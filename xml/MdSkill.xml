@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<servant>
+    <skill name = "蔚蓝骑乘">
+        <order>1</order>
+        <description>自身的Arts指令卡性能提升(3回合)：20%-30%</description>
+        <used>1</used>
+        <type name = "Arts">
+            <effect_1>0.2</effect_1>
+            <effect_X>0.3</effect_X>
+        </type>
+    </skill>
+    <skill name = "Rodeo Flip">
+        <order>2</order>
+        <description>付与自身回避状态(1回合)；暴击星掉落率提升(1回合)：30%-50%</description>
+        <used>0</used>
+    </skill>
+    <skill name = "永不结束的夏日">
+        <order>3</order>
+        <description>付与自身毅力状态（1次·3回合）：1000；增加NP：20%-30%</description>
+        <used>1</used>
+        <type name = "NPgain">
+            <effect_1>20</effect_1>
+            <effect_X>30</effect_X>
+        </type>
+    </skill>
+    <skill name = "冲浪">
+        <order>passive</order>
+        <description>自身的Arts指令卡性能提升(5%)，暴击星掉落率提升(5%)</description>
+        <used>1</used>
+        <type name = "Arts">
+            <effect>0.2</effect>
+        </type>
+    </skill>
+</servant>
