@@ -4,36 +4,184 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace PerpetualNBPerformance
 {
     public partial class MainForm : Form
     {
-        public MainForm()
-        {
-            InitializeComponent();
-
-            // 初始化技能等级
-            NP20s_AllSkillReset();
-            Buff_AllSkillReset();
-            enermyHP_Write();
-        }
-
+        private XmlDocument FndmtXML = new XmlDocument();
+        private XmlDocument SkillXML = new XmlDocument();
+        #region 公共布尔值
         private Boolean clothIsExchange = true;
         private Boolean hasNPServ = false;
         private Boolean hasBufServ = false;
         private Boolean allowCalcu = false;
         private Boolean biKong = false;
         private Boolean biHai = false;
+        private Boolean pauseChangeDetect = true;
+        private Boolean dataInvalid = false;
+        #endregion
+        #region 固有数据
         private static int[] enermy1st = { 23465, 23301, 23301 };
         private static int[] enermy2nd = { 23465, 24319, 81857 };
         private static int[] enermy3rd = { 98090, 152662 };
         private static double[] npTimes = { 4.5, 6.0, 6.75, 7.125, 7.5 };
         private static double[] damageAccuHit = { 0.06, 0.19, 0.39, 0.65, 1.00 };
+        #endregion
+
+        public MainForm()
+        {
+            InitializeComponent();
+            // 检查XML文件，不存在时创建新文件
+            if (!File.Exists(@".\Data\MdFndmntlXML.xml") && !File.Exists(@".\Data\SkillXML.xml"))
+            {
+                CreateXML.CreateMdFndmntlXML();
+                CreateXML.CreateServSkillXML();
+                MessageBox.Show("未发现\\Data\\MdMdFndmntlXML.xml与\\Data\\SkillXML.xml文件，已创建新文件", "缺少必要的XML文件", MessageBoxButtons.OK);
+            }
+            else if (!File.Exists(@".\Data\MdFndmntlXML.xml"))
+            {
+                CreateXML.CreateMdFndmntlXML();
+                MessageBox.Show("未发现\\Data\\MdMdFndmntlXML.xml文件，已创建新文件", "缺少必要的XML文件", MessageBoxButtons.OK);
+            }
+            else if (!File.Exists(@".\Data\SkillXML.xml"))
+            {
+                CreateXML.CreateServSkillXML();
+                MessageBox.Show("未发现\\Data\\SkillXML.xml文件，已创建新文件", "缺少必要的XML文件", MessageBoxButtons.OK);
+            }
+
+
+            // 写入技能等级
+            if (!writeFndmtlData()) writeFndmtlData(true);
+            if (!writeSkillData()) writeSkillData(true);
+
+            // 写入敌方血量数据
+            enermyHP_Write();
+        }
+
+        // 写入技能数据
+        private Boolean writeFndmtlData()
+        {
+            Boolean confrm = true;
+            pauseChangeDetect = true;
+            try
+            {
+                FndmtXML.Load(@".\Data\MdFndmntlXML.xml");
+                XmlNode servant = FndmtXML.GetElementsByTagName("servant").Item(0);
+                LvText.Text = servant["level"].InnerText;
+                FufuText.Text = servant["fufu"].InnerText;
+                NPLvText.Text = servant["nplv"].InnerText;
+                for (int i = 1; i <= 3; i++)
+                {
+                    this.Controls.Find(string.Format("MdSkill{0}Text", i), true)[0].Text = servant[string.Format("Skill{0}", i)].InnerText;
+                }
+                CELvText.Text = FndmtXML.GetElementsByTagName("celv").Item(0).InnerText;
+            }
+            catch (Exception e)
+            {
+                string txt = MessageBox.Show("基础数据尝试写入失败，是否重新生成XML文件以重新写入？\n“是”：重新生成XML文件并尝试重写；\n“否”：不重新生成XML文件，使用默认参数写入", "", MessageBoxButtons.YesNoCancel).ToString();
+                switch (txt)
+                {
+                    case "Yes": //Yes
+                        CreateXML.CreateMdFndmntlXML();
+                        FndmtXML = CreateXML.CreateMdFndmntlXML_NOTFILE();
+                        confrm = false;
+                        break;
+                    case "No": //No
+                        FndmtXML = CreateXML.CreateMdFndmntlXML_NOTFILE();
+                        confrm = false;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            pauseChangeDetect = false;
+            return confrm;
+        }
+        private Boolean writeFndmtlData(Boolean bl)
+        {
+            pauseChangeDetect = true;
+            XmlNode servant = FndmtXML.GetElementsByTagName("servant").Item(0);
+            LvText.Text = servant["level"].InnerText;
+            FufuText.Text = servant["fufu"].InnerText;
+            NPLvText.Text = servant["nplv"].InnerText;
+            for (int i = 1; i <= 3; i++)
+            {
+                this.Controls.Find(string.Format("MdSkill{0}Text", i), true)[0].Text = servant[string.Format("Skill{0}", i)].InnerText;
+            }
+            CELvText.Text = FndmtXML.GetElementsByTagName("celv").Item(0).InnerText;
+            pauseChangeDetect = false;
+            return true;
+        }
+
+        private Boolean writeSkillData()
+        {
+            Boolean confrm = true;
+            pauseChangeDetect = true;
+            try
+            {
+                SkillXML.Load(@".\Data\SkillXML.xml");
+                XmlNodeList servant = SkillXML.GetElementsByTagName("servant");
+                foreach (XmlNode node in servant)
+                {
+                    if (node.HasChildNodes)
+                    {
+                        XmlAttribute attrX = node.Attributes["id"];
+                        for (int i = 1; i <= 3; i++)
+                        {
+                            string temp = string.Format("Skill{0}", i);
+                            this.Controls.Find(string.Format("{0}{1}Text", attrX.Value, temp), true)[0].Text = node.SelectSingleNode(temp).InnerText;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                string txt = MessageBox.Show("从者技能数据尝试写入失败，是否重新生成XML文件以重新写入？\n“是”：重新生成XML文件并尝试重写；\n“否”：不重新生成XML文件，使用默认参数写入", "", MessageBoxButtons.YesNoCancel).ToString();
+                switch (txt)
+                {
+                    case "Yes": //Yes
+                        CreateXML.CreateServSkillXML();
+                        SkillXML = CreateXML.CreateServSkillXML_NOTFILE();
+                        confrm = false;
+                        break;
+                    case "No": //No
+                        SkillXML = CreateXML.CreateServSkillXML_NOTFILE();
+                        confrm = false;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            pauseChangeDetect = false;
+            return confrm;
+        }
+        private Boolean writeSkillData(Boolean bl)
+        {
+            pauseChangeDetect = true;
+            XmlNodeList servant = SkillXML.GetElementsByTagName("servant");
+            foreach (XmlNode node in servant)
+            {
+                if (node.HasChildNodes)
+                {
+                    XmlAttribute attrX = node.Attributes["id"];
+                    for (int i = 1; i <= 3; i++)
+                    {
+                        string temp = string.Format("Skill{0}", i);
+                        this.Controls.Find(string.Format("{0}{1}Text", attrX.Value, temp), true)[0].Text = node.SelectSingleNode(temp).InnerText;
+                    }
+                }
+            }
+            pauseChangeDetect = false;
+            return true;
+        }
 
         // 写入敌方血量
         private void enermyHP_Write()
@@ -52,6 +200,7 @@ namespace PerpetualNBPerformance
             }
         }
 
+        #region 一键数据写入
         // 满芙芙设置（应该都满了吧……）
         private void Fufu1000B_Click(object sender, EventArgs e) => FufuText.Text = "1000";
 
@@ -80,100 +229,15 @@ namespace PerpetualNBPerformance
         private void SkillMax_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            switch (btn.Name)
+            string btnName = btn.Name;
+            StringBuilder panelName = new StringBuilder(btnName.Replace("AllMaxB", ""));
+            switch (panelName.ToString())
             {
-                case "ZGlAllMaxB":
-                    foreach (Control item in ZGlSkillP.Controls)
-                    {
-                        if (item is TextBox) item.Text = "10";
-                    }
-                    break;
-                case "ZGlAllMaxBEx":
-                    foreach (Control item in ZGlSkillExP.Controls)
-                    {
-                        if (item is TextBox) item.Text = "10";
-                    }
-                    break;
-                case "HaiAllMaxB":
-                    foreach (Control item in HaiSkillP.Controls)
-                    {
-                        if (item is TextBox) item.Text = "10";
-                    }
-                    break;
-                case "LaAllMaxB":
-                    foreach (Control item in LaSkillP.Controls)
-                    {
-                        if (item is TextBox) item.Text = "10";
-                    }
-                    break;
-                case "MeiAllMaxB":
-                    foreach (Control item in MeiSkillP.Controls)
-                    {
-                        if (item is TextBox) item.Text = "10";
-                    }
-                    break;
-                case "ShaAllMaxB":
-                    foreach (Control item in ShaSkillP.Controls)
-                    {
-                        if (item is TextBox) item.Text = "10";
-                    }
-                    break;
-                case "MaAllMaxB":
-                    foreach (Control item in MaSkillP.Controls)
-                    {
-                        if (item is TextBox) item.Text = "10";
-                    }
-                    break;
-                case "NPAllMaxB":
-                    foreach (Control item in NP20GB.Controls)
-                    {
-                        if (item is Panel)
-                        {
-                            foreach (Control itemT in item.Controls)
-                            {
-                                if (itemT is TextBox) itemT.Text = "10";
-                            }
-                        }
-                    }
-                    break;
-                case "HaiAllMaxExB":
-                    foreach (Control item in HaiSkillExP.Controls)
-                    {
-                        if (item is TextBox) item.Text = "10";
-                    }
-                    break;
-                case "HuaAllMaxB":
-                    foreach (Control item in HuaSkillP.Controls)
-                    {
-                        if (item is TextBox) item.Text = "10";
-                    }
-                    break;
-                case "YuAllMaxB":
-                    foreach (Control item in YuSkillP.Controls)
-                    {
-                        if (item is TextBox) item.Text = "10";
-                    }
-                    break;
-                case "SanAllMaxB":
-                    foreach (Control item in SanSkillP.Controls)
-                    {
-                        if (item is TextBox) item.Text = "10";
-                    }
-                    break;
-                case "XinAllMaxB":
-                    foreach (Control item in XinSkillP.Controls)
-                    {
-                        if (item is TextBox) item.Text = "10";
-                    }
-                    break;
-                case "FenAllMaxB":
-                    foreach (Control item in FenSkillP.Controls)
-                    {
-                        if (item is TextBox) item.Text = "10";
-                    }
-                    break;
-                case "BuAllMaxB":
-                    foreach (Control item in BuffGB.Controls)
+                case "NP20":
+                case "Buff":
+                    panelName.Append("GB");
+                    GroupBox temp_1 = (GroupBox)this.Controls.Find(panelName.ToString(), true)[0];
+                    foreach (Control item in temp_1.Controls)
                     {
                         if (item is Panel)
                         {
@@ -185,38 +249,16 @@ namespace PerpetualNBPerformance
                     }
                     break;
                 default:
+                    panelName.Append("SkillP");
+                    Panel temp = (Panel)this.Controls.Find(panelName.ToString(), true)[0];
+                    for (int i = 0; i < temp.Controls.Count; i++)
+                    {
+                        if (temp.Controls[i] is TextBox) temp.Controls[i].Text = "10";
+                    }
                     break;
             }
         }
-
-        // 双孔明复选，改变相应控件的可操控性
-        private void DoubleZGlChB_CheckedChanged(object sender, EventArgs e)
-        {
-            if (DoubleZGlChB.Checked)
-            {
-                biKong = true;
-                ZGlAllMaxBEx.Enabled = true;
-                ZGlSkillExP.Enabled = true;
-                NP20GB.Enabled = false;
-                DoubleHaiChB.Enabled = false;
-                DoubleHaiChB.Checked = false;
-                HaiExRB.Enabled = true;
-                HaiSkillExP.Enabled = true;
-                NP20s_CheckedReset();
-            }
-            else
-            {
-                biKong = false;
-                ZGlAllMaxBEx.Enabled = false;
-                ZGlSkillExP.Enabled = false;
-                NP20GB.Enabled = true;
-                HaiExRB.Enabled = false;
-                HaiExRB.Checked = false;
-                NP20s_AllSkillEnabledReset();
-                Buff_AllSkillEnabledReset();
-            }
-            startCalculating();
-        }
+        #endregion
 
         // 御主服装更换
         private void ClothRBs_CheckedChanged(object sender, EventArgs e)
@@ -238,6 +280,36 @@ namespace PerpetualNBPerformance
                 NP20GB.Enabled = false;
                 DoubleHaiChB.Checked = false;
                 DoubleHaiChB.Enabled = false;
+            }
+            startCalculating();
+        }
+
+        #region 孔明/20NP充能从者相关
+        // 双孔明复选，改变相应控件的可操控性
+        private void DoubleZGlChB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (DoubleZGlChB.Checked)
+            {
+                biKong = true;
+                ZGlExAllMaxB.Enabled = true;
+                ZGlExSkillP.Enabled = true;
+                NP20GB.Enabled = false;
+                DoubleHaiChB.Enabled = false;
+                DoubleHaiChB.Checked = false;
+                HaiExRB.Enabled = true;
+                HaiExSkillP.Enabled = true;
+                NP20s_CheckedReset();
+            }
+            else
+            {
+                biKong = false;
+                ZGlExAllMaxB.Enabled = false;
+                ZGlExSkillP.Enabled = false;
+                NP20GB.Enabled = true;
+                HaiExRB.Enabled = false;
+                HaiExRB.Checked = false;
+                NP20s_AllSkillEnabledReset();
+                Buff_AllSkillEnabledReset();
             }
             startCalculating();
         }
@@ -278,6 +350,7 @@ namespace PerpetualNBPerformance
 
         private void NP20s_AllSkillReset()
         {
+            pauseChangeDetect = true;
             foreach (Control item in NP20GB.Controls)
             {
                 if (item is Panel)
@@ -289,6 +362,7 @@ namespace PerpetualNBPerformance
                 }
             }
             MaSkill2Text.Text = "10";
+            pauseChangeDetect = false;
         }
 
         private void NP20s_AllSkillEnabledReset()
@@ -317,7 +391,7 @@ namespace PerpetualNBPerformance
         // NP获取提升Buff选择
         private void Buff_CheckedChanged(object sender, EventArgs e)
         {
-            HaiSkillExP.Enabled = HaiExRB.Checked;
+            HaiExSkillP.Enabled = HaiExRB.Checked;
             HuaSkillP.Enabled = HuaRB.Checked;
             YuSkillP.Enabled = YuRB.Checked;
             SanSkillP.Enabled = SanRB.Checked;
@@ -331,7 +405,9 @@ namespace PerpetualNBPerformance
             hasBufServ = (ch == 1);
             startCalculating();
         }
+        #endregion
 
+        #region Buff从者相关
         // 双海妈复选，改变相应控件的可操控性
         private void DoubleHaiChB_CheckedChanged(object sender, EventArgs e)
         {
@@ -344,7 +420,7 @@ namespace PerpetualNBPerformance
                 }
                 HaiExRB.Enabled = true;
                 HaiExRB.Checked = true;
-                HaiSkillExP.Enabled = true;
+                HaiExSkillP.Enabled = true;
             }
             else
             {
@@ -363,7 +439,7 @@ namespace PerpetualNBPerformance
         {
             HaiExRB.Enabled = DoubleHaiChB.Checked;
             HaiExRB.Checked = DoubleHaiChB.Checked;
-            HaiSkillExP.Enabled = DoubleHaiChB.Checked;
+            HaiExSkillP.Enabled = DoubleHaiChB.Checked;
         }
 
         // Buff重置选择
@@ -392,6 +468,7 @@ namespace PerpetualNBPerformance
 
         private void Buff_AllSkillReset()
         {
+            pauseChangeDetect = true;
             foreach (Control item in BuffGB.Controls)
             {
                 if (item is Panel)
@@ -402,11 +479,12 @@ namespace PerpetualNBPerformance
                     }
                 }
             }
+            pauseChangeDetect = false;
         }
 
         private void Buff_AllSkillEnabledReset()
         {
-            HaiSkillExP.Enabled = false;
+            HaiExSkillP.Enabled = false;
             HuaSkillP.Enabled = true;
             YuSkillP.Enabled = true;
             SanSkillP.Enabled = true;
@@ -415,9 +493,16 @@ namespace PerpetualNBPerformance
             if (DoubleZGlChB.Checked)
             {
                 HaiExRB.Enabled = true;
-                HaiSkillExP.Enabled = true;
+                HaiExSkillP.Enabled = true;
             }
         }
+
+        // 永久锁定玛修充能10级
+        private void MaSkill2Text_EnabledChanged(object sender, EventArgs e)
+        {
+            MaSkill2Text.Enabled = false;
+        }
+        #endregion
 
         // 隐藏无关技能
         private void HideNrskChB_CheckedChanged(object sender, EventArgs e)
@@ -430,10 +515,10 @@ namespace PerpetualNBPerformance
                 ZGlSkill1Text.Visible = false;
                 ZGlSkill2.Visible = false;
                 ZGlSkill2Text.Visible = false;
-                ZGlSkillEx1.Visible = false;
-                ZGlSkillEx1Text.Visible = false;
-                ZGlSkillEx2.Visible = false;
-                ZGlSkillEx2Text.Visible = false;
+                ZGlExSkill1.Visible = false;
+                ZGlExSkill1Text.Visible = false;
+                ZGlExSkill2.Visible = false;
+                ZGlExSkill2Text.Visible = false;
                 HaiSkill2.Visible = false;
                 HaiSkill2Text.Visible = false;
                 LaSkill2.Visible = false;
@@ -450,8 +535,8 @@ namespace PerpetualNBPerformance
                 MaSkill1Text.Visible = false;
                 MaSkill3.Visible = false;
                 MaSkill3Text.Visible = false;
-                HaiSkillEx2.Visible = false;
-                HaiSkillEx2Text.Visible = false;
+                HaiExSkill2.Visible = false;
+                HaiExSkill2Text.Visible = false;
                 HuaSkill3.Visible = false;
                 HuaSkill3Text.Visible = false;
                 YuSkill1.Visible = false;
@@ -479,10 +564,10 @@ namespace PerpetualNBPerformance
                 ZGlSkill1Text.Visible = true;
                 ZGlSkill2.Visible = true;
                 ZGlSkill2Text.Visible = true;
-                ZGlSkillEx1.Visible = true;
-                ZGlSkillEx1Text.Visible = true;
-                ZGlSkillEx2.Visible = true;
-                ZGlSkillEx2Text.Visible = true;
+                ZGlExSkill1.Visible = true;
+                ZGlExSkill1Text.Visible = true;
+                ZGlExSkill2.Visible = true;
+                ZGlExSkill2Text.Visible = true;
                 HaiSkill2.Visible = true;
                 HaiSkill2Text.Visible = true;
                 LaSkill2.Visible = true;
@@ -499,8 +584,8 @@ namespace PerpetualNBPerformance
                 MaSkill1Text.Visible = true;
                 MaSkill3.Visible = true;
                 MaSkill3Text.Visible = true;
-                HaiSkillEx2.Visible = true;
-                HaiSkillEx2Text.Visible = true;
+                HaiExSkill2.Visible = true;
+                HaiExSkill2Text.Visible = true;
                 HuaSkill3.Visible = true;
                 HuaSkill3Text.Visible = true;
                 YuSkill1.Visible = true;
@@ -522,17 +607,123 @@ namespace PerpetualNBPerformance
             }
         }
 
-        // 永久锁定玛修充能10级
-        private void MaSkill2Text_EnabledChanged(object sender, EventArgs e)
+        // 文本框失去焦点时判断数据是否有效
+        private void TextBox_Leave(object sender, EventArgs e)
         {
-            MaSkill2Text.Enabled = false;
+            if (!dataInvalid) return;
+            Boolean error = false;
+            TextBox tbx = (TextBox)sender;
+            try
+            {
+                Convert.ToInt32(tbx.Text);
+            }
+            catch (FormatException ex)
+            {
+                error = true;
+            }
+            if (tbx.Name.IndexOf("Skill") > -1)
+            {
+                if (error || !((Convert.ToInt32(tbx.Text) > 0 && Convert.ToInt32(tbx.Text) < 11)))
+                {
+                    MessageBox.Show("技能数值无效，已重置为1", "", MessageBoxButtons.OK);
+                    tbx.Text = "1";
+                    return;
+                }
+            }
+            else if (tbx.Name.IndexOf("Fufu") > -1)
+            {
+                if (error || !((Convert.ToInt32(tbx.Text) > -1 && Convert.ToInt32(tbx.Text) < 2000)))
+                {
+                    MessageBox.Show("芙芙数值无效，已重置为1000", "", MessageBoxButtons.OK);
+                    tbx.Text = "1000";
+                    return;
+                }
+            }
+            else if (tbx.Name.IndexOf("NPLv") > -1)
+            {
+                if (error || !((Convert.ToInt32(tbx.Text) > 0 && Convert.ToInt32(tbx.Text) < 5)))
+                {
+                    MessageBox.Show("宝具等级数值无效，已重置为1", "", MessageBoxButtons.OK);
+                    tbx.Text = "1";
+                    return;
+                }
+            }
+            else if (tbx.Name.IndexOf("CELv") > -1)
+            {
+                if (error || !((Convert.ToInt32(tbx.Text) > 0 && Convert.ToInt32(tbx.Text) < 101)))
+                {
+                    MessageBox.Show("礼装等级数值无效，已重置为20", "", MessageBoxButtons.OK);
+                    tbx.Text = "20";
+                    return;
+                }
+            }
+            else if (tbx.Name.IndexOf("Lv") > -1)
+            {
+                if (error || !((Convert.ToInt32(tbx.Text) > 79 && Convert.ToInt32(tbx.Text) < 101)))
+                {
+                    MessageBox.Show("小莫等级数值无效（需至少80级），已重置为80", "", MessageBoxButtons.OK);
+                    tbx.Text = "80";
+                    return;
+                }
+            }
         }
 
         // 文本框更改触发计算
         private void TextBox_Text_Changed(object sender, EventArgs e)
         {
+            if (pauseChangeDetect) return;
             TextBox tbx = (TextBox)sender;
-            if (tbx.Text != "" && tbx.Text != null) startCalculating();
+            try
+            {
+                Convert.ToInt32(tbx.Text);
+            }
+            catch (FormatException ex)
+            {
+                dataInvalid = true;
+                return;
+            }
+            if (tbx.Name.IndexOf("Skill") > -1)
+            {
+                if (!((Convert.ToInt32(tbx.Text) > 0 && Convert.ToInt32(tbx.Text) < 11)))
+                {
+                    dataInvalid = true;
+                    return;
+                }
+            }
+            else if (tbx.Name.IndexOf("Fufu") > -1)
+            {
+                if (!((Convert.ToInt32(tbx.Text) > -1 && Convert.ToInt32(tbx.Text) < 2000)))
+                {
+                    dataInvalid = true;
+                    return;
+                }
+            }
+            else if (tbx.Name.IndexOf("NPLv") > -1)
+            {
+                if (!((Convert.ToInt32(tbx.Text) > 0 && Convert.ToInt32(tbx.Text) < 5)))
+                {
+                    dataInvalid = true;
+                    return;
+                }
+            }
+            else if (tbx.Name.IndexOf("CELv") > -1)
+            {
+                if (!((Convert.ToInt32(tbx.Text) > 0 && Convert.ToInt32(tbx.Text) < 101)))
+                {
+                    dataInvalid = true;
+                    return;
+                }
+            }
+            else if (tbx.Name.IndexOf("Lv") > -1)
+            {
+                if (!((Convert.ToInt32(tbx.Text) > 79 && Convert.ToInt32(tbx.Text) < 101)))
+                {
+                    dataInvalid = true;
+                    return;
+                }
+            }
+            dataInvalid = false;
+            startCalculating();
         }
 
         // 满破勾选触发计算
@@ -541,7 +732,13 @@ namespace PerpetualNBPerformance
             startCalculating();
         }
 
-        // 主程序
+        // 礼装更改触发计算
+        private void CECoB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            startCalculating();
+        }
+
+        #region 主程序
         private void appendNPGain(List<int> array, List<string> arrayT, string name, int skill = 10)
         {
             switch (name)
@@ -691,7 +888,8 @@ namespace PerpetualNBPerformance
                 double atkTotal = 0;
 
                 // 充能服
-                if (clothIsExchange == false) {
+                if (clothIsExchange == false)
+                {
                     npAllL.Add(20);
                     npAllLN.Add("充能服");
                 }
@@ -734,8 +932,8 @@ namespace PerpetualNBPerformance
                 if (biKong)
                 {
                     appendNPGain(npAllL, npAllLN, "Kong");
-                    appendAtkUP(atkAllL, atkAllLN, "Kong", Convert.ToInt32(ZGlSkillEx3Text.Text));
-                    skill = Convert.ToInt32(ZGlSkillEx3Text.Text);
+                    appendAtkUP(atkAllL, atkAllLN, "Kong", Convert.ToInt32(ZGlExSkill3Text.Text));
+                    skill = Convert.ToInt32(ZGlExSkill3Text.Text);
                     extraAtt += (skill < 10) ? (skill - 1) * 30 + 200 : 500;
                 }
                 // 孔明
@@ -783,8 +981,8 @@ namespace PerpetualNBPerformance
                 switch (buffsup.ToString())
                 {
                     case "HaiExRB":
-                        appendNPGain(npAllL, npAllLN, "Hai", Convert.ToInt32(HaiSkillEx1Text.Text));
-                        appendArtsUP(artsAllL, artsAllLN, "Hai", Convert.ToInt32(HaiSkillEx3Text.Text));
+                        appendNPGain(npAllL, npAllLN, "Hai", Convert.ToInt32(HaiExSkill1Text.Text));
+                        appendArtsUP(artsAllL, artsAllLN, "Hai", Convert.ToInt32(HaiExSkill3Text.Text));
                         break;
                     case "HuaRB":
                         appendNPUP(npUpAllL, npUpAllLN, "Hua", Convert.ToInt32(HuaSkill1Text.Text));
@@ -957,9 +1155,49 @@ namespace PerpetualNBPerformance
             }
         }
 
-        private void CECoB_SelectedIndexChanged(object sender, EventArgs e)
+        #endregion
+
+        // 保存
+        private void SaveFndmtlB_Click(object sender, EventArgs e)
         {
-            startCalculating();
+            XmlDocument XML = CreateXML.CreateMdFndmntlXML_NOTFILE();
+            XmlNode servant = XML.GetElementsByTagName("servant").Item(0);
+            servant["level"].InnerText = LvText.Text;
+            servant["fufu"].InnerText = FufuText.Text;
+            servant["nplv"].InnerText = NPLvText.Text;
+            for (int i = 1; i <= 3; i++)
+            {
+                servant[string.Format("Skill{0}", i)].InnerText = this.Controls.Find(string.Format("MdSkill{0}Text", i), true)[0].Text;
+            }
+            FndmtXML.GetElementsByTagName("celv").Item(0).InnerText = CELvText.Text;
+            XML.Save(@".\Data\MdFndmntlXML.xml");
+            MessageBox.Show("保存成功！", "", MessageBoxButtons.OK);
+        }
+
+        private void SaveSkillB_Click(object sender, EventArgs e)
+        {
+            XmlDocument XML = CreateXML.CreateServSkillXML_NOTFILE();
+            XmlNodeList servant = XML.GetElementsByTagName("servant");
+            foreach (XmlNode node in servant)
+            {
+                if (node.HasChildNodes)
+                {
+                    XmlAttribute attrX = node.Attributes["id"];
+                    for (int i = 1; i <= 3; i++)
+                    {
+                        string temp = string.Format("Skill{0}", i);
+                        node.SelectSingleNode(temp).InnerText = this.Controls.Find(string.Format("{0}{1}Text", attrX.Value, temp), true)[0].Text;
+                    }
+                }
+            }
+            XML.Save(@".\Data\SkillXML.xml");
+            MessageBox.Show("保存成功！", "", MessageBoxButtons.OK);
+        }
+
+        private void ReLoadB_Click(object sender, EventArgs e)
+        {
+            if (!writeFndmtlData()) writeFndmtlData(true);
+            if (!writeSkillData()) writeSkillData(true);
         }
     }
 }
