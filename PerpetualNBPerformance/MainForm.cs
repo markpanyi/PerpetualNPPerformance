@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -38,35 +34,42 @@ namespace PerpetualNBPerformance
         public MainForm()
         {
             InitializeComponent();
-            // 检查XML文件，不存在时创建新文件
+            // 检查XML文件，不存在时创建新文件；并写入数据
             if (!File.Exists(@".\Data\MdFndmntlXML.xml") && !File.Exists(@".\Data\SkillXML.xml"))
             {
                 CreateXML.CreateMdFndmntlXML();
                 CreateXML.CreateServSkillXML();
                 MessageBox.Show("未发现\\Data\\MdMdFndmntlXML.xml与\\Data\\SkillXML.xml文件，已创建新文件", "缺少必要的XML文件", MessageBoxButtons.OK);
+                WriteFndmtlData(true);
+                WriteSkillData(true);
             }
             else if (!File.Exists(@".\Data\MdFndmntlXML.xml"))
             {
                 CreateXML.CreateMdFndmntlXML();
                 MessageBox.Show("未发现\\Data\\MdMdFndmntlXML.xml文件，已创建新文件", "缺少必要的XML文件", MessageBoxButtons.OK);
+                WriteFndmtlData(true);
+                if (!WriteSkillData()) WriteSkillData(true);
             }
             else if (!File.Exists(@".\Data\SkillXML.xml"))
             {
                 CreateXML.CreateServSkillXML();
                 MessageBox.Show("未发现\\Data\\SkillXML.xml文件，已创建新文件", "缺少必要的XML文件", MessageBoxButtons.OK);
+                if (!WriteFndmtlData()) WriteFndmtlData(true);
+                WriteSkillData(true);
+
+            }
+            else
+            {
+                if (!WriteFndmtlData()) WriteFndmtlData(true);
+                if (!WriteSkillData()) WriteSkillData(true);
             }
 
-
-            // 写入技能等级
-            if (!writeFndmtlData()) writeFndmtlData(true);
-            if (!writeSkillData()) writeSkillData(true);
-
             // 写入敌方血量数据
-            enermyHP_Write();
+            EnermyHP_Write();
         }
 
         // 写入技能数据
-        private Boolean writeFndmtlData()
+        private Boolean WriteFndmtlData()
         {
             Boolean confrm = true;
             pauseChangeDetect = true;
@@ -83,9 +86,9 @@ namespace PerpetualNBPerformance
                 }
                 CELvText.Text = FndmtXML.GetElementsByTagName("celv").Item(0).InnerText;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                string txt = MessageBox.Show("基础数据尝试写入失败，是否重新生成XML文件以重新写入？\n“是”：重新生成XML文件并尝试重写；\n“否”：不重新生成XML文件，使用默认参数写入", "", MessageBoxButtons.YesNoCancel).ToString();
+                string txt = MessageBox.Show("基础数据尝试写入失败，是否重新生成XML文件以重新写入？\n“是”：重新生成XML文件并尝试重写；\n“否”：不重新生成XML文件，使用默认参数写入", "", MessageBoxButtons.YesNo).ToString();
                 switch (txt)
                 {
                     case "Yes": //Yes
@@ -104,7 +107,7 @@ namespace PerpetualNBPerformance
             pauseChangeDetect = false;
             return confrm;
         }
-        private Boolean writeFndmtlData(Boolean bl)
+        private Boolean WriteFndmtlData(Boolean bl)
         {
             pauseChangeDetect = true;
             XmlNode servant = FndmtXML.GetElementsByTagName("servant").Item(0);
@@ -120,7 +123,7 @@ namespace PerpetualNBPerformance
             return true;
         }
 
-        private Boolean writeSkillData()
+        private Boolean WriteSkillData()
         {
             Boolean confrm = true;
             pauseChangeDetect = true;
@@ -141,9 +144,9 @@ namespace PerpetualNBPerformance
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                string txt = MessageBox.Show("从者技能数据尝试写入失败，是否重新生成XML文件以重新写入？\n“是”：重新生成XML文件并尝试重写；\n“否”：不重新生成XML文件，使用默认参数写入", "", MessageBoxButtons.YesNoCancel).ToString();
+                string txt = MessageBox.Show("从者技能数据尝试写入失败，是否重新生成XML文件以重新写入？\n“是”：重新生成XML文件并尝试重写；\n“否”：不重新生成XML文件，使用默认参数写入", "", MessageBoxButtons.YesNo).ToString();
                 switch (txt)
                 {
                     case "Yes": //Yes
@@ -163,7 +166,7 @@ namespace PerpetualNBPerformance
             pauseChangeDetect = false;
             return confrm;
         }
-        private Boolean writeSkillData(Boolean bl)
+        private Boolean WriteSkillData(Boolean bl)
         {
             pauseChangeDetect = true;
             XmlNodeList servant = SkillXML.GetElementsByTagName("servant");
@@ -184,7 +187,7 @@ namespace PerpetualNBPerformance
         }
 
         // 写入敌方血量
-        private void enermyHP_Write()
+        private void EnermyHP_Write()
         {
             for (int i = 0; i < enermy1st.Length; i++)
             {
@@ -617,7 +620,7 @@ namespace PerpetualNBPerformance
             {
                 Convert.ToInt32(tbx.Text);
             }
-            catch (FormatException ex)
+            catch (FormatException)
             {
                 error = true;
             }
@@ -677,7 +680,7 @@ namespace PerpetualNBPerformance
             {
                 Convert.ToInt32(tbx.Text);
             }
-            catch (FormatException ex)
+            catch (FormatException)
             {
                 dataInvalid = true;
                 return;
@@ -1196,8 +1199,8 @@ namespace PerpetualNBPerformance
 
         private void ReLoadB_Click(object sender, EventArgs e)
         {
-            if (!writeFndmtlData()) writeFndmtlData(true);
-            if (!writeSkillData()) writeSkillData(true);
+            if (!WriteFndmtlData()) WriteFndmtlData(true);
+            if (!WriteSkillData()) WriteSkillData(true);
         }
     }
 }
