@@ -93,11 +93,9 @@ namespace PerpetualNBPerformance
                 {
                     case "Yes": //Yes
                         CreateXML.CreateMdFndmntlXML();
-                        FndmtXML = CreateXML.CreateMdFndmntlXML_NOTFILE();
                         confrm = false;
                         break;
                     case "No": //No
-                        FndmtXML = CreateXML.CreateMdFndmntlXML_NOTFILE();
                         confrm = false;
                         break;
                     default:
@@ -109,6 +107,7 @@ namespace PerpetualNBPerformance
         }
         private Boolean WriteFndmtlData(Boolean bl)
         {
+            FndmtXML = CreateXML.CreateMdFndmntlXML_NOTFILE();
             pauseChangeDetect = true;
             XmlNode servant = FndmtXML.GetElementsByTagName("servant").Item(0);
             LvText.Text = servant["level"].InnerText;
@@ -151,11 +150,9 @@ namespace PerpetualNBPerformance
                 {
                     case "Yes": //Yes
                         CreateXML.CreateServSkillXML();
-                        SkillXML = CreateXML.CreateServSkillXML_NOTFILE();
                         confrm = false;
                         break;
                     case "No": //No
-                        SkillXML = CreateXML.CreateServSkillXML_NOTFILE();
                         confrm = false;
                         break;
                     default:
@@ -168,6 +165,7 @@ namespace PerpetualNBPerformance
         }
         private Boolean WriteSkillData(Boolean bl)
         {
+            SkillXML = CreateXML.CreateServSkillXML_NOTFILE();
             pauseChangeDetect = true;
             XmlNodeList servant = SkillXML.GetElementsByTagName("servant");
             foreach (XmlNode node in servant)
@@ -210,27 +208,34 @@ namespace PerpetualNBPerformance
         // R莫百级5宝310满芙芙（135，大佬的R莫）设置
         private void MdAllMaxB_Click(object sender, EventArgs e)
         {
+            pauseChangeDetect = true;
             LvText.Text = "100";
             FufuText.Text = "1000";
             NPLvText.Text = "5";
             MdSkill1Text.Text = "10";
             MdSkill2Text.Text = "10";
             MdSkill3Text.Text = "10";
+            pauseChangeDetect = false;
+            startCalculating();
         }
 
         // R莫80级310满芙芙（通常的R莫）设置
         private void Md80MaxB_Click(object sender, EventArgs e)
         {
+            pauseChangeDetect = true;
             LvText.Text = "80";
             FufuText.Text = "1000";
             MdSkill1Text.Text = "10";
             MdSkill2Text.Text = "10";
             MdSkill3Text.Text = "10";
+            pauseChangeDetect = false;
+            startCalculating();
         }
 
         // 310设置
         private void SkillMax_Click(object sender, EventArgs e)
         {
+            pauseChangeDetect = true;
             Button btn = (Button)sender;
             string btnName = btn.Name;
             StringBuilder panelName = new StringBuilder(btnName.Replace("AllMaxB", ""));
@@ -260,6 +265,8 @@ namespace PerpetualNBPerformance
                     }
                     break;
             }
+            pauseChangeDetect = false;
+            startCalculating();
         }
         #endregion
 
@@ -1201,6 +1208,7 @@ namespace PerpetualNBPerformance
         {
             if (!WriteFndmtlData()) WriteFndmtlData(true);
             if (!WriteSkillData()) WriteSkillData(true);
+            startCalculating();
         }
     }
 }
