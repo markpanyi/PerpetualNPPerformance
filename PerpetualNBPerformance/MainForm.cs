@@ -216,7 +216,7 @@ namespace PerpetualNBPerformance
             MdSkill2Text.Text = "10";
             MdSkill3Text.Text = "10";
             pauseChangeDetect = false;
-            startCalculating();
+            StartCalculating();
         }
 
         // R莫80级310满芙芙（通常的R莫）设置
@@ -229,7 +229,7 @@ namespace PerpetualNBPerformance
             MdSkill2Text.Text = "10";
             MdSkill3Text.Text = "10";
             pauseChangeDetect = false;
-            startCalculating();
+            StartCalculating();
         }
 
         // 310设置
@@ -266,7 +266,7 @@ namespace PerpetualNBPerformance
                     break;
             }
             pauseChangeDetect = false;
-            startCalculating();
+            StartCalculating();
         }
         #endregion
 
@@ -291,7 +291,7 @@ namespace PerpetualNBPerformance
                 DoubleHaiChB.Checked = false;
                 DoubleHaiChB.Enabled = false;
             }
-            startCalculating();
+            StartCalculating();
         }
 
         #region 孔明/20NP充能从者相关
@@ -321,7 +321,7 @@ namespace PerpetualNBPerformance
                 NP20s_AllSkillEnabledReset();
                 Buff_AllSkillEnabledReset();
             }
-            startCalculating();
+            StartCalculating();
         }
 
         // 20NP充能选择
@@ -347,7 +347,7 @@ namespace PerpetualNBPerformance
                 ch += Convert.ToInt32(item.Checked);
             }
             hasNPServ = (ch == 1);
-            startCalculating();
+            StartCalculating();
         }
 
         // 20NP重置所有
@@ -397,7 +397,9 @@ namespace PerpetualNBPerformance
                 item.Checked = false;
             }
         }
+        #endregion
 
+        #region Buff从者相关
         // NP获取提升Buff选择
         private void Buff_CheckedChanged(object sender, EventArgs e)
         {
@@ -407,17 +409,16 @@ namespace PerpetualNBPerformance
             SanSkillP.Enabled = SanRB.Checked;
             XinSkillP.Enabled = XinRB.Checked;
             FenSkillP.Enabled = FenRB.Checked;
+            ShanSkillP.Enabled = ShanRB.Checked;
             int ch = 0;
             foreach (RadioButton item in BuffP.Controls)
             {
                 ch += Convert.ToInt32(item.Checked);
             }
             hasBufServ = (ch == 1);
-            startCalculating();
+            StartCalculating();
         }
-        #endregion
 
-        #region Buff从者相关
         // 双海妈复选，改变相应控件的可操控性
         private void DoubleHaiChB_CheckedChanged(object sender, EventArgs e)
         {
@@ -500,6 +501,7 @@ namespace PerpetualNBPerformance
             SanSkillP.Enabled = true;
             XinSkillP.Enabled = true;
             FenSkillP.Enabled = true;
+            ShanSkillP.Enabled = true;
             if (DoubleZGlChB.Checked)
             {
                 HaiExRB.Enabled = true;
@@ -565,6 +567,8 @@ namespace PerpetualNBPerformance
                 FenSkill2Text.Visible = false;
                 FenSkill3.Visible = false;
                 FenSkill3Text.Visible = false;
+                ShanSkill1.Visible = false;
+                ShanSkill1Text.Visible = false;
             }
             else
             {
@@ -614,6 +618,8 @@ namespace PerpetualNBPerformance
                 FenSkill2Text.Visible = true;
                 FenSkill3.Visible = true;
                 FenSkill3Text.Visible = true;
+                ShanSkill1.Visible = true;
+                ShanSkill1Text.Visible = true;
             }
         }
 
@@ -651,7 +657,7 @@ namespace PerpetualNBPerformance
             }
             else if (tbx.Name.IndexOf("NPLv") > -1)
             {
-                if (error || !((Convert.ToInt32(tbx.Text) > 0 && Convert.ToInt32(tbx.Text) < 5)))
+                if (error || !((Convert.ToInt32(tbx.Text) > 0 && Convert.ToInt32(tbx.Text) < 6)))
                 {
                     MessageBox.Show("宝具等级数值无效，已重置为1", "", MessageBoxButtons.OK);
                     tbx.Text = "1";
@@ -710,7 +716,7 @@ namespace PerpetualNBPerformance
             }
             else if (tbx.Name.IndexOf("NPLv") > -1)
             {
-                if (!((Convert.ToInt32(tbx.Text) > 0 && Convert.ToInt32(tbx.Text) < 5)))
+                if (!((Convert.ToInt32(tbx.Text) > 0 && Convert.ToInt32(tbx.Text) < 6)))
                 {
                     dataInvalid = true;
                     return;
@@ -733,23 +739,23 @@ namespace PerpetualNBPerformance
                 }
             }
             dataInvalid = false;
-            startCalculating();
+            StartCalculating();
         }
 
         // 满破勾选触发计算
         private void MLBChB_CheckedChanged(object sender, EventArgs e)
         {
-            startCalculating();
+            StartCalculating();
         }
 
         // 礼装更改触发计算
         private void CECoB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            startCalculating();
+            StartCalculating();
         }
 
         #region 主程序
-        private void appendNPGain(List<int> array, List<string> arrayT, string name, int skill = 10)
+        private void AppendNPGain(List<int> array, List<string> arrayT, string name, int skill = 10)
         {
             switch (name)
             {
@@ -786,7 +792,7 @@ namespace PerpetualNBPerformance
             }
         }
 
-        private void appendAtkUP(List<double> array, List<string> arrayT, string name, int skill)
+        private void AppendAtkUP(List<double> array, List<string> arrayT, string name, int skill)
         {
             switch (name)
             {
@@ -806,12 +812,16 @@ namespace PerpetualNBPerformance
                     array.Add((skill < 10) ? (skill - 1) * 0.01 + 0.3 : 0.4);
                     arrayT.Add("花嫁");
                     break;
+                case "Shan":
+                    array.Add((skill < 10) ? (skill - 1) * 0.0105 + 0.105 : 0.21);
+                    arrayT.Add("贤王");
+                    break;
                 default:
                     break;
             }
         }
 
-        private void appendArtsUP(List<double> array, List<string> arrayT, string name, int skill)
+        private void AppendArtsUP(List<double> array, List<string> arrayT, string name, int skill)
         {
             switch (name)
             {
@@ -827,12 +837,16 @@ namespace PerpetualNBPerformance
                     array.Add((skill < 10) ? (skill - 1) * 0.02 + 0.3 : 0.5);
                     arrayT.Add("小玉");
                     break;
+                case "Shan":
+                    array.Add((skill < 10) ? (skill - 1) * 0.01 + 0.2 : 0.3);
+                    arrayT.Add("贤王");
+                    break;
                 default:
                     break;
             }
         }
 
-        private void appendNPUP(List<double> array, List<string> arrayT, string name, int skill)
+        private void AppendNPUP(List<double> array, List<string> arrayT, string name, int skill)
         {
             switch (name)
             {
@@ -857,7 +871,7 @@ namespace PerpetualNBPerformance
             }
         }
 
-        private void startCalculating()
+        private void StartCalculating()
         {
             if (ExchangeRB.Checked)
             {
@@ -913,8 +927,8 @@ namespace PerpetualNBPerformance
                 mdatk += Convert.ToInt16(FufuText.Text);
 
                 // 小莫主动
-                appendNPGain(npAllL, npAllLN, "Md", Convert.ToInt32(MdSkill3Text.Text));
-                appendArtsUP(artsAllL, artsAllLN, "Md", Convert.ToInt32(MdSkill1Text.Text));
+                AppendNPGain(npAllL, npAllLN, "Md", Convert.ToInt32(MdSkill3Text.Text));
+                AppendArtsUP(artsAllL, artsAllLN, "Md", Convert.ToInt32(MdSkill1Text.Text));
 
                 // 小莫被动
                 artsAllL.Add(0.05);
@@ -927,7 +941,7 @@ namespace PerpetualNBPerformance
                 }
                 else if (CECoB.Items[CECoB.SelectedIndex].ToString() == "二神三脚")
                 {
-                    specAtk = MLBChB.Checked ? 2.2 : 2.15;
+                    specAtk = MLBChB.Checked ? 2.2 : 1.15;
                     mdatk += Convert.ToInt16(Math.Floor(((2000.0 - 500.0) / 99) * (Convert.ToInt16(CELvText.Text) - 1) + 500));
                 }
                 else if (CECoB.Items[CECoB.SelectedIndex].ToString() == "为御主加油")
@@ -941,14 +955,14 @@ namespace PerpetualNBPerformance
                 int skill;
                 if (biKong)
                 {
-                    appendNPGain(npAllL, npAllLN, "Kong");
-                    appendAtkUP(atkAllL, atkAllLN, "Kong", Convert.ToInt32(ZGlExSkill3Text.Text));
+                    AppendNPGain(npAllL, npAllLN, "Kong");
+                    AppendAtkUP(atkAllL, atkAllLN, "Kong", Convert.ToInt32(ZGlExSkill3Text.Text));
                     skill = Convert.ToInt32(ZGlExSkill3Text.Text);
                     extraAtt += (skill < 10) ? (skill - 1) * 30 + 200 : 500;
                 }
                 // 孔明
-                appendNPGain(npAllL, npAllLN, "Kong");
-                appendAtkUP(atkAllL, atkAllLN, "Kong", Convert.ToInt32(ZGlSkill3Text.Text));
+                AppendNPGain(npAllL, npAllLN, "Kong");
+                AppendAtkUP(atkAllL, atkAllLN, "Kong", Convert.ToInt32(ZGlSkill3Text.Text));
                 skill = Convert.ToInt32(ZGlSkill3Text.Text);
                 extraAtt += (skill < 10) ? (skill - 1) * 30 + 200 : 500;
 
@@ -961,22 +975,22 @@ namespace PerpetualNBPerformance
                 switch (np20sup.ToString())
                 {
                     case "HaiRB":
-                        appendNPGain(npAllL, npAllLN, "Hai", Convert.ToInt32(HaiSkill1Text.Text));
-                        appendArtsUP(artsAllL, artsAllLN, "Hai", Convert.ToInt32(HaiSkill3Text.Text));
+                        AppendNPGain(npAllL, npAllLN, "Hai", Convert.ToInt32(HaiSkill1Text.Text));
+                        AppendArtsUP(artsAllL, artsAllLN, "Hai", Convert.ToInt32(HaiSkill3Text.Text));
                         break;
                     case "LaRB":
-                        appendNPGain(npAllL, npAllLN, "La");
-                        appendAtkUP(atkAllL, atkAllLN, "La", Convert.ToInt32(LaSkill1Text.Text));
+                        AppendNPGain(npAllL, npAllLN, "La");
+                        AppendAtkUP(atkAllL, atkAllLN, "La", Convert.ToInt32(LaSkill1Text.Text));
                         break;
                     case "MeiRB":
-                        appendNPGain(npAllL, npAllLN, "Mei");
-                        appendAtkUP(atkAllL, atkAllLN, "Mei", Convert.ToInt32(MeiSkill1Text.Text));
+                        AppendNPGain(npAllL, npAllLN, "Mei");
+                        AppendAtkUP(atkAllL, atkAllLN, "Mei", Convert.ToInt32(MeiSkill1Text.Text));
                         break;
                     case "ShaRB":
-                        appendNPGain(npAllL, npAllLN, "Sha");
+                        AppendNPGain(npAllL, npAllLN, "Sha");
                         break;
                     case "MaRB":
-                        appendNPGain(npAllL, npAllLN, "Ma");
+                        AppendNPGain(npAllL, npAllLN, "Ma");
                         break;
                     default:
                         break;
@@ -991,24 +1005,28 @@ namespace PerpetualNBPerformance
                 switch (buffsup.ToString())
                 {
                     case "HaiExRB":
-                        appendNPGain(npAllL, npAllLN, "Hai", Convert.ToInt32(HaiExSkill1Text.Text));
-                        appendArtsUP(artsAllL, artsAllLN, "Hai", Convert.ToInt32(HaiExSkill3Text.Text));
+                        AppendNPGain(npAllL, npAllLN, "Hai", Convert.ToInt32(HaiExSkill1Text.Text));
+                        AppendArtsUP(artsAllL, artsAllLN, "Hai", Convert.ToInt32(HaiExSkill3Text.Text));
                         break;
                     case "HuaRB":
-                        appendNPUP(npUpAllL, npUpAllLN, "Hua", Convert.ToInt32(HuaSkill1Text.Text));
-                        appendAtkUP(atkAllL, atkAllLN, "Hua", Convert.ToInt32(HuaSkill2Text.Text));
+                        AppendNPUP(npUpAllL, npUpAllLN, "Hua", Convert.ToInt32(HuaSkill1Text.Text));
+                        AppendAtkUP(atkAllL, atkAllLN, "Hua", Convert.ToInt32(HuaSkill2Text.Text));
                         break;
                     case "YuRB":
-                        appendArtsUP(artsAllL, artsAllLN, "Yu", Convert.ToInt32(YuSkill3Text.Text));
+                        AppendArtsUP(artsAllL, artsAllLN, "Yu", Convert.ToInt32(YuSkill3Text.Text));
                         break;
                     case "SanRB":
-                        appendNPUP(npUpAllL, npUpAllLN, "San", Convert.ToInt32(SanSkill3Text.Text));
+                        AppendNPUP(npUpAllL, npUpAllLN, "San", Convert.ToInt32(SanSkill3Text.Text));
                         break;
                     case "XinRB":
-                        appendNPUP(npUpAllL, npUpAllLN, "Xin", Convert.ToInt32(XinSkill1Text.Text));
+                        AppendNPUP(npUpAllL, npUpAllLN, "Xin", Convert.ToInt32(XinSkill1Text.Text));
                         break;
                     case "FenRB":
-                        appendNPUP(npUpAllL, npUpAllLN, "Fen", Convert.ToInt32(FenSkill1Text.Text));
+                        AppendNPUP(npUpAllL, npUpAllLN, "Fen", Convert.ToInt32(FenSkill1Text.Text));
+                        break;
+                    case "ShanRB":
+                        AppendArtsUP(artsAllL, artsAllLN, "Shan", Convert.ToInt32(ShanSkill3Text.Text));
+                        AppendAtkUP(atkAllL, atkAllLN, "Shan", Convert.ToInt32(ShanSkill2Text.Text));
                         break;
                     default:
                         break;
@@ -1129,29 +1147,35 @@ namespace PerpetualNBPerformance
                 for (int i = 0; i < atkAllL.Count(); i++)
                 {
                     Atkupoutput.Append(atkAllLN[i]);
-                    Atkupoutput.Append(atkAllL[i].ToString());
+                    Atkupoutput.Append((atkAllL[i] * 100).ToString());
+                    Atkupoutput.Append("%");
                     if (i < atkAllL.Count() - 1) Atkupoutput.Append("+");
                 }
                 Atkupoutput.Append("=");
-                Atkupoutput.Append(Convert.ToString(Math.Round(atkAll * 1000) / 1000));
+                Atkupoutput.Append(Convert.ToString(Math.Round(atkAll * 10000) / 100));
+                Atkupoutput.Append("%");
 
                 for (int i = 0; i < artsAllL.Count(); i++)
                 {
                     Artsupoutput.Append(artsAllLN[i]);
-                    Artsupoutput.Append(artsAllL[i].ToString());
+                    Artsupoutput.Append((artsAllL[i] * 100).ToString());
+                    Artsupoutput.Append("%");
                     if (i < artsAllL.Count() - 1) Artsupoutput.Append("+");
                 }
                 Artsupoutput.Append("=");
-                Artsupoutput.Append(Convert.ToString(Math.Round(artsAll * 1000) / 1000));
+                Artsupoutput.Append(Convert.ToString(Math.Round(artsAll * 1000) / 10));
+                Artsupoutput.Append("%");
 
                 for (int i = 0; i < npUpAllL.Count(); i++)
                 {
                     NPupoutput.Append(npUpAllLN[i]);
-                    NPupoutput.Append(npUpAllL[i].ToString());
+                    NPupoutput.Append((npUpAllL[i] * 100).ToString());
+                    NPupoutput.Append("%");
                     if (i < npUpAllL.Count() - 1) NPupoutput.Append("+");
                 }
                 NPupoutput.Append("=");
-                NPupoutput.Append(Convert.ToString(Math.Round(npUpAll * 100) / 100));
+                NPupoutput.Append(Convert.ToString(Math.Round(npUpAll * 100)));
+                NPupoutput.Append("%");
 
                 NPOutput.Text = NPoutput.ToString();
                 AtkOutput.Text = Atkoutput.ToString();
@@ -1208,7 +1232,7 @@ namespace PerpetualNBPerformance
         {
             if (!WriteFndmtlData()) WriteFndmtlData(true);
             if (!WriteSkillData()) WriteSkillData(true);
-            startCalculating();
+            StartCalculating();
         }
     }
 }
