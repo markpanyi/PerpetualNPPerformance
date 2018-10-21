@@ -10,8 +10,8 @@ namespace PerpetualNBPerformance
 {
     abstract class CreateXML
     {
-        private static string[] SERVANT_ID = { "ZGl", "ZGlEx", "Hai", "La", "Mei", "Sha", "Ma", "HaiEx", "Hua", "Yu", "San", "Xin", "Fen", "Shan" };
-        private static string[] SERVANT_NAME = { "孔明", "孔明2", "海妈", "拉二", "梅林", "莎比", "玛修", "海妈(2)", "花嫁", "小玉", "三藏", "信长", "芬恩", "贤王" };
+        public static string[] SERVANT_ID = { "ZGl", "ZGlEx", "Hai", "La", "Mei", "Sha", "Ma", "HaiEx", "Hua", "Yu", "San", "Xin", "Fen", "Shan", "Dou", "Lin", "Lily", "Niu", "Bu", "Long", "Ni" };
+        public static string[] SERVANT_NAME = { "孔明", "孔明2", "海妈", "拉二", "梅林", "莎比", "玛修", "海妈(2)", "花嫁", "小玉", "三藏", "信长", "芬恩", "贤王", "豆爸", "骑凛", "Lily", "牛若", "布妈", "龙娘", "水泥" };
 
         public static void CreateMdFndmntlXML()
         {

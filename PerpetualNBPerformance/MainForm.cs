@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -11,17 +12,25 @@ namespace PerpetualNBPerformance
 {
     public partial class MainForm : Form
     {
+        #region 公共变量
         private XmlDocument FndmtXML = new XmlDocument();
         private XmlDocument SkillXML = new XmlDocument();
+        private XmlDocument SkillInfo = new XmlDocument();
+        private XmlDocument CraftInfo = new XmlDocument();
+
+        private XmlNode skillinfo;
+        private XmlNode craftinfo;
+
+        private List<string> UselessSkills = new List<string>();
+        #endregion
         #region 公共布尔值
         private Boolean clothIsExchange = true;
         private Boolean hasNPServ = false;
         private Boolean hasBufServ = false;
         private Boolean allowCalcu = false;
-        private Boolean biKong = false;
-        private Boolean biHai = false;
         private Boolean pauseChangeDetect = true;
         private Boolean dataInvalid = false;
+        private Boolean unusualCE = false;
         #endregion
         #region 固有数据
         private static int[] enermy1st = { 23465, 23301, 23301 };
@@ -29,6 +38,7 @@ namespace PerpetualNBPerformance
         private static int[] enermy3rd = { 98090, 152662 };
         private static double[] npTimes = { 4.5, 6.0, 6.75, 7.125, 7.5 };
         private static double[] damageAccuHit = { 0.06, 0.19, 0.39, 0.65, 1.00 };
+        private Dictionary<string, string> servName = new Dictionary<string, string>();
         #endregion
 
         public MainForm()
@@ -64,10 +74,58 @@ namespace PerpetualNBPerformance
                 if (!WriteSkillData()) WriteSkillData(true);
             }
 
+            // 检查XML文件，不存在时退出
+            if (!File.Exists(@".\Data\SkillInfo.xml") || !File.Exists(@".\Data\CraftEInfo.xml"))
+            {
+                MessageBox.Show("缺少\\Data\\SkillInfo.xml或\\Data\\CraftEInfo.xml文件，程序无法运行", "缺少必要的XML文件", MessageBoxButtons.OK);
+                this.Close();
+            }
+            else
+            {
+                SkillInfo.Load(@".\Data\SkillInfo.xml");
+                skillinfo = SkillInfo.DocumentElement;
+
+                CraftInfo.Load(@".\Data\CraftEInfo.xml");
+                craftinfo = CraftInfo.DocumentElement;
+
+                // 无关技能List写入
+                XmlNodeList servant = skillinfo.SelectNodes("servant");
+                foreach (XmlNode node in servant)
+                {
+                    XmlAttribute attrX = node.Attributes["id"];
+                    XmlNodeList ulssskills = node.SelectNodes("*[valid=0]");
+                    if (attrX.Value == "Hai")
+                    {
+                        foreach (XmlNode item in ulssskills)
+                        {
+                            UselessSkills.Add(string.Format("{0}{1}", attrX.Value, item.Name));
+                            UselessSkills.Add(string.Format("{0}Ex{1}", attrX.Value, item.Name));
+                        }
+                    }
+                    else
+                    {
+                        foreach (XmlNode item in ulssskills) UselessSkills.Add(string.Format("{0}{1}", attrX.Value, item.Name));
+                    }
+                }
+
+                // 礼装选项写入
+                List<string> celist = new List<string>();
+                XmlNodeList Celist = craftinfo.SelectNodes("//name");
+                foreach (XmlNode item in Celist) celist.Add(item.InnerText);
+                CECoB.Items.AddRange(celist.ToArray());
+            }
+
+            // servName写入
+            for (int i = 0; i < CreateXML.SERVANT_ID.Length; i++) servName.Add(CreateXML.SERVANT_ID[i], CreateXML.SERVANT_NAME[i]);
+
+            // 玛修二技能10写入
+            MaSkill2Text.Text = "10";
+
             // 写入敌方血量数据
             EnermyHP_Write();
         }
 
+        #region 写入
         // 写入技能数据
         private Boolean WriteFndmtlData()
         {
@@ -132,14 +190,11 @@ namespace PerpetualNBPerformance
                 XmlNodeList servant = SkillXML.GetElementsByTagName("servant");
                 foreach (XmlNode node in servant)
                 {
-                    if (node.HasChildNodes)
+                    XmlAttribute attrX = node.Attributes["id"];
+                    for (int i = 1; i <= 3; i++)
                     {
-                        XmlAttribute attrX = node.Attributes["id"];
-                        for (int i = 1; i <= 3; i++)
-                        {
-                            string temp = string.Format("Skill{0}", i);
-                            this.Controls.Find(string.Format("{0}{1}Text", attrX.Value, temp), true)[0].Text = node.SelectSingleNode(temp).InnerText;
-                        }
+                        string temp = string.Format("Skill{0}", i);
+                        this.Controls.Find(string.Format("{0}{1}Text", attrX.Value, temp), true)[0].Text = node.SelectSingleNode(temp).InnerText;
                     }
                 }
             }
@@ -170,14 +225,11 @@ namespace PerpetualNBPerformance
             XmlNodeList servant = SkillXML.GetElementsByTagName("servant");
             foreach (XmlNode node in servant)
             {
-                if (node.HasChildNodes)
+                XmlAttribute attrX = node.Attributes["id"];
+                for (int i = 1; i <= 3; i++)
                 {
-                    XmlAttribute attrX = node.Attributes["id"];
-                    for (int i = 1; i <= 3; i++)
-                    {
-                        string temp = string.Format("Skill{0}", i);
-                        this.Controls.Find(string.Format("{0}{1}Text", attrX.Value, temp), true)[0].Text = node.SelectSingleNode(temp).InnerText;
-                    }
+                    string temp = string.Format("Skill{0}", i);
+                    this.Controls.Find(string.Format("{0}{1}Text", attrX.Value, temp), true)[0].Text = node.SelectSingleNode(temp).InnerText;
                 }
             }
             pauseChangeDetect = false;
@@ -200,6 +252,7 @@ namespace PerpetualNBPerformance
                 Enermy3LV.Items[0].SubItems[i + 1].Text = enermy3rd[i].ToString();
             }
         }
+        #endregion
 
         #region 一键数据写入
         // 满芙芙设置（应该都满了吧……）
@@ -242,10 +295,24 @@ namespace PerpetualNBPerformance
             switch (panelName.ToString())
             {
                 case "NP20":
-                case "Buff":
                     panelName.Append("GB");
                     GroupBox temp_1 = (GroupBox)this.Controls.Find(panelName.ToString(), true)[0];
                     foreach (Control item in temp_1.Controls)
+                    {
+                        if (item is Panel)
+                        {
+                            foreach (Control itemT in item.Controls)
+                            {
+                                if (itemT is TextBox) itemT.Text = "10";
+                            }
+                        }
+                    }
+                    break;
+                case "Bu30":
+                case "Bu20":
+                    panelName.Append("TP");
+                    TabPage temp_2 = (TabPage)this.Controls.Find(panelName.ToString(), true)[0];
+                    foreach (Control item in temp_2.Controls)
                     {
                         if (item is Panel)
                         {
@@ -273,24 +340,47 @@ namespace PerpetualNBPerformance
         // 御主服装更换
         private void ClothRBs_CheckedChanged(object sender, EventArgs e)
         {
-            if (ExchangeRB.Checked)
+            if (ExchangeRB.Checked) clothIsExchange = true;
+            else if (ChargeRB.Checked) clothIsExchange = false;
+
+            DoubleZGlChB.Enabled = !unusualCE && clothIsExchange;
+            DoubleHaiChB.Enabled = !DoubleZGlChB.Checked && clothIsExchange && HaiRB.Checked;
+            NP20GB.Enabled = !(!(unusualCE || (clothIsExchange && !DoubleZGlChB.Checked)) || (unusualCE && !NoZGlChB.Checked));
+            HaiExRB.Enabled = !unusualCE && (!clothIsExchange || DoubleHaiChB.Checked);
+            HaiExChB.Enabled = unusualCE && (!clothIsExchange || DoubleHaiChB.Checked);
+            StartCalculating();
+        }
+
+        // 礼装更换
+        private void CECoB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (craftinfo.SelectSingleNode(string.Format("craftes[name=\"{0}\"]", CECoB.SelectedItem.ToString()))["unusual"].InnerText == "1")
             {
-                clothIsExchange = true;
-                DoubleZGlChB.Enabled = true;
-                NP20s_AllSkillEnabledReset();
-                NP20GB.Enabled = true;
-                DoubleHaiChB.Enabled = true;
+                unusualCE = true;
+                ExchangeRB.Checked = true;
+                ChargeRB.Checked = false;
             }
-            if (ChargeRB.Checked)
+            else
             {
-                clothIsExchange = false;
-                DoubleZGlChB.Checked = false;
-                DoubleZGlChB.Enabled = false;
-                NP20s_CheckedReset();
-                NP20GB.Enabled = false;
-                DoubleHaiChB.Checked = false;
-                DoubleHaiChB.Enabled = false;
+                unusualCE = false;
+                ChargeRB.Checked = true;
             }
+
+            ClothP.Enabled = !unusualCE;
+            DoubleZGlChB.Enabled = !unusualCE && clothIsExchange;
+            NoZGlChB.Enabled = unusualCE;
+            NP20GB.Enabled = !(!(unusualCE || (clothIsExchange && !DoubleZGlChB.Checked)) || (unusualCE && !NoZGlChB.Checked));
+            foreach (Control item in BuffP.Controls)
+            {
+                if (item is RadioButton && item.Name != "HaiExRB") item.Enabled = !unusualCE && !DoubleHaiChB.Checked;
+                else if (item is CheckBox && item.Name != "HaiExChB") item.Enabled = unusualCE;
+            }
+            foreach (Control item in Bu20TP.Controls) item.Enabled = unusualCE;
+            HaiExRB.Enabled = !unusualCE && (!clothIsExchange || DoubleHaiChB.Checked);
+            HaiExChB.Enabled = unusualCE && (!clothIsExchange || DoubleHaiChB.Checked);
+            HaiExSkillP.Enabled = !clothIsExchange || DoubleHaiChB.Checked;
+            HaiExRB.Checked = !unusualCE && DoubleHaiChB.Checked;
+            HaiExChB.Checked = unusualCE && DoubleHaiChB.Checked;
             StartCalculating();
         }
 
@@ -298,55 +388,31 @@ namespace PerpetualNBPerformance
         // 双孔明复选，改变相应控件的可操控性
         private void DoubleZGlChB_CheckedChanged(object sender, EventArgs e)
         {
-            if (DoubleZGlChB.Checked)
-            {
-                biKong = true;
-                ZGlExAllMaxB.Enabled = true;
-                ZGlExSkillP.Enabled = true;
-                NP20GB.Enabled = false;
-                DoubleHaiChB.Enabled = false;
-                DoubleHaiChB.Checked = false;
-                HaiExRB.Enabled = true;
-                HaiExSkillP.Enabled = true;
-                NP20s_CheckedReset();
-            }
-            else
-            {
-                biKong = false;
-                ZGlExAllMaxB.Enabled = false;
-                ZGlExSkillP.Enabled = false;
-                NP20GB.Enabled = true;
-                HaiExRB.Enabled = false;
-                HaiExRB.Checked = false;
-                NP20s_AllSkillEnabledReset();
-                Buff_AllSkillEnabledReset();
-            }
+            ZGlExSkillP.Enabled = DoubleZGlChB.Checked;
+            ZGlExAllMaxB.Enabled = DoubleZGlChB.Checked;
+            NP20GB.Enabled = !(!(unusualCE || (clothIsExchange && !DoubleZGlChB.Checked)) || (unusualCE && !NoZGlChB.Checked));
+            DoubleHaiChB.Enabled = !DoubleZGlChB.Checked && clothIsExchange && HaiRB.Checked;
+            StartCalculating();
+        }
+
+        // 无孔明复选
+        private void NoZGlChB_CheckedChanged(object sender, EventArgs e)
+        {
+            ZGlSkillP.Enabled = !NoZGlChB.Checked;
+            NP20GB.Enabled = !(!(unusualCE || (clothIsExchange && !DoubleZGlChB.Checked)) || (unusualCE && !NoZGlChB.Checked));
             StartCalculating();
         }
 
         // 20NP充能选择
         private void NP20s_CheckedChanged(object sender, EventArgs e)
         {
-            HaiSkillP.Enabled = HaiRB.Checked;
-            LaSkillP.Enabled = LaRB.Checked;
-            MeiSkillP.Enabled = MeiRB.Checked;
-            ShaSkillP.Enabled = ShaRB.Checked;
-            MaSkillP.Enabled = MaRB.Checked;
-            if (HaiRB.Checked)
-            {
-                DoubleHaiChB.Enabled = true;
-            }
-            else
-            {
-                DoubleHaiChB.Enabled = false;
-                DoubleHaiChB.Checked = false;
-            }
             int ch = 0;
             foreach (RadioButton item in NP20P.Controls)
             {
                 ch += Convert.ToInt32(item.Checked);
             }
             hasNPServ = (ch == 1);
+            DoubleHaiChB.Enabled = !DoubleZGlChB.Checked && clothIsExchange && HaiRB.Checked;
             StartCalculating();
         }
 
@@ -401,56 +467,43 @@ namespace PerpetualNBPerformance
 
         #region Buff从者相关
         // NP获取提升Buff选择
-        private void Buff_CheckedChanged(object sender, EventArgs e)
+        private void Buffs_CheckedChanged(object sender, EventArgs e)
         {
-            HaiExSkillP.Enabled = HaiExRB.Checked;
-            HuaSkillP.Enabled = HuaRB.Checked;
-            YuSkillP.Enabled = YuRB.Checked;
-            SanSkillP.Enabled = SanRB.Checked;
-            XinSkillP.Enabled = XinRB.Checked;
-            FenSkillP.Enabled = FenRB.Checked;
-            ShanSkillP.Enabled = ShanRB.Checked;
-            int ch = 0;
-            foreach (RadioButton item in BuffP.Controls)
+            foreach (Control item in BuffP.Controls)
             {
-                ch += Convert.ToInt32(item.Checked);
+                if (item is RadioButton && item.Name != "HaiExRB") item.Enabled = !unusualCE && !DoubleHaiChB.Checked;
+            }
+            uint ch = 0;
+            foreach (Control item in BuffP.Controls)
+            {
+                if (item is RadioButton) ch += Convert.ToUInt32(((RadioButton)item).Checked);
             }
             hasBufServ = (ch == 1);
+            StartCalculating();
+        }
+        private void Bu20s_CheckedChanged(object sender, EventArgs e)
+        {
+            uint ct = 0;
+            foreach (Control item in BuffP.Controls)
+            {
+                if (item is CheckBox && ((CheckBox)item).Checked) ct += 1;
+            }
+            foreach (Control item in Bu20P.Controls)
+            {
+                if (item is CheckBox && ((CheckBox)item).Checked) ct += 1;
+            }
+            hasBufServ = (ct == 2);
             StartCalculating();
         }
 
         // 双海妈复选，改变相应控件的可操控性
         private void DoubleHaiChB_CheckedChanged(object sender, EventArgs e)
         {
-            if (DoubleHaiChB.Checked)
-            {
-                biHai = true;
-                foreach (RadioButton item in BuffP.Controls)
-                {
-                    item.Enabled = false;
-                }
-                HaiExRB.Enabled = true;
-                HaiExRB.Checked = true;
-                HaiExSkillP.Enabled = true;
-            }
-            else
-            {
-                biHai = false;
-                foreach (RadioButton item in BuffP.Controls)
-                {
-                    item.Enabled = true;
-                }
-                HaiExRB.Enabled = false;
-                HaiExRB.Checked = false;
-                Buff_AllSkillEnabledReset();
-            }
-        }
-
-        private void HaiEx_EnabledChange()
-        {
-            HaiExRB.Enabled = DoubleHaiChB.Checked;
-            HaiExRB.Checked = DoubleHaiChB.Checked;
-            HaiExSkillP.Enabled = DoubleHaiChB.Checked;
+            HaiExRB.Enabled = !unusualCE && (!clothIsExchange || DoubleHaiChB.Checked);
+            HaiExChB.Enabled = unusualCE && (!clothIsExchange || DoubleHaiChB.Checked);
+            HaiExSkillP.Enabled = !clothIsExchange || DoubleHaiChB.Checked;
+            HaiExRB.Checked = !unusualCE && DoubleHaiChB.Checked;
+            HaiExChB.Checked = unusualCE && DoubleHaiChB.Checked;
         }
 
         // Buff重置选择
@@ -462,9 +515,10 @@ namespace PerpetualNBPerformance
 
         private void Buff_CheckedReset()
         {
-            foreach (RadioButton item in BuffP.Controls)
+            foreach (Control item in BuffP.Controls)
             {
-                item.Checked = false;
+                if (item is RadioButton) ((RadioButton)item).Checked = false;
+                else if (item is CheckBox) ((CheckBox)item).Checked = false;
             }
         }
 
@@ -480,33 +534,51 @@ namespace PerpetualNBPerformance
         private void Buff_AllSkillReset()
         {
             pauseChangeDetect = true;
-            foreach (Control item in BuffGB.Controls)
-            {
-                if (item is Panel)
-                {
-                    foreach (Control itemT in item.Controls)
-                    {
-                        if (itemT is TextBox) itemT.Text = "1";
-                    }
-                }
-            }
+            foreach (Control item in Bu30TP.Controls) if (item is Panel) foreach (Control itemT in item.Controls) if (itemT is TextBox) itemT.Text = "1";
             pauseChangeDetect = false;
         }
 
         private void Buff_AllSkillEnabledReset()
         {
-            HaiExSkillP.Enabled = false;
+            HaiExSkillP.Enabled = true && DoubleZGlChB.Checked;
             HuaSkillP.Enabled = true;
             YuSkillP.Enabled = true;
             SanSkillP.Enabled = true;
             XinSkillP.Enabled = true;
             FenSkillP.Enabled = true;
             ShanSkillP.Enabled = true;
-            if (DoubleZGlChB.Checked)
-            {
-                HaiExRB.Enabled = true;
-                HaiExSkillP.Enabled = true;
-            }
+        }
+
+        // Buff20重置选择
+        private void Bu20ResetSlctnB_Click(object sender, EventArgs e)
+        {
+            Bu20_CheckedReset();
+            Bu20_AllSkillEnabledReset();
+        }
+
+        private void Bu20_CheckedReset()
+        {
+            foreach (CheckBox item in Bu20P.Controls) item.Checked = false;
+        }
+
+        // Buff重置所有
+        private void Bu20ResetAllB_Click(object sender, EventArgs e)
+        {
+            Bu20_CheckedReset();
+            Bu20_AllSkillEnabledReset();
+            Bu20_AllSkillReset();
+        }
+
+        private void Bu20_AllSkillReset()
+        {
+            pauseChangeDetect = true;
+            foreach (Control item in Bu20TP.Controls) if (item is Panel) foreach (Control itemT in item.Controls) if (itemT is TextBox) itemT.Text = "1";
+            pauseChangeDetect = false;
+        }
+
+        private void Bu20_AllSkillEnabledReset()
+        {
+            foreach (Control item in Bu20TP.Controls) if (item is Panel) item.Enabled = true;
         }
 
         // 永久锁定玛修充能10级
@@ -521,105 +593,19 @@ namespace PerpetualNBPerformance
         {
             if (HideNrskChB.Checked)
             {
-                MdSkill2.Visible = false;
-                MdSkill2Text.Visible = false;
-                ZGlSkill1.Visible = false;
-                ZGlSkill1Text.Visible = false;
-                ZGlSkill2.Visible = false;
-                ZGlSkill2Text.Visible = false;
-                ZGlExSkill1.Visible = false;
-                ZGlExSkill1Text.Visible = false;
-                ZGlExSkill2.Visible = false;
-                ZGlExSkill2Text.Visible = false;
-                HaiSkill2.Visible = false;
-                HaiSkill2Text.Visible = false;
-                LaSkill2.Visible = false;
-                LaSkill2Text.Visible = false;
-                MeiSkill2.Visible = false;
-                MeiSkill2Text.Visible = false;
-                MeiSkill3.Visible = false;
-                MeiSkill3Text.Visible = false;
-                ShaSkill1.Visible = false;
-                ShaSkill1Text.Visible = false;
-                ShaSkill2.Visible = false;
-                ShaSkill2Text.Visible = false;
-                MaSkill1.Visible = false;
-                MaSkill1Text.Visible = false;
-                MaSkill3.Visible = false;
-                MaSkill3Text.Visible = false;
-                HaiExSkill2.Visible = false;
-                HaiExSkill2Text.Visible = false;
-                HuaSkill3.Visible = false;
-                HuaSkill3Text.Visible = false;
-                YuSkill1.Visible = false;
-                YuSkill1Text.Visible = false;
-                YuSkill2.Visible = false;
-                YuSkill2Text.Visible = false;
-                SanSkill1.Visible = false;
-                SanSkill1Text.Visible = false;
-                SanSkill2.Visible = false;
-                SanSkill2Text.Visible = false;
-                XinSkill2.Visible = false;
-                XinSkill2Text.Visible = false;
-                XinSkill3.Visible = false;
-                XinSkill3Text.Visible = false;
-                FenSkill2.Visible = false;
-                FenSkill2Text.Visible = false;
-                FenSkill3.Visible = false;
-                FenSkill3Text.Visible = false;
-                ShanSkill1.Visible = false;
-                ShanSkill1Text.Visible = false;
+                foreach (string item in UselessSkills)
+                {
+                    this.Controls.Find(item, true)[0].Visible = false;
+                    this.Controls.Find(string.Format("{0}Text", item), true)[0].Visible = false;
+                }
             }
             else
             {
-                MdSkill2.Visible = true;
-                MdSkill2Text.Visible = true;
-                ZGlSkill1.Visible = true;
-                ZGlSkill1Text.Visible = true;
-                ZGlSkill2.Visible = true;
-                ZGlSkill2Text.Visible = true;
-                ZGlExSkill1.Visible = true;
-                ZGlExSkill1Text.Visible = true;
-                ZGlExSkill2.Visible = true;
-                ZGlExSkill2Text.Visible = true;
-                HaiSkill2.Visible = true;
-                HaiSkill2Text.Visible = true;
-                LaSkill2.Visible = true;
-                LaSkill2Text.Visible = true;
-                MeiSkill2.Visible = true;
-                MeiSkill2Text.Visible = true;
-                MeiSkill3.Visible = true;
-                MeiSkill3Text.Visible = true;
-                ShaSkill1.Visible = true;
-                ShaSkill1Text.Visible = true;
-                ShaSkill2.Visible = true;
-                ShaSkill2Text.Visible = true;
-                MaSkill1.Visible = true;
-                MaSkill1Text.Visible = true;
-                MaSkill3.Visible = true;
-                MaSkill3Text.Visible = true;
-                HaiExSkill2.Visible = true;
-                HaiExSkill2Text.Visible = true;
-                HuaSkill3.Visible = true;
-                HuaSkill3Text.Visible = true;
-                YuSkill1.Visible = true;
-                YuSkill1Text.Visible = true;
-                YuSkill2.Visible = true;
-                YuSkill2Text.Visible = true;
-                SanSkill1.Visible = true;
-                SanSkill1Text.Visible = true;
-                SanSkill2.Visible = true;
-                SanSkill2Text.Visible = true;
-                XinSkill2.Visible = true;
-                XinSkill2Text.Visible = true;
-                XinSkill3.Visible = true;
-                XinSkill3Text.Visible = true;
-                FenSkill2.Visible = true;
-                FenSkill2Text.Visible = true;
-                FenSkill3.Visible = true;
-                FenSkill3Text.Visible = true;
-                ShanSkill1.Visible = true;
-                ShanSkill1Text.Visible = true;
+                foreach (string item in UselessSkills)
+                {
+                    this.Controls.Find(item, true)[0].Visible = true;
+                    this.Controls.Find(string.Format("{0}Text", item), true)[0].Visible = true;
+                }
             }
         }
 
@@ -684,6 +670,7 @@ namespace PerpetualNBPerformance
             }
         }
 
+        #region 触发计算
         // 文本框更改触发计算
         private void TextBox_Text_Changed(object sender, EventArgs e)
         {
@@ -747,146 +734,25 @@ namespace PerpetualNBPerformance
         {
             StartCalculating();
         }
+        #endregion
 
-        // 礼装更改触发计算
-        private void CECoB_SelectedIndexChanged(object sender, EventArgs e)
+        private void RB_ChB_EnabledChanged(object sender, EventArgs e)
         {
-            StartCalculating();
+            if (sender is RadioButton) ((RadioButton)sender).Checked = false;
+            else if (sender is CheckBox) ((CheckBox)sender).Checked = false;
         }
 
         #region 主程序
-        private void AppendNPGain(List<int> array, List<string> arrayT, string name, int skill = 10)
-        {
-            switch (name)
-            {
-                case "Md":
-                    array.Add((skill < 10) ? (skill - 1) + 20 : 30);
-                    arrayT.Add("小莫");
-                    break;
-                case "Kong":
-                    array.Add(50);
-                    arrayT.Add("孔明");
-                    break;
-                case "Hai":
-                    array.Add((skill < 10) ? (skill - 1) + 10 : 20);
-                    arrayT.Add("海妈");
-                    break;
-                case "La":
-                    array.Add(20);
-                    arrayT.Add("拉二");
-                    break;
-                case "Mei":
-                    array.Add(20);
-                    arrayT.Add("梅林");
-                    break;
-                case "Sha":
-                    array.Add(20);
-                    arrayT.Add("莎比");
-                    break;
-                case "Ma":
-                    array.Add(20);
-                    arrayT.Add("玛修");
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void AppendAtkUP(List<double> array, List<string> arrayT, string name, int skill)
-        {
-            switch (name)
-            {
-                case "Kong":
-                    array.Add((skill < 10) ? (skill - 1) * 0.01 + 0.2 : 0.3);
-                    arrayT.Add("孔明");
-                    break;
-                case "La":
-                    array.Add((skill < 10) ? (skill - 1) * 0.009 + 0.09 : 0.18);
-                    arrayT.Add("拉二");
-                    break;
-                case "Mei":
-                    array.Add((skill < 10) ? (skill - 1) * 0.01 + 0.1 : 0.2);
-                    arrayT.Add("梅林");
-                    break;
-                case "Hua":
-                    array.Add((skill < 10) ? (skill - 1) * 0.01 + 0.3 : 0.4);
-                    arrayT.Add("花嫁");
-                    break;
-                case "Shan":
-                    array.Add((skill < 10) ? (skill - 1) * 0.0105 + 0.105 : 0.21);
-                    arrayT.Add("贤王");
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void AppendArtsUP(List<double> array, List<string> arrayT, string name, int skill)
-        {
-            switch (name)
-            {
-                case "Md":
-                    array.Add((skill < 10) ? (skill - 1) * 0.01 + 0.2 : 0.3);
-                    arrayT.Add("小莫");
-                    break;
-                case "Hai":
-                    array.Add((skill < 10) ? (skill - 1) * 0.005 + 0.15 : 0.2);
-                    arrayT.Add("海妈");
-                    break;
-                case "Yu":
-                    array.Add((skill < 10) ? (skill - 1) * 0.02 + 0.3 : 0.5);
-                    arrayT.Add("小玉");
-                    break;
-                case "Shan":
-                    array.Add((skill < 10) ? (skill - 1) * 0.01 + 0.2 : 0.3);
-                    arrayT.Add("贤王");
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void AppendNPUP(List<double> array, List<string> arrayT, string name, int skill)
-        {
-            switch (name)
-            {
-                case "Hua":
-                    array.Add((skill < 10) ? (skill - 1) * 0.01 + 0.35 : 0.45);
-                    arrayT.Add("花嫁");
-                    break;
-                case "San":
-                    array.Add((skill < 10) ? (skill - 1) * 0.02 + 0.1 : 0.3);
-                    arrayT.Add("三藏");
-                    break;
-                case "Xin":
-                    array.Add((skill < 10) ? (skill - 1) * 0.01 + 0.2 : 0.3);
-                    arrayT.Add("信长");
-                    break;
-                case "Fen":
-                    array.Add((skill < 10) ? (skill - 1) * 0.02 + 0.1 : 0.3);
-                    arrayT.Add("芬恩");
-                    break;
-                default:
-                    break;
-            }
-        }
-
         private void StartCalculating()
         {
-            if (ExchangeRB.Checked)
+            if (unusualCE)
             {
-                if (biKong || biHai)
-                {
-                    allowCalcu = hasBufServ;
-                }
-                else
-                {
-                    allowCalcu = hasBufServ && hasNPServ;
-                }
+                allowCalcu = NoZGlChB.Checked ? hasBufServ && hasNPServ : hasBufServ;
             }
-            else if (ChargeRB.Checked)
+            else
             {
-                allowCalcu = hasBufServ;
+                if (ExchangeRB.Checked) allowCalcu = DoubleZGlChB.Checked ? hasBufServ : hasBufServ && hasNPServ;
+                else if (ChargeRB.Checked) allowCalcu = hasBufServ;
             }
 
             // 先判断是不是可以开始计算了
@@ -895,21 +761,27 @@ namespace PerpetualNBPerformance
                 ResultGB.Enabled = true;
 
                 List<int> npAllL = new List<int>();
-                List<double> atkAllL = new List<double>();
-                List<double> artsAllL = new List<double>();
+                List<int> extraAtkAllL = new List<int>();
+                List<double> npdmgUpAllL = new List<double>();
+                List<double> atkUpAllL = new List<double>();
+                List<double> artsUpAllL = new List<double>();
                 List<double> npUpAllL = new List<double>();
                 List<string> npAllLN = new List<string>();
-                List<string> atkAllLN = new List<string>();
-                List<string> artsAllLN = new List<string>();
+                List<string> extraAtkAllLN = new List<string>();
+                List<string> npdmgUpAllLN = new List<string>();
+                List<string> atkUpAllLN = new List<string>();
+                List<string> artsUpAllLN = new List<string>();
                 List<string> npUpAllLN = new List<string>();
+
                 int npAll = 0;
+                int extraAtkAll = 0;
                 double atkAll = 0;
                 double artsAll = 0;
                 double npUpAll = 0;
-                double specAtk = 0;
-                double extraAtt = 0;
+                double npdmgAll = 0;
                 double npGainPerHit = 0;
                 double atkTotal = 0;
+                double defendDown = 0;
 
                 // 充能服
                 if (clothIsExchange == false)
@@ -927,44 +799,98 @@ namespace PerpetualNBPerformance
                 mdatk += Convert.ToInt16(FufuText.Text);
 
                 // 小莫主动
-                AppendNPGain(npAllL, npAllLN, "Md", Convert.ToInt32(MdSkill3Text.Text));
-                AppendArtsUP(artsAllL, artsAllLN, "Md", Convert.ToInt32(MdSkill1Text.Text));
+                npAllL.Add((Convert.ToInt32(MdSkill3Text.Text) < 10) ? (Convert.ToInt32(MdSkill3Text.Text) - 1) + 20 : 30);
+                npAllLN.Add("小莫");
+                artsUpAllL.Add((Convert.ToInt32(MdSkill1Text.Text) < 10) ? (Convert.ToInt32(MdSkill1Text.Text) - 1) * 0.01 + 0.2 : 0.3);
+                artsUpAllLN.Add("小莫");
 
                 // 小莫被动
-                artsAllL.Add(0.05);
-                artsAllLN.Add("小莫被动");
+                artsUpAllL.Add(0.05);
+                artsUpAllLN.Add("小莫被动");
 
                 // 礼装效果
-                if (CECoB.SelectedIndex == -1)
+                XmlNode crafte = craftinfo.SelectSingleNode(string.Format("craftes[name='{0}']", CECoB.SelectedItem.ToString()));
+                int atk_1 = Convert.ToInt32(crafte["atk_1"].InnerText);
+                int atk_C = Convert.ToInt32(crafte["atk_C"].InnerText);
+                mdatk += Convert.ToInt16(Math.Floor(((atk_C - atk_1) / 99.0) * (Convert.ToInt32(CELvText.Text) - 1))) + atk_1;
+                foreach (XmlNode eff in crafte.SelectNodes("eff"))
                 {
+                    switch (eff.Attributes["type"].Value)
+                    {
+                        case "np":
+                            npAllL.Add(MLBChB.Checked ? Convert.ToInt32(eff["eff_M"].InnerText) : Convert.ToInt32(eff["eff_N"].InnerText));
+                            npAllLN.Add(MLBChB.Checked ? "满破礼装" : "礼装");
+                            break;
+                        case "atkUp":
+                            atkUpAllL.Add(MLBChB.Checked ? Convert.ToDouble(eff["eff_M"].InnerText) : Convert.ToDouble(eff["eff_N"].InnerText));
+                            atkUpAllLN.Add(MLBChB.Checked ? "满破礼装" : "礼装");
+                            break;
+                        case "artsUp":
+                            artsUpAllL.Add(MLBChB.Checked ? Convert.ToDouble(eff["eff_M"].InnerText) : Convert.ToDouble(eff["eff_N"].InnerText));
+                            artsUpAllLN.Add(MLBChB.Checked ? "满破礼装" : "礼装");
+                            break;
+                        case "npUp":
+                            npUpAllL.Add(MLBChB.Checked ? Convert.ToDouble(eff["eff_M"].InnerText) : Convert.ToDouble(eff["eff_N"].InnerText));
+                            npUpAllLN.Add(MLBChB.Checked ? "满破礼装" : "礼装");
+                            break;
+                        case "npdmgUp":
+                            npdmgUpAllL.Add(MLBChB.Checked ? Convert.ToDouble(eff["eff_M"].InnerText) : Convert.ToDouble(eff["eff_N"].InnerText));
+                            npdmgUpAllLN.Add(MLBChB.Checked ? "满破礼装" : "礼装");
+                            break;
+                    }
+                }
 
-                }
-                else if (CECoB.Items[CECoB.SelectedIndex].ToString() == "二神三脚")
-                {
-                    specAtk = MLBChB.Checked ? 2.2 : 1.15;
-                    mdatk += Convert.ToInt16(Math.Floor(((2000.0 - 500.0) / 99) * (Convert.ToInt16(CELvText.Text) - 1) + 500));
-                }
-                else if (CECoB.Items[CECoB.SelectedIndex].ToString() == "为御主加油")
-                {
-                    artsAllL.Add(MLBChB.Checked ? 0.08 : 0.06);
-                    artsAllLN.Add("礼装");
-                    mdatk += Convert.ToInt16(Math.Floor(((1000.0 - 250.0) / 99) * (Convert.ToInt16(CELvText.Text) - 1) + 250));
-                }
-
-                // 看双孔明是否有
-                int skill;
-                if (biKong)
-                {
-                    AppendNPGain(npAllL, npAllLN, "Kong");
-                    AppendAtkUP(atkAllL, atkAllLN, "Kong", Convert.ToInt32(ZGlExSkill3Text.Text));
-                    skill = Convert.ToInt32(ZGlExSkill3Text.Text);
-                    extraAtt += (skill < 10) ? (skill - 1) * 30 + 200 : 500;
-                }
                 // 孔明
-                AppendNPGain(npAllL, npAllLN, "Kong");
-                AppendAtkUP(atkAllL, atkAllLN, "Kong", Convert.ToInt32(ZGlSkill3Text.Text));
-                skill = Convert.ToInt32(ZGlSkill3Text.Text);
-                extraAtt += (skill < 10) ? (skill - 1) * 30 + 200 : 500;
+                if (!NoZGlChB.Checked)
+                {
+                    int skllLv, zglnpeff = 0, zglextraatk = 0;
+                    double npeff1, npeffX, atkeff1 = 0, atkeffX = 0, extraatk1 = 0, extraatkX = 0, zglatkupeff = 0;
+                    XmlNode zglservant = skillinfo.SelectSingleNode("servant[@id=\"ZGl\"]");
+                    XmlNodeList zglvalSkills = zglservant.SelectNodes("*[valid=1]");
+                    foreach (XmlNode node in zglvalSkills)
+                    {
+                        skllLv = Convert.ToInt32(this.Controls.Find(string.Format("ZGl{0}Text", node.Name), true)[0].Text);
+                        foreach (XmlNode eff in node.SelectNodes("eff"))
+                        {
+                            switch (eff.Attributes["type"].Value)
+                            {
+                                case "np":
+                                    npeff1 = Convert.ToInt32(eff["eff_num1"].InnerText);
+                                    npeffX = Convert.ToInt32(eff["eff_numX"].InnerText);
+                                    zglnpeff += Convert.ToInt32(skllLv == 10 ? npeffX : npeff1 + (npeffX - npeff1) / 10 * (skllLv - 1));
+                                    break;
+                                case "atkUp":
+                                    atkeff1 = Convert.ToDouble(eff["eff_num1"].InnerText);
+                                    atkeffX = Convert.ToDouble(eff["eff_numX"].InnerText);
+                                    zglatkupeff = skllLv == 10 ? atkeffX : atkeff1 + (atkeffX - atkeff1) / 10 * (skllLv - 1);
+                                    break;
+                                case "extraAtk":
+                                    extraatk1 = Convert.ToDouble(eff["eff_num1"].InnerText);
+                                    extraatkX = Convert.ToDouble(eff["eff_numX"].InnerText);
+                                    zglextraatk = Convert.ToInt32(skllLv == 10 ? extraatkX : extraatk1 + (extraatkX - extraatk1) / 10 * (skllLv - 1));
+                                    break;
+                            }
+                        }
+                    }
+                    npAllL.Add(zglnpeff);
+                    npAllLN.Add(servName["ZGl"]);
+                    atkUpAllL.Add(zglatkupeff);
+                    atkUpAllLN.Add(servName["ZGl"]);
+                    extraAtkAllL.Add(zglextraatk);
+                    extraAtkAllLN.Add(servName["ZGl"]);
+                    if (DoubleZGlChB.Checked)
+                    {
+                        skllLv = Convert.ToInt32(this.Controls.Find("ZGlExSkill3Text", true)[0].Text);
+                        zglatkupeff = skllLv == 10 ? atkeffX : atkeff1 + (atkeffX - atkeff1) / 10 * (skllLv - 1);
+                        zglextraatk = Convert.ToInt32(skllLv == 10 ? extraatkX : extraatk1 + (extraatkX - extraatk1) / 10 * (skllLv - 1));
+                        npAllL.Add(zglnpeff);
+                        npAllLN.Add(servName["ZGl"]);
+                        atkUpAllL.Add(zglatkupeff);
+                        atkUpAllLN.Add(servName["ZGl"]);
+                        extraAtkAllL.Add(zglextraatk);
+                        extraAtkAllLN.Add(servName["ZGl"]);
+                    }
+                }
 
                 // 20NP提供
                 StringBuilder np20sup = new StringBuilder();
@@ -972,77 +898,179 @@ namespace PerpetualNBPerformance
                 {
                     np20sup.Append(item.Checked ? item.Name : "");
                 }
-                switch (np20sup.ToString())
+                np20sup.Replace("RB", "");
+                if (np20sup.ToString() != "")
                 {
-                    case "HaiRB":
-                        AppendNPGain(npAllL, npAllLN, "Hai", Convert.ToInt32(HaiSkill1Text.Text));
-                        AppendArtsUP(artsAllL, artsAllLN, "Hai", Convert.ToInt32(HaiSkill3Text.Text));
-                        break;
-                    case "LaRB":
-                        AppendNPGain(npAllL, npAllLN, "La");
-                        AppendAtkUP(atkAllL, atkAllLN, "La", Convert.ToInt32(LaSkill1Text.Text));
-                        break;
-                    case "MeiRB":
-                        AppendNPGain(npAllL, npAllLN, "Mei");
-                        AppendAtkUP(atkAllL, atkAllLN, "Mei", Convert.ToInt32(MeiSkill1Text.Text));
-                        break;
-                    case "ShaRB":
-                        AppendNPGain(npAllL, npAllLN, "Sha");
-                        break;
-                    case "MaRB":
-                        AppendNPGain(npAllL, npAllLN, "Ma");
-                        break;
-                    default:
-                        break;
+                    XmlNode npservant = skillinfo.SelectSingleNode(string.Format("servant[@id=\"{0}\"]", np20sup.ToString()));
+                    XmlNodeList npvalSkills = npservant.SelectNodes("*[valid=1]");
+                    foreach (XmlNode node in npvalSkills)
+                    {
+                        int skllLv = Convert.ToInt32(this.Controls.Find(string.Format("{0}{1}Text", np20sup.ToString(), node.Name), true)[0].Text);
+                        foreach (XmlNode eff in node.SelectNodes("eff"))
+                        {
+                            double eff1, effX, effect;
+                            switch (eff.Attributes["type"].Value)
+                            {
+                                case "np":
+                                    eff1 = Convert.ToInt32(eff["eff_num1"].InnerText);
+                                    effX = Convert.ToInt32(eff["eff_numX"].InnerText);
+                                    effect = skllLv == 10 ? effX : eff1 + (effX - eff1) / 10 * (skllLv - 1);
+                                    npAllL.Add(Convert.ToInt32(effect));
+                                    npAllLN.Add(servName[np20sup.ToString()]);
+                                    break;
+                                case "atkUp":
+                                    eff1 = Convert.ToDouble(eff["eff_num1"].InnerText);
+                                    effX = Convert.ToDouble(eff["eff_numX"].InnerText);
+                                    effect = skllLv == 10 ? effX : eff1 + (effX - eff1) / 10 * (skllLv - 1);
+                                    atkUpAllL.Add(effect);
+                                    atkUpAllLN.Add(servName[np20sup.ToString()]);
+                                    break;
+                                case "artsUp":
+                                    eff1 = Convert.ToDouble(eff["eff_num1"].InnerText);
+                                    effX = Convert.ToDouble(eff["eff_numX"].InnerText);
+                                    effect = skllLv == 10 ? effX : eff1 + (effX - eff1) / 10 * (skllLv - 1);
+                                    artsUpAllL.Add(effect);
+                                    artsUpAllLN.Add(servName[np20sup.ToString()]);
+                                    break;
+                                case "npUp":
+                                    eff1 = Convert.ToDouble(eff["eff_num1"].InnerText);
+                                    effX = Convert.ToDouble(eff["eff_numX"].InnerText);
+                                    effect = skllLv == 10 ? effX : eff1 + (effX - eff1) / 10 * (skllLv - 1);
+                                    npUpAllL.Add(effect);
+                                    npUpAllLN.Add(servName[np20sup.ToString()]);
+                                    break;
+                            }
+                        }
+                    }
                 }
 
                 // Buff提供
-                StringBuilder buffsup = new StringBuilder();
-                foreach (RadioButton item in BuffP.Controls)
+                if (unusualCE)
                 {
-                    buffsup.Append(item.Checked ? item.Name : "");
+                    List<string> buffssup = new List<string>();
+                    foreach (Control item in BuffP.Controls)
+                    {
+                        if (item is CheckBox && ((CheckBox)item).Checked) buffssup.Add(item.Name.Replace("ChB", "").Replace("Ex", ""));
+                    }
+                    foreach (Control item in Bu20P.Controls)
+                    {
+                        if (item is CheckBox && ((CheckBox)item).Checked) buffssup.Add(item.Name.Replace("ChB", ""));
+                    }
+                    foreach (string buffsup in buffssup)
+                    {
+                        XmlNode buservant = skillinfo.SelectSingleNode(string.Format("servant[@id=\"{0}\"]", buffsup));
+                        XmlNodeList buvalSkills = buservant.SelectNodes("*[valid=1]");
+                        foreach (XmlNode node in buvalSkills)
+                        {
+                            int skllLv = Convert.ToInt32(this.Controls.Find(string.Format("{0}{1}Text", buffsup.ToString(), node.Name), true)[0].Text);
+                            foreach (XmlNode eff in node.SelectNodes("eff"))
+                            {
+                                double eff1, effX, effect;
+                                switch (eff.Attributes["type"].Value)
+                                {
+                                    case "np":
+                                        eff1 = Convert.ToInt32(eff.SelectSingleNode("eff_num1").InnerText);
+                                        effX = Convert.ToInt32(eff.SelectSingleNode("eff_numX").InnerText);
+                                        effect = skllLv == 10 ? effX : eff1 + (effX - eff1) / 10 * (skllLv - 1);
+                                        npAllL.Add(Convert.ToInt32(effect));
+                                        npAllLN.Add(servName[buffsup.ToString()]);
+                                        break;
+                                    case "atkUp":
+                                        eff1 = Convert.ToDouble(eff.SelectSingleNode("eff_num1").InnerText);
+                                        effX = Convert.ToDouble(eff.SelectSingleNode("eff_numX").InnerText);
+                                        effect = skllLv == 10 ? effX : eff1 + (effX - eff1) / 10 * (skllLv - 1);
+                                        atkUpAllL.Add(effect);
+                                        atkUpAllLN.Add(servName[buffsup.ToString()]);
+                                        break;
+                                    case "artsUp":
+                                        eff1 = Convert.ToDouble(eff.SelectSingleNode("eff_num1").InnerText);
+                                        effX = Convert.ToDouble(eff.SelectSingleNode("eff_numX").InnerText);
+                                        effect = skllLv == 10 ? effX : eff1 + (effX - eff1) / 10 * (skllLv - 1);
+                                        artsUpAllL.Add(effect);
+                                        artsUpAllLN.Add(servName[buffsup.ToString()]);
+                                        break;
+                                    case "npUp":
+                                        eff1 = Convert.ToDouble(eff.SelectSingleNode("eff_num1").InnerText);
+                                        effX = Convert.ToDouble(eff.SelectSingleNode("eff_numX").InnerText);
+                                        effect = skllLv == 10 ? effX : eff1 + (effX - eff1) / 10 * (skllLv - 1);
+                                        npUpAllL.Add(effect);
+                                        npUpAllLN.Add(servName[buffsup.ToString()]);
+                                        break;
+                                    case "defendDown":
+                                        eff1 = Convert.ToDouble(eff.SelectSingleNode("eff_num1").InnerText);
+                                        effX = Convert.ToDouble(eff.SelectSingleNode("eff_numX").InnerText);
+                                        defendDown = skllLv == 10 ? effX : eff1 + (effX - eff1) / 10 * (skllLv - 1);
+                                        break;
+                                }
+                            }
+                        }
+                    }
                 }
-                switch (buffsup.ToString())
+                else
                 {
-                    case "HaiExRB":
-                        AppendNPGain(npAllL, npAllLN, "Hai", Convert.ToInt32(HaiExSkill1Text.Text));
-                        AppendArtsUP(artsAllL, artsAllLN, "Hai", Convert.ToInt32(HaiExSkill3Text.Text));
-                        break;
-                    case "HuaRB":
-                        AppendNPUP(npUpAllL, npUpAllLN, "Hua", Convert.ToInt32(HuaSkill1Text.Text));
-                        AppendAtkUP(atkAllL, atkAllLN, "Hua", Convert.ToInt32(HuaSkill2Text.Text));
-                        break;
-                    case "YuRB":
-                        AppendArtsUP(artsAllL, artsAllLN, "Yu", Convert.ToInt32(YuSkill3Text.Text));
-                        break;
-                    case "SanRB":
-                        AppendNPUP(npUpAllL, npUpAllLN, "San", Convert.ToInt32(SanSkill3Text.Text));
-                        break;
-                    case "XinRB":
-                        AppendNPUP(npUpAllL, npUpAllLN, "Xin", Convert.ToInt32(XinSkill1Text.Text));
-                        break;
-                    case "FenRB":
-                        AppendNPUP(npUpAllL, npUpAllLN, "Fen", Convert.ToInt32(FenSkill1Text.Text));
-                        break;
-                    case "ShanRB":
-                        AppendArtsUP(artsAllL, artsAllLN, "Shan", Convert.ToInt32(ShanSkill3Text.Text));
-                        AppendAtkUP(atkAllL, atkAllLN, "Shan", Convert.ToInt32(ShanSkill2Text.Text));
-                        break;
-                    default:
-                        break;
+                    StringBuilder buffsup = new StringBuilder();
+                    foreach (Control item in BuffP.Controls)
+                    {
+                        if (item is RadioButton) buffsup.Append(((RadioButton)item).Checked ? item.Name : "");
+                    }
+                    buffsup.Replace("RB", "");
+                    buffsup.Replace("Ex", "");
+                    XmlNode buservant = skillinfo.SelectSingleNode(string.Format("servant[@id=\"{0}\"]", buffsup.ToString()));
+                    XmlNodeList buvalSkills = buservant.SelectNodes("*[valid=1]");
+                    foreach (XmlNode node in buvalSkills)
+                    {
+                        int skllLv = Convert.ToInt32(this.Controls.Find(string.Format("{0}{1}Text", buffsup.ToString(), node.Name), true)[0].Text);
+                        foreach (XmlNode eff in node.SelectNodes("eff"))
+                        {
+                            double eff1, effX, effect;
+                            switch (eff.Attributes["type"].Value)
+                            {
+                                case "np":
+                                    eff1 = Convert.ToInt32(eff.SelectSingleNode("eff_num1").InnerText);
+                                    effX = Convert.ToInt32(eff.SelectSingleNode("eff_numX").InnerText);
+                                    effect = skllLv == 10 ? effX : eff1 + (effX - eff1) / 10 * (skllLv - 1);
+                                    npAllL.Add(Convert.ToInt32(effect));
+                                    npAllLN.Add(servName[buffsup.ToString()]);
+                                    break;
+                                case "atkUp":
+                                    eff1 = Convert.ToDouble(eff.SelectSingleNode("eff_num1").InnerText);
+                                    effX = Convert.ToDouble(eff.SelectSingleNode("eff_numX").InnerText);
+                                    effect = skllLv == 10 ? effX : eff1 + (effX - eff1) / 10 * (skllLv - 1);
+                                    atkUpAllL.Add(effect);
+                                    atkUpAllLN.Add(servName[buffsup.ToString()]);
+                                    break;
+                                case "artsUp":
+                                    eff1 = Convert.ToDouble(eff.SelectSingleNode("eff_num1").InnerText);
+                                    effX = Convert.ToDouble(eff.SelectSingleNode("eff_numX").InnerText);
+                                    effect = skllLv == 10 ? effX : eff1 + (effX - eff1) / 10 * (skllLv - 1);
+                                    artsUpAllL.Add(effect);
+                                    artsUpAllLN.Add(servName[buffsup.ToString()]);
+                                    break;
+                                case "npUp":
+                                    eff1 = Convert.ToDouble(eff.SelectSingleNode("eff_num1").InnerText);
+                                    effX = Convert.ToDouble(eff.SelectSingleNode("eff_numX").InnerText);
+                                    effect = skllLv == 10 ? effX : eff1 + (effX - eff1) / 10 * (skllLv - 1);
+                                    npUpAllL.Add(effect);
+                                    npUpAllLN.Add(servName[buffsup.ToString()]);
+                                    break;
+                            }
+                        }
+                    }
                 }
 
                 // 加和所有数据
                 foreach (int item in npAllL) npAll += item;
-                foreach (float item in atkAllL) atkAll += item;
-                foreach (float item in artsAllL) artsAll += item;
+                foreach (int item in extraAtkAllL) extraAtkAll += item;
+                foreach (float item in atkUpAllL) atkAll += item;
+                foreach (float item in artsUpAllL) artsAll += item;
                 foreach (float item in npUpAllL) npUpAll += item;
+                foreach (float item in npdmgUpAllL) npdmgAll += item;
 
                 // 计算上述条件下每hit无overkill下的NP回收量
                 npGainPerHit = 0.71 * (1 + artsAll) * (1 + npUpAll) * 3 * 1.2;
 
                 // 计算上述条件下宝具总伤害（1/2面）
-                atkTotal = mdatk * 0.23 * npTime * (1 + artsAll) * 2 * 0.9 * (1 + atkAll) * (1 + specAtk) * 0.9 + extraAtt;
+                atkTotal = mdatk * 0.23 * npTime * (1 + artsAll) * 2 * 0.9 * (1 + atkAll) * (1 + npdmgAll) * 0.9 + extraAtkAll;
 
                 // 计算总np
                 List<double> enermy1NP = new List<double>();
@@ -1079,19 +1107,21 @@ namespace PerpetualNBPerformance
                 enermy2NP.Add(enermy2Totalnp);
                 for (int i = 0; i < 3; i++) enermy1Atk.Add(Convert.ToInt32(Math.Floor(atkTotal)));
                 for (int i = 0; i < 3; i++) enermy2Atk.Add(Convert.ToInt32(Math.Floor(atkTotal)));
-                double atkTotal3;
+                double atkTotal31, atkTotal32;
                 if (clothIsExchange)
                 {
-                    atkTotal3 = mdatk * 0.23 * npTime * (1 + artsAll) * 1.1 * (1 + atkAll + 0.3) * (1 + specAtk) * 0.9 + extraAtt;
+                    atkTotal31 = mdatk * 0.23 * npTime * (1 + artsAll) * 1.1 * (1 + atkAll + defendDown + 0.3) * (1 + npdmgAll) * 0.9;
+                    atkTotal32 = mdatk * 0.23 * npTime * (1 + artsAll) * 1.1 * (1 + atkAll + 0.3) * (1 + npdmgAll) * 0.9 * 2;
                 }
                 else
                 {
-                    atkTotal3 = mdatk * 0.23 * npTime * (1 + artsAll) * 1.1 * (1 + atkAll) * (1 + specAtk) * 0.9 + extraAtt;
+                    atkTotal31 = mdatk * 0.23 * npTime * (1 + artsAll) * 1.1 * (1 + atkAll + defendDown) * (1 + npdmgAll) * 0.9;
+                    atkTotal32 = mdatk * 0.23 * npTime * (1 + artsAll) * 1.1 * (1 + atkAll) * (1 + npdmgAll) * 0.9 * 2;
                 }
-                enermy3Atk.Add(Convert.ToInt32(Math.Floor(atkTotal3)));
-                enermy3Atk.Add(Convert.ToInt32(Math.Floor(atkTotal3 * 2)));
-                enermy3AtkMax.Add(Convert.ToInt32(Math.Floor(atkTotal3 / 0.9 * 1.1)));
-                enermy3AtkMax.Add(Convert.ToInt32(Math.Floor(atkTotal3 * 2 / 0.9 * 1.1)));
+                enermy3Atk.Add(Convert.ToInt32(Math.Floor(atkTotal31) + extraAtkAll));
+                enermy3Atk.Add(Convert.ToInt32(Math.Floor(atkTotal32) + extraAtkAll));
+                enermy3AtkMax.Add(Convert.ToInt32(Math.Floor(atkTotal31 / 0.9 * 1.1) + extraAtkAll));
+                enermy3AtkMax.Add(Convert.ToInt32(Math.Floor(atkTotal32 / 0.9 * 1.1) + extraAtkAll));
 
                 // 写入结果
                 for (int i = 0; i < enermy1Atk.Count(); i++)
@@ -1126,43 +1156,58 @@ namespace PerpetualNBPerformance
                 StringBuilder NPoutput = new StringBuilder();
                 StringBuilder Atkoutput = new StringBuilder();
                 StringBuilder Atkupoutput = new StringBuilder();
+                StringBuilder Npdmgupoutput = new StringBuilder();
                 StringBuilder Artsupoutput = new StringBuilder();
                 StringBuilder NPupoutput = new StringBuilder();
+                StringBuilder ExtraAtkoutput = new StringBuilder();
 
                 Atkoutput.Append("小莫Atk：");
                 Atkoutput.Append(mdatk.ToString());
                 NPoutput.Append("NP：");
                 Atkupoutput.Append("攻击力提升：");
+                Npdmgupoutput.Append("宝具威力提升：");
                 NPupoutput.Append("NP获得量提升：");
+                ExtraAtkoutput.Append("额外伤害增加：");
 
                 for (int i = 0; i < npAllL.Count(); i++)
                 {
                     NPoutput.Append(npAllLN[i]);
                     NPoutput.Append(npAllL[i].ToString());
                     if (i < npAllL.Count() - 1) NPoutput.Append("+");
+                    else NPoutput.Append("=");
                 }
-                NPoutput.Append("=");
                 NPoutput.Append(npAll.ToString());
 
-                for (int i = 0; i < atkAllL.Count(); i++)
+                for (int i = 0; i < atkUpAllL.Count(); i++)
                 {
-                    Atkupoutput.Append(atkAllLN[i]);
-                    Atkupoutput.Append((atkAllL[i] * 100).ToString());
+                    Atkupoutput.Append(atkUpAllLN[i]);
+                    Atkupoutput.Append((atkUpAllL[i] * 100).ToString());
                     Atkupoutput.Append("%");
-                    if (i < atkAllL.Count() - 1) Atkupoutput.Append("+");
+                    if (i < atkUpAllL.Count() - 1) Atkupoutput.Append("+");
+                    else Atkupoutput.Append("=");
                 }
-                Atkupoutput.Append("=");
                 Atkupoutput.Append(Convert.ToString(Math.Round(atkAll * 10000) / 100));
                 Atkupoutput.Append("%");
 
-                for (int i = 0; i < artsAllL.Count(); i++)
+                for (int i = 0; i < npdmgUpAllL.Count(); i++)
                 {
-                    Artsupoutput.Append(artsAllLN[i]);
-                    Artsupoutput.Append((artsAllL[i] * 100).ToString());
-                    Artsupoutput.Append("%");
-                    if (i < artsAllL.Count() - 1) Artsupoutput.Append("+");
+                    Npdmgupoutput.Append(npdmgUpAllLN[i]);
+                    Npdmgupoutput.Append((npdmgUpAllL[i] * 100).ToString());
+                    Npdmgupoutput.Append("%");
+                    if (i < npdmgUpAllL.Count() - 1) Npdmgupoutput.Append("+");
+                    else Npdmgupoutput.Append("=");
                 }
-                Artsupoutput.Append("=");
+                Npdmgupoutput.Append(Convert.ToString(Math.Round(npdmgAll * 100)));
+                Npdmgupoutput.Append("%");
+
+                for (int i = 0; i < artsUpAllL.Count(); i++)
+                {
+                    Artsupoutput.Append(artsUpAllLN[i]);
+                    Artsupoutput.Append((artsUpAllL[i] * 100).ToString());
+                    Artsupoutput.Append("%");
+                    if (i < artsUpAllL.Count() - 1) Artsupoutput.Append("+");
+                    else Artsupoutput.Append("=");
+                }
                 Artsupoutput.Append(Convert.ToString(Math.Round(artsAll * 1000) / 10));
                 Artsupoutput.Append("%");
 
@@ -1172,16 +1217,27 @@ namespace PerpetualNBPerformance
                     NPupoutput.Append((npUpAllL[i] * 100).ToString());
                     NPupoutput.Append("%");
                     if (i < npUpAllL.Count() - 1) NPupoutput.Append("+");
+                    else NPupoutput.Append("=");
                 }
-                NPupoutput.Append("=");
                 NPupoutput.Append(Convert.ToString(Math.Round(npUpAll * 100)));
                 NPupoutput.Append("%");
+
+                for (int i = 0; i < extraAtkAllL.Count(); i++)
+                {
+                    ExtraAtkoutput.Append(extraAtkAllLN[i]);
+                    ExtraAtkoutput.Append(extraAtkAllL[i].ToString());
+                    if (i < extraAtkAllL.Count() - 1) ExtraAtkoutput.Append("+");
+                    else ExtraAtkoutput.Append("=");
+                }
+                ExtraAtkoutput.Append(extraAtkAll.ToString());
 
                 NPOutput.Text = NPoutput.ToString();
                 AtkOutput.Text = Atkoutput.ToString();
                 AtkUPOutput.Text = Atkupoutput.ToString();
+                NpDmgUpOutput.Text = Npdmgupoutput.ToString();
                 ArtsUpOutput.Text = Artsupoutput.ToString();
                 NPUpOutput.Text = NPupoutput.ToString();
+                ExtraAtkOutput.Text = ExtraAtkoutput.ToString();
             }
             else
             {
@@ -1191,7 +1247,7 @@ namespace PerpetualNBPerformance
 
         #endregion
 
-        // 保存
+        #region  保存
         private void SaveFndmtlB_Click(object sender, EventArgs e)
         {
             XmlDocument XML = CreateXML.CreateMdFndmntlXML_NOTFILE();
@@ -1232,7 +1288,9 @@ namespace PerpetualNBPerformance
         {
             if (!WriteFndmtlData()) WriteFndmtlData(true);
             if (!WriteSkillData()) WriteSkillData(true);
+            MaSkill2Text.Text = "10";
             StartCalculating();
         }
+        #endregion
     }
 }

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--DO NOT DELETE OR CASUALLY CHANGE THIS FILE; OTHERWISE THE PROGRAM MAY CRASH-->
+<!--eff type contains np, atkUp, artsUp, npUp, extraAtk, npdmgUp-->
+
+<info>
+    <craftes id="23">
+        <name>二神三脚</name>
+        <unusual>0</unusual>
+        <atk_1>500</atk_1>
+        <atk_C>2000</atk_C>
+        <eff type="npdmgUp">
+            <eff_N>1.15</eff_N>
+            <eff_M>2.20</eff_M>
+        </eff>
+    </craftes>
+
+    <craftes id="cfm">
+        <name>为御主喝彩</name>
+        <unusual>0</unusual>
+        <atk_1>250</atk_1>
+        <atk_C>1000</atk_C>
+        <eff type="artsUp">
+            <eff_N>0.06</eff_N>
+            <eff_M>0.08</eff_M>
+        </eff>
+    </craftes>
+
+    <craftes id="my">
+        <name>苍玉之魔法少女</name>
+        <unusual>1</unusual>
+        <atk_1>500</atk_1>
+        <atk_C>2000</atk_C>
+        <eff type="np">
+            <eff_N>40</eff_N>
+            <eff_M>50</eff_M>
+        </eff>
+        <eff type="npUp">
+            <eff_N>0.25</eff_N>
+            <eff_M>0.30</eff_M>
+        </eff>
+    </craftes>
+
+    <craftes id="hw">
+        <name>万圣节小恶魔</name>
+        <unusual>1</unusual>
+        <atk_1>500</atk_1>
+        <atk_C>2000</atk_C>
+        <eff type="np">
+            <eff_N>50</eff_N>
+            <eff_M>60</eff_M>
+        </eff>
+        <eff type="npUp">
+            <eff_N>0.20</eff_N>
+            <eff_M>0.25</eff_M>
+        </eff>
+    </craftes>
+
+    <craftes id="gp">
+        <name>冠位人偶师</name>
+        <unusual>1</unusual>
+        <atk_1>250</atk_1>
+        <atk_C>1000</atk_C>
+        <eff type="np">
+            <eff_N>50</eff_N>
+            <eff_M>60</eff_M>
+        </eff>
+        <eff type="npUp">
+            <eff_N>0.15</eff_N>
+            <eff_M>0.20</eff_M>
+        </eff>
+    </craftes>
+
+    <craftes id="fo">
+        <name>奥林匹亚之战</name>
+        <unusual>1</unusual>
+        <atk_1>500</atk_1>
+        <atk_C>2000</atk_C>
+        <eff type="np">
+            <eff_N>50</eff_N>
+            <eff_M>60</eff_M>
+        </eff>
+        <eff type="npUp">
+            <eff_N>0.08</eff_N>
+            <eff_M>0.10</eff_M>
+        </eff>
+    </craftes>
+
+    <craftes id="2nd">
+        <name>迦勒底周年纪念</name>
+        <unusual>1</unusual>
+        <atk_1>250</atk_1>
+        <atk_C>1000</atk_C>
+        <eff type="np">
+            <eff_N>50</eff_N>
+            <eff_M>60</eff_M>
+        </eff>
+        <eff type="npUp">
+            <eff_N>0.08</eff_N>
+            <eff_M>0.10</eff_M>
+        </eff>
+    </craftes>
+
+    <craftes id="an">
+        <name>潜入湛蓝</name>
+        <unusual>1</unusual>
+        <atk_1>250</atk_1>
+        <atk_C>1000</atk_C>
+        <eff type="np">
+            <eff_N>30</eff_N>
+            <eff_M>50</eff_M>
+        </eff>
+        <eff type="npUp">
+            <eff_N>0.08</eff_N>
+            <eff_M>0.10</eff_M>
+        </eff>
+        <eff type="npdmgUp">
+            <eff_N>0.08</eff_N>
+            <eff_M>0.10</eff_M>
+        </eff>
+    </craftes>
+
+    <craftes id="jwl">
+        <name>万华镜</name>
+        <unusual>1</unusual>
+        <atk_1>500</atk_1>
+        <atk_C>2000</atk_C>
+        <eff type="np">
+            <eff_N>80</eff_N>
+            <eff_M>100</eff_M>
+        </eff>
+    </craftes>
+</info>

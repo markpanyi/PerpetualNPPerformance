@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--DO NOT DELETE OR CASUALLY CHANGE THIS FILE; OTHERWISE THE PROGRAM MAY CRASH-->
+<!--eff type contains np, atkUp, defendDown, artsUp, npUp, extraAtk, npdmgUp-->
+
+<info>
+    <servant id="ZGl">
+        <Skill1>
+            <valid>1</valid>
+            <eff type="np">
+                <eff_num1>30</eff_num1>
+                <eff_numX>30</eff_numX>
+            </eff>
+        </Skill1>
+        <Skill2>
+            <valid>1</valid>
+            <eff type="np">
+                <eff_num1>10</eff_num1>
+                <eff_numX>10</eff_numX>
+            </eff>
+        </Skill2>
+        <Skill3>
+            <valid>1</valid>
+            <eff type="np">
+                <eff_num1>10</eff_num1>
+                <eff_numX>10</eff_numX>
+            </eff>
+            <eff type="atkUp">
+                <eff_num1>0.2</eff_num1>
+                <eff_numX>0.3</eff_numX>
+            </eff>
+            <eff type="extraAtk">
+                <eff_num1>200</eff_num1>
+                <eff_numX>500</eff_numX>
+            </eff>
+        </Skill3>
+    </servant>
+
+    <servant id="Hai">
+        <Skill1>
+            <valid>1</valid>
+            <eff type="np">
+                <eff_num1>10</eff_num1>
+                <eff_numX>20</eff_numX>
+            </eff>
+        </Skill1>
+        <Skill2>
+            <valid>0</valid>
+        </Skill2>
+        <Skill3>
+            <valid>1</valid>
+            <eff type="artsUp">
+                <eff_num1>0.15</eff_num1>
+                <eff_numX>0.20</eff_numX>
+            </eff>
+        </Skill3>
+    </servant>
+
+    <servant id="La">
+        <Skill1>
+            <valid>1</valid>
+            <eff type="atkUp">
+                <eff_num1>0.09</eff_num1>
+                <eff_numX>0.18</eff_numX>
+            </eff>
+        </Skill1>
+        <Skill2>
+            <valid>0</valid>
+        </Skill2>
+        <Skill3>
+            <valid>1</valid>
+            <eff type="np">
+                <eff_num1>20</eff_num1>
+                <eff_numX>20</eff_numX>
+            </eff>
+        </Skill3>
+    </servant>
+
+    <servant id="Mei">
+        <Skill1>
+            <valid>1</valid>
+            <eff type="np">
+                <eff_num1>20</eff_num1>
+                <eff_numX>20</eff_numX>
+            </eff>
+            <eff type="atkUp">
+                <eff_num1>0.10</eff_num1>
+                <eff_numX>0.20</eff_numX>
+            </eff>
+        </Skill1>
+        <Skill2>
+            <valid>0</valid>
+        </Skill2>
+        <Skill3>
+            <valid>0</valid>
+        </Skill3>
+    </servant>
+
+    <servant id="Sha">
+        <Skill1>
+            <valid>0</valid>
+        </Skill1>
+        <Skill2>
+            <valid>0</valid>
+        </Skill2>
+        <Skill3>
+            <valid>1</valid>
+            <eff type="np">
+                <eff_num1>20</eff_num1>
+                <eff_numX>20</eff_numX>
+            </eff>
+        </Skill3>
+    </servant>
+
+    <servant id="Ma">
+        <Skill1>
+            <valid>0</valid>
+        </Skill1>
+        <Skill2>
+            <valid>1</valid>
+            <eff type="np">
+                <eff_num1>10</eff_num1>
+                <eff_numX>20</eff_numX>
+            </eff>
+        </Skill2>
+        <Skill3>
+            <valid>0</valid>
+        </Skill3>
+    </servant>
+
+    <servant id="Hua">
+        <Skill1>
+            <valid>1</valid>
+            <eff type="npUp">
+                <eff_num1>0.35</eff_num1>
+                <eff_numX>0.45</eff_numX>
+            </eff>
+        </Skill1>
+        <Skill2>
+            <valid>1</valid>
+            <eff type="atkUp">
+                <eff_num1>0.30</eff_num1>
+                <eff_numX>0.40</eff_numX>
+            </eff>
+        </Skill2>
+        <Skill3>
+            <valid>0</valid>
+        </Skill3>
+    </servant>
+
+    <servant id="Yu">
+        <Skill1>
+            <valid>0</valid>
+        </Skill1>
+        <Skill2>
+            <valid>0</valid>
+        </Skill2>
+        <Skill3>
+            <valid>1</valid>
+            <eff type="artsUp">
+                <eff_num1>0.30</eff_num1>
+                <eff_numX>0.50</eff_numX>
+            </eff>
+        </Skill3>
+    </servant>
+
+    <servant id="San">
+        <Skill1>
+            <valid>0</valid>
+        </Skill1>
+        <Skill2>
+            <valid>0</valid>
+        </Skill2>
+        <Skill3>
+            <valid>1</valid>
+            <eff type="npUp">
+                <eff_num1>0.10</eff_num1>
+                <eff_numX>0.30</eff_numX>
+            </eff>
+        </Skill3>
+    </servant>
+
+    <servant id="Xin">
+        <Skill1>
+            <valid>1</valid>
+            <eff type="npUp">
+                <eff_num1>0.20</eff_num1>
+                <eff_numX>0.30</eff_numX>
+            </eff>
+        </Skill1>
+        <Skill2>
+            <valid>0</valid>
+        </Skill2>
+        <Skill3>
+            <valid>0</valid>
+        </Skill3>
+    </servant>
+
+    <servant id="Fen">
+        <Skill1>
+            <valid>1</valid>
+            <eff type="npUp">
+                <eff_num1>0.10</eff_num1>
+                <eff_numX>0.30</eff_numX>
+            </eff>
+        </Skill1>
+        <Skill2>
+            <valid>0</valid>
+        </Skill2>
+        <Skill3>
+            <valid>0</valid>
+        </Skill3>
+    </servant>
+
+    <servant id="Shan">
+        <Skill1>
+            <valid>0</valid>
+        </Skill1>
+        <Skill2>
+            <valid>1</valid>
+            <eff type="atkUp">
+                <eff_num1>0.105</eff_num1>
+                <eff_numX>0.210</eff_numX>
+            </eff>
+        </Skill2>
+        <Skill3>
+            <valid>1</valid>
+            <eff type="artsUp">
+                <eff_num1>0.20</eff_num1>
+                <eff_numX>0.30</eff_numX>
+            </eff>
+        </Skill3>
+    </servant>
+
+    <servant id="Dou">
+        <Skill1>
+            <valid>0</valid>
+        </Skill1>
+        <Skill2>
+            <valid>1</valid>
+            <eff type="artsUp">
+                <eff_num1>10</eff_num1>
+                <eff_numX>20</eff_numX>
+            </eff>
+        </Skill2>
+        <Skill3>
+            <valid>0</valid>
+        </Skill3>
+    </servant>
+
+    <servant id="Lin">
+        <Skill1>
+            <valid>1</valid>
+            <eff type="npUp">
+                <eff_num1>0.10</eff_num1>
+                <eff_numX>0.20</eff_numX>
+            </eff>
+        </Skill1>
+        <Skill2>
+            <valid>0</valid>
+        </Skill2>
+        <Skill3>
+            <valid>0</valid>
+        </Skill3>
+    </servant>
+
+    <servant id="Lily">
+        <Skill1>
+            <valid>0</valid>
+        </Skill1>
+        <Skill2>
+            <valid>0</valid>
+        </Skill2>
+        <Skill3>
+            <valid>1</valid>
+            <eff type="npUp">
+                <eff_num1>0.10</eff_num1>
+                <eff_numX>0.20</eff_numX>
+            </eff>
+        </Skill3>
+    </servant>
+
+    <servant id="Niu">
+        <Skill1>
+            <valid>1</valid>
+            <eff type="npUp">
+                <eff_num1>0.10</eff_num1>
+                <eff_numX>0.20</eff_numX>
+            </eff>
+        </Skill1>
+        <Skill2>
+            <valid>1</valid>
+            <eff type="atkUp">
+                <eff_num1>0.085</eff_num1>
+                <eff_numX>0.170</eff_numX>
+            </eff>
+        </Skill2>
+        <Skill3>
+            <valid>0</valid>
+        </Skill3>
+    </servant>
+
+    <servant id="Bu">
+        <Skill1>
+            <valid>0</valid>
+        </Skill1>
+        <Skill2>
+            <valid>0</valid>
+        </Skill2>
+        <Skill3>
+            <valid>1</valid>
+            <eff type="artsUp">
+                <eff_num1>0.10</eff_num1>
+                <eff_numX>0.20</eff_numX>
+            </eff>
+        </Skill3>
+    </servant>
+
+    <servant id="Long">
+        <Skill1>
+            <valid>1</valid>
+            <eff type="atkUp">
+                <eff_num1>0.20</eff_num1>
+                <eff_numX>0.40</eff_numX>
+            </eff>
+        </Skill1>
+        <Skill2>
+            <valid>1</valid>
+            <eff type="defendDown">
+                <eff_num1>0.10</eff_num1>
+                <eff_numX>0.20</eff_numX>
+            </eff>
+        </Skill2>
+        <Skill3>
+            <valid>0</valid>
+        </Skill3>
+    </servant>
+
+    <servant id="Ni">
+        <Skill1>
+            <valid>0</valid>
+        </Skill1>
+        <Skill2>
+            <valid>0</valid>
+        </Skill2>
+        <Skill3>
+            <valid>1</valid>
+            <eff type="atkUp">
+                <eff_num1>0.30</eff_num1>
+                <eff_numX>0.50</eff_numX>
+            </eff>
+        </Skill3>
+    </servant>
+</info>

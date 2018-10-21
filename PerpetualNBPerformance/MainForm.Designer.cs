@@ -101,6 +101,7 @@
             this.LvText = new System.Windows.Forms.TextBox();
             this.Lv = new System.Windows.Forms.Label();
             this.ZhuGeliangGB = new System.Windows.Forms.GroupBox();
+            this.NoZGlChB = new System.Windows.Forms.CheckBox();
             this.ZGlExAllMaxB = new System.Windows.Forms.Button();
             this.ZGlAllMaxB = new System.Windows.Forms.Button();
             this.ZGlExSkillP = new System.Windows.Forms.Panel();
@@ -176,6 +177,8 @@
             this.LaRB = new System.Windows.Forms.RadioButton();
             this.HaiRB = new System.Windows.Forms.RadioButton();
             this.BuffGB = new System.Windows.Forms.GroupBox();
+            this.BuffTC = new System.Windows.Forms.TabControl();
+            this.Bu30TP = new System.Windows.Forms.TabPage();
             this.ShanSkillP = new System.Windows.Forms.Panel();
             this.ShanAllMaxB = new System.Windows.Forms.Button();
             this.ShanSkill3Text = new System.Windows.Forms.TextBox();
@@ -186,7 +189,7 @@
             this.ShanSkill1 = new System.Windows.Forms.Label();
             this.ShanSkill = new System.Windows.Forms.Label();
             this.DoubleHaiChB = new System.Windows.Forms.CheckBox();
-            this.BuffAllMaxB = new System.Windows.Forms.Button();
+            this.Bu30AllMaxB = new System.Windows.Forms.Button();
             this.BuResetSlctnB = new System.Windows.Forms.Button();
             this.BuResetAllB = new System.Windows.Forms.Button();
             this.FenSkillP = new System.Windows.Forms.Panel();
@@ -244,6 +247,20 @@
             this.HaiExSkill1 = new System.Windows.Forms.Label();
             this.HaiExSkill = new System.Windows.Forms.Label();
             this.BuffP = new System.Windows.Forms.Panel();
+            this.ShanL = new System.Windows.Forms.Label();
+            this.FenL = new System.Windows.Forms.Label();
+            this.XinL = new System.Windows.Forms.Label();
+            this.SanL = new System.Windows.Forms.Label();
+            this.YuL = new System.Windows.Forms.Label();
+            this.HuaL = new System.Windows.Forms.Label();
+            this.ShanChB = new System.Windows.Forms.CheckBox();
+            this.FenChB = new System.Windows.Forms.CheckBox();
+            this.XinChB = new System.Windows.Forms.CheckBox();
+            this.SanChB = new System.Windows.Forms.CheckBox();
+            this.YuChB = new System.Windows.Forms.CheckBox();
+            this.HuaChB = new System.Windows.Forms.CheckBox();
+            this.HaiExL = new System.Windows.Forms.Label();
+            this.HaiExChB = new System.Windows.Forms.CheckBox();
             this.ShanRB = new System.Windows.Forms.RadioButton();
             this.FenRB = new System.Windows.Forms.RadioButton();
             this.XinRB = new System.Windows.Forms.RadioButton();
@@ -251,7 +268,84 @@
             this.YuRB = new System.Windows.Forms.RadioButton();
             this.HuaRB = new System.Windows.Forms.RadioButton();
             this.HaiExRB = new System.Windows.Forms.RadioButton();
+            this.Bu20TP = new System.Windows.Forms.TabPage();
+            this.NiSkillP = new System.Windows.Forms.Panel();
+            this.NiAllMaxB = new System.Windows.Forms.Button();
+            this.NiSkill3Text = new System.Windows.Forms.TextBox();
+            this.NiSkill3 = new System.Windows.Forms.Label();
+            this.NiSkill2Text = new System.Windows.Forms.TextBox();
+            this.NiSkill2 = new System.Windows.Forms.Label();
+            this.NiSkill1Text = new System.Windows.Forms.TextBox();
+            this.NiSkill1 = new System.Windows.Forms.Label();
+            this.NiSkill = new System.Windows.Forms.Label();
+            this.Bu20AllMaxB = new System.Windows.Forms.Button();
+            this.Bu20ResetSlctnB = new System.Windows.Forms.Button();
+            this.Bu20ResetAllB = new System.Windows.Forms.Button();
+            this.LongSkillP = new System.Windows.Forms.Panel();
+            this.LongAllMaxB = new System.Windows.Forms.Button();
+            this.LongSkill3Text = new System.Windows.Forms.TextBox();
+            this.LongSkill3 = new System.Windows.Forms.Label();
+            this.LongSkill2Text = new System.Windows.Forms.TextBox();
+            this.LongSkill2 = new System.Windows.Forms.Label();
+            this.LongSkill1Text = new System.Windows.Forms.TextBox();
+            this.LongSkill1 = new System.Windows.Forms.Label();
+            this.LongSkill = new System.Windows.Forms.Label();
+            this.BuSkillP = new System.Windows.Forms.Panel();
+            this.BuAllMaxB = new System.Windows.Forms.Button();
+            this.BuSkill3Text = new System.Windows.Forms.TextBox();
+            this.BuSkill3 = new System.Windows.Forms.Label();
+            this.BuSkill2Text = new System.Windows.Forms.TextBox();
+            this.BuSkill2 = new System.Windows.Forms.Label();
+            this.BuSkill1Text = new System.Windows.Forms.TextBox();
+            this.BuSkill1 = new System.Windows.Forms.Label();
+            this.BuSkill = new System.Windows.Forms.Label();
+            this.NiuSkillP = new System.Windows.Forms.Panel();
+            this.NiuAllMaxB = new System.Windows.Forms.Button();
+            this.NiuSkill3Text = new System.Windows.Forms.TextBox();
+            this.NiuSkill3 = new System.Windows.Forms.Label();
+            this.NiuSkill2Text = new System.Windows.Forms.TextBox();
+            this.NiuSkill2 = new System.Windows.Forms.Label();
+            this.NiuSkill1Text = new System.Windows.Forms.TextBox();
+            this.NiuSkill1 = new System.Windows.Forms.Label();
+            this.NiuSkill = new System.Windows.Forms.Label();
+            this.LilySkillP = new System.Windows.Forms.Panel();
+            this.LilyAllMaxB = new System.Windows.Forms.Button();
+            this.LilySkill3Text = new System.Windows.Forms.TextBox();
+            this.LilySkill3 = new System.Windows.Forms.Label();
+            this.LilySkill2Text = new System.Windows.Forms.TextBox();
+            this.LilySkill2 = new System.Windows.Forms.Label();
+            this.LilySkill1Text = new System.Windows.Forms.TextBox();
+            this.LilySkill1 = new System.Windows.Forms.Label();
+            this.LilySkill = new System.Windows.Forms.Label();
+            this.LinSkillP = new System.Windows.Forms.Panel();
+            this.LinAllMaxB = new System.Windows.Forms.Button();
+            this.LinSkill3Text = new System.Windows.Forms.TextBox();
+            this.LinSkill3 = new System.Windows.Forms.Label();
+            this.LinSkill2Text = new System.Windows.Forms.TextBox();
+            this.LinSkill2 = new System.Windows.Forms.Label();
+            this.LinSkill1Text = new System.Windows.Forms.TextBox();
+            this.LinSkill1 = new System.Windows.Forms.Label();
+            this.LinSkill = new System.Windows.Forms.Label();
+            this.DouSkillP = new System.Windows.Forms.Panel();
+            this.DouAllMaxB = new System.Windows.Forms.Button();
+            this.DouSkill3Text = new System.Windows.Forms.TextBox();
+            this.DouSkill3 = new System.Windows.Forms.Label();
+            this.DouSkill2Text = new System.Windows.Forms.TextBox();
+            this.DouSkill2 = new System.Windows.Forms.Label();
+            this.DouSkill1Text = new System.Windows.Forms.TextBox();
+            this.DouSkill1 = new System.Windows.Forms.Label();
+            this.DouSkill = new System.Windows.Forms.Label();
+            this.Bu20P = new System.Windows.Forms.Panel();
+            this.NiChB = new System.Windows.Forms.CheckBox();
+            this.LongChB = new System.Windows.Forms.CheckBox();
+            this.BuChB = new System.Windows.Forms.CheckBox();
+            this.NiuChB = new System.Windows.Forms.CheckBox();
+            this.LilyChB = new System.Windows.Forms.CheckBox();
+            this.LinChB = new System.Windows.Forms.CheckBox();
+            this.DouChB = new System.Windows.Forms.CheckBox();
             this.ResultGB = new System.Windows.Forms.GroupBox();
+            this.ExtraAtkOutput = new System.Windows.Forms.Label();
+            this.NpDmgUpOutput = new System.Windows.Forms.Label();
             this.ArtsOut = new System.Windows.Forms.Label();
             this.NPUpOutput = new System.Windows.Forms.Label();
             this.ArtsUpOutput = new System.Windows.Forms.Label();
@@ -294,6 +388,8 @@
             this.HaiSkillP.SuspendLayout();
             this.NP20P.SuspendLayout();
             this.BuffGB.SuspendLayout();
+            this.BuffTC.SuspendLayout();
+            this.Bu30TP.SuspendLayout();
             this.ShanSkillP.SuspendLayout();
             this.FenSkillP.SuspendLayout();
             this.XinSkillP.SuspendLayout();
@@ -302,6 +398,15 @@
             this.HuaSkillP.SuspendLayout();
             this.HaiExSkillP.SuspendLayout();
             this.BuffP.SuspendLayout();
+            this.Bu20TP.SuspendLayout();
+            this.NiSkillP.SuspendLayout();
+            this.LongSkillP.SuspendLayout();
+            this.BuSkillP.SuspendLayout();
+            this.NiuSkillP.SuspendLayout();
+            this.LilySkillP.SuspendLayout();
+            this.LinSkillP.SuspendLayout();
+            this.DouSkillP.SuspendLayout();
+            this.Bu20P.SuspendLayout();
             this.ResultGB.SuspendLayout();
             this.ResultTC.SuspendLayout();
             this.ResultTP1.SuspendLayout();
@@ -398,7 +503,7 @@
             // 
             // CELvText
             // 
-            this.CELvText.Location = new System.Drawing.Point(293, 95);
+            this.CELvText.Location = new System.Drawing.Point(300, 95);
             this.CELvText.Name = "CELvText";
             this.CELvText.Size = new System.Drawing.Size(50, 27);
             this.CELvText.TabIndex = 18;
@@ -408,7 +513,7 @@
             // CFLv
             // 
             this.CFLv.AutoSize = true;
-            this.CFLv.Location = new System.Drawing.Point(256, 100);
+            this.CFLv.Location = new System.Drawing.Point(266, 100);
             this.CFLv.Name = "CFLv";
             this.CFLv.Size = new System.Drawing.Size(29, 20);
             this.CFLv.TabIndex = 17;
@@ -430,7 +535,7 @@
             // MLBChB
             // 
             this.MLBChB.AutoSize = true;
-            this.MLBChB.Location = new System.Drawing.Point(185, 98);
+            this.MLBChB.Location = new System.Drawing.Point(200, 98);
             this.MLBChB.Name = "MLBChB";
             this.MLBChB.Size = new System.Drawing.Size(61, 24);
             this.MLBChB.TabIndex = 16;
@@ -441,13 +546,9 @@
             // CECoB
             // 
             this.CECoB.FormattingEnabled = true;
-            this.CECoB.Items.AddRange(new object[] {
-            "（无）",
-            "二神三脚",
-            "为御主加油"});
             this.CECoB.Location = new System.Drawing.Point(50, 96);
             this.CECoB.Name = "CECoB";
-            this.CECoB.Size = new System.Drawing.Size(121, 28);
+            this.CECoB.Size = new System.Drawing.Size(140, 28);
             this.CECoB.TabIndex = 15;
             this.CECoB.SelectedIndexChanged += new System.EventHandler(this.CECoB_SelectedIndexChanged);
             // 
@@ -589,6 +690,7 @@
             // 
             // ZhuGeliangGB
             // 
+            this.ZhuGeliangGB.Controls.Add(this.NoZGlChB);
             this.ZhuGeliangGB.Controls.Add(this.ZGlExAllMaxB);
             this.ZhuGeliangGB.Controls.Add(this.ZGlAllMaxB);
             this.ZhuGeliangGB.Controls.Add(this.ZGlExSkillP);
@@ -601,6 +703,19 @@
             this.ZhuGeliangGB.TabIndex = 1;
             this.ZhuGeliangGB.TabStop = false;
             this.ZhuGeliangGB.Text = "孔明爸爸";
+            // 
+            // NoZGlChB
+            // 
+            this.NoZGlChB.AutoSize = true;
+            this.NoZGlChB.Enabled = false;
+            this.NoZGlChB.Location = new System.Drawing.Point(395, 25);
+            this.NoZGlChB.Name = "NoZGlChB";
+            this.NoZGlChB.Size = new System.Drawing.Size(91, 24);
+            this.NoZGlChB.TabIndex = 41;
+            this.NoZGlChB.Text = "不要孔明";
+            this.NoZGlChB.UseVisualStyleBackColor = true;
+            this.NoZGlChB.CheckedChanged += new System.EventHandler(this.NoZGlChB_CheckedChanged);
+            this.NoZGlChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // ZGlExAllMaxB
             // 
@@ -794,6 +909,7 @@
             this.DoubleZGlChB.Text = "双孔明";
             this.DoubleZGlChB.UseVisualStyleBackColor = true;
             this.DoubleZGlChB.CheckedChanged += new System.EventHandler(this.DoubleZGlChB_CheckedChanged);
+            this.DoubleZGlChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // NP20GB
             // 
@@ -1308,6 +1424,7 @@
             this.MaRB.Text = "玛修";
             this.MaRB.UseVisualStyleBackColor = true;
             this.MaRB.CheckedChanged += new System.EventHandler(this.NP20s_CheckedChanged);
+            this.MaRB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // ShaRB
             // 
@@ -1319,6 +1436,7 @@
             this.ShaRB.Text = "莎比";
             this.ShaRB.UseVisualStyleBackColor = true;
             this.ShaRB.CheckedChanged += new System.EventHandler(this.NP20s_CheckedChanged);
+            this.ShaRB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // MeiRB
             // 
@@ -1330,6 +1448,7 @@
             this.MeiRB.Text = "梅林";
             this.MeiRB.UseVisualStyleBackColor = true;
             this.MeiRB.CheckedChanged += new System.EventHandler(this.NP20s_CheckedChanged);
+            this.MeiRB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // LaRB
             // 
@@ -1341,6 +1460,7 @@
             this.LaRB.Text = "拉二";
             this.LaRB.UseVisualStyleBackColor = true;
             this.LaRB.CheckedChanged += new System.EventHandler(this.NP20s_CheckedChanged);
+            this.LaRB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // HaiRB
             // 
@@ -1352,28 +1472,50 @@
             this.HaiRB.Text = "海妈";
             this.HaiRB.UseVisualStyleBackColor = true;
             this.HaiRB.CheckedChanged += new System.EventHandler(this.NP20s_CheckedChanged);
+            this.HaiRB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // BuffGB
             // 
-            this.BuffGB.Controls.Add(this.ShanSkillP);
-            this.BuffGB.Controls.Add(this.DoubleHaiChB);
-            this.BuffGB.Controls.Add(this.BuffAllMaxB);
-            this.BuffGB.Controls.Add(this.BuResetSlctnB);
-            this.BuffGB.Controls.Add(this.BuResetAllB);
-            this.BuffGB.Controls.Add(this.FenSkillP);
-            this.BuffGB.Controls.Add(this.XinSkillP);
-            this.BuffGB.Controls.Add(this.SanSkillP);
-            this.BuffGB.Controls.Add(this.YuSkillP);
-            this.BuffGB.Controls.Add(this.HuaSkillP);
-            this.BuffGB.Controls.Add(this.HaiExSkillP);
-            this.BuffGB.Controls.Add(this.BuffP);
+            this.BuffGB.Controls.Add(this.BuffTC);
             this.BuffGB.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.BuffGB.Location = new System.Drawing.Point(15, 455);
             this.BuffGB.Name = "BuffGB";
-            this.BuffGB.Size = new System.Drawing.Size(500, 275);
+            this.BuffGB.Size = new System.Drawing.Size(500, 300);
             this.BuffGB.TabIndex = 45;
             this.BuffGB.TabStop = false;
             this.BuffGB.Text = "NP获取提升Buff";
+            // 
+            // BuffTC
+            // 
+            this.BuffTC.Controls.Add(this.Bu30TP);
+            this.BuffTC.Controls.Add(this.Bu20TP);
+            this.BuffTC.Location = new System.Drawing.Point(6, 26);
+            this.BuffTC.Name = "BuffTC";
+            this.BuffTC.SelectedIndex = 0;
+            this.BuffTC.Size = new System.Drawing.Size(488, 268);
+            this.BuffTC.TabIndex = 0;
+            // 
+            // Bu30TP
+            // 
+            this.Bu30TP.Controls.Add(this.ShanSkillP);
+            this.Bu30TP.Controls.Add(this.DoubleHaiChB);
+            this.Bu30TP.Controls.Add(this.Bu30AllMaxB);
+            this.Bu30TP.Controls.Add(this.BuResetSlctnB);
+            this.Bu30TP.Controls.Add(this.BuResetAllB);
+            this.Bu30TP.Controls.Add(this.FenSkillP);
+            this.Bu30TP.Controls.Add(this.XinSkillP);
+            this.Bu30TP.Controls.Add(this.SanSkillP);
+            this.Bu30TP.Controls.Add(this.YuSkillP);
+            this.Bu30TP.Controls.Add(this.HuaSkillP);
+            this.Bu30TP.Controls.Add(this.HaiExSkillP);
+            this.Bu30TP.Controls.Add(this.BuffP);
+            this.Bu30TP.Location = new System.Drawing.Point(4, 29);
+            this.Bu30TP.Name = "Bu30TP";
+            this.Bu30TP.Padding = new System.Windows.Forms.Padding(3);
+            this.Bu30TP.Size = new System.Drawing.Size(480, 235);
+            this.Bu30TP.TabIndex = 0;
+            this.Bu30TP.Text = "常用从者";
+            this.Bu30TP.UseVisualStyleBackColor = true;
             // 
             // ShanSkillP
             // 
@@ -1385,10 +1527,10 @@
             this.ShanSkillP.Controls.Add(this.ShanSkill1Text);
             this.ShanSkillP.Controls.Add(this.ShanSkill1);
             this.ShanSkillP.Controls.Add(this.ShanSkill);
-            this.ShanSkillP.Location = new System.Drawing.Point(95, 219);
+            this.ShanSkillP.Location = new System.Drawing.Point(98, 198);
             this.ShanSkillP.Name = "ShanSkillP";
             this.ShanSkillP.Size = new System.Drawing.Size(290, 33);
-            this.ShanSkillP.TabIndex = 55;
+            this.ShanSkillP.TabIndex = 67;
             // 
             // ShanAllMaxB
             // 
@@ -1407,7 +1549,6 @@
             this.ShanSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.ShanSkill3Text.TabIndex = 27;
             this.ShanSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.ShanSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // ShanSkill3
             // 
@@ -1425,7 +1566,6 @@
             this.ShanSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.ShanSkill2Text.TabIndex = 25;
             this.ShanSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.ShanSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // ShanSkill2
             // 
@@ -1443,7 +1583,6 @@
             this.ShanSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.ShanSkill1Text.TabIndex = 23;
             this.ShanSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.ShanSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // ShanSkill1
             // 
@@ -1467,40 +1606,41 @@
             // 
             this.DoubleHaiChB.AutoSize = true;
             this.DoubleHaiChB.Enabled = false;
-            this.DoubleHaiChB.Location = new System.Drawing.Point(409, 26);
+            this.DoubleHaiChB.Location = new System.Drawing.Point(402, 5);
             this.DoubleHaiChB.Name = "DoubleHaiChB";
             this.DoubleHaiChB.Size = new System.Drawing.Size(76, 24);
-            this.DoubleHaiChB.TabIndex = 54;
+            this.DoubleHaiChB.TabIndex = 66;
             this.DoubleHaiChB.Text = "双海妈";
             this.DoubleHaiChB.UseVisualStyleBackColor = true;
             this.DoubleHaiChB.CheckedChanged += new System.EventHandler(this.DoubleHaiChB_CheckedChanged);
+            this.DoubleHaiChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
-            // BuffAllMaxB
+            // Bu30AllMaxB
             // 
-            this.BuffAllMaxB.Location = new System.Drawing.Point(400, 154);
-            this.BuffAllMaxB.Name = "BuffAllMaxB";
-            this.BuffAllMaxB.Size = new System.Drawing.Size(85, 30);
-            this.BuffAllMaxB.TabIndex = 53;
-            this.BuffAllMaxB.Text = "全部310";
-            this.BuffAllMaxB.UseVisualStyleBackColor = true;
-            this.BuffAllMaxB.Click += new System.EventHandler(this.SkillMax_Click);
+            this.Bu30AllMaxB.Location = new System.Drawing.Point(393, 133);
+            this.Bu30AllMaxB.Name = "Bu30AllMaxB";
+            this.Bu30AllMaxB.Size = new System.Drawing.Size(85, 30);
+            this.Bu30AllMaxB.TabIndex = 65;
+            this.Bu30AllMaxB.Text = "全部310";
+            this.Bu30AllMaxB.UseVisualStyleBackColor = true;
+            this.Bu30AllMaxB.Click += new System.EventHandler(this.SkillMax_Click);
             // 
             // BuResetSlctnB
             // 
-            this.BuResetSlctnB.Location = new System.Drawing.Point(400, 187);
+            this.BuResetSlctnB.Location = new System.Drawing.Point(393, 166);
             this.BuResetSlctnB.Name = "BuResetSlctnB";
             this.BuResetSlctnB.Size = new System.Drawing.Size(85, 30);
-            this.BuResetSlctnB.TabIndex = 51;
+            this.BuResetSlctnB.TabIndex = 64;
             this.BuResetSlctnB.Text = "重置选择";
             this.BuResetSlctnB.UseVisualStyleBackColor = true;
             this.BuResetSlctnB.Click += new System.EventHandler(this.BuResetSlctnB_Click);
             // 
             // BuResetAllB
             // 
-            this.BuResetAllB.Location = new System.Drawing.Point(400, 220);
+            this.BuResetAllB.Location = new System.Drawing.Point(393, 199);
             this.BuResetAllB.Name = "BuResetAllB";
             this.BuResetAllB.Size = new System.Drawing.Size(85, 30);
-            this.BuResetAllB.TabIndex = 50;
+            this.BuResetAllB.TabIndex = 63;
             this.BuResetAllB.Text = "重置所有";
             this.BuResetAllB.UseVisualStyleBackColor = true;
             this.BuResetAllB.Click += new System.EventHandler(this.BuResetAllB_Click);
@@ -1515,10 +1655,10 @@
             this.FenSkillP.Controls.Add(this.FenSkill1Text);
             this.FenSkillP.Controls.Add(this.FenSkill1);
             this.FenSkillP.Controls.Add(this.FenSkill);
-            this.FenSkillP.Location = new System.Drawing.Point(95, 186);
+            this.FenSkillP.Location = new System.Drawing.Point(98, 165);
             this.FenSkillP.Name = "FenSkillP";
             this.FenSkillP.Size = new System.Drawing.Size(290, 33);
-            this.FenSkillP.TabIndex = 45;
+            this.FenSkillP.TabIndex = 62;
             // 
             // FenAllMaxB
             // 
@@ -1537,7 +1677,6 @@
             this.FenSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.FenSkill3Text.TabIndex = 27;
             this.FenSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.FenSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // FenSkill3
             // 
@@ -1555,7 +1694,6 @@
             this.FenSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.FenSkill2Text.TabIndex = 25;
             this.FenSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.FenSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // FenSkill2
             // 
@@ -1573,7 +1711,6 @@
             this.FenSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.FenSkill1Text.TabIndex = 23;
             this.FenSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.FenSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // FenSkill1
             // 
@@ -1603,10 +1740,10 @@
             this.XinSkillP.Controls.Add(this.XinSkill1Text);
             this.XinSkillP.Controls.Add(this.XinSkill1);
             this.XinSkillP.Controls.Add(this.XinSkill);
-            this.XinSkillP.Location = new System.Drawing.Point(95, 153);
+            this.XinSkillP.Location = new System.Drawing.Point(98, 132);
             this.XinSkillP.Name = "XinSkillP";
             this.XinSkillP.Size = new System.Drawing.Size(290, 33);
-            this.XinSkillP.TabIndex = 44;
+            this.XinSkillP.TabIndex = 61;
             // 
             // XinAllMaxB
             // 
@@ -1625,7 +1762,6 @@
             this.XinSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.XinSkill3Text.TabIndex = 27;
             this.XinSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.XinSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // XinSkill3
             // 
@@ -1643,7 +1779,6 @@
             this.XinSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.XinSkill2Text.TabIndex = 25;
             this.XinSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.XinSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // XinSkill2
             // 
@@ -1661,7 +1796,6 @@
             this.XinSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.XinSkill1Text.TabIndex = 23;
             this.XinSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.XinSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // XinSkill1
             // 
@@ -1691,10 +1825,10 @@
             this.SanSkillP.Controls.Add(this.SanSkill1Text);
             this.SanSkillP.Controls.Add(this.SanSkill1);
             this.SanSkillP.Controls.Add(this.SanSkill);
-            this.SanSkillP.Location = new System.Drawing.Point(95, 120);
+            this.SanSkillP.Location = new System.Drawing.Point(98, 99);
             this.SanSkillP.Name = "SanSkillP";
             this.SanSkillP.Size = new System.Drawing.Size(290, 33);
-            this.SanSkillP.TabIndex = 43;
+            this.SanSkillP.TabIndex = 60;
             // 
             // SanAllMaxB
             // 
@@ -1713,7 +1847,6 @@
             this.SanSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.SanSkill3Text.TabIndex = 27;
             this.SanSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.SanSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // SanSkill3
             // 
@@ -1731,7 +1864,6 @@
             this.SanSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.SanSkill2Text.TabIndex = 25;
             this.SanSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.SanSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // SanSkill2
             // 
@@ -1749,7 +1881,6 @@
             this.SanSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.SanSkill1Text.TabIndex = 23;
             this.SanSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.SanSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // SanSkill1
             // 
@@ -1779,10 +1910,10 @@
             this.YuSkillP.Controls.Add(this.YuSkill1Text);
             this.YuSkillP.Controls.Add(this.YuSkill1);
             this.YuSkillP.Controls.Add(this.YuSkill);
-            this.YuSkillP.Location = new System.Drawing.Point(95, 87);
+            this.YuSkillP.Location = new System.Drawing.Point(98, 66);
             this.YuSkillP.Name = "YuSkillP";
             this.YuSkillP.Size = new System.Drawing.Size(290, 33);
-            this.YuSkillP.TabIndex = 42;
+            this.YuSkillP.TabIndex = 59;
             // 
             // YuAllMaxB
             // 
@@ -1801,7 +1932,6 @@
             this.YuSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.YuSkill3Text.TabIndex = 27;
             this.YuSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.YuSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // YuSkill3
             // 
@@ -1819,7 +1949,6 @@
             this.YuSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.YuSkill2Text.TabIndex = 25;
             this.YuSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.YuSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // YuSkill2
             // 
@@ -1837,7 +1966,6 @@
             this.YuSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.YuSkill1Text.TabIndex = 23;
             this.YuSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.YuSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // YuSkill1
             // 
@@ -1867,10 +1995,10 @@
             this.HuaSkillP.Controls.Add(this.HuaSkill1Text);
             this.HuaSkillP.Controls.Add(this.HuaSkill1);
             this.HuaSkillP.Controls.Add(this.HuaSkill);
-            this.HuaSkillP.Location = new System.Drawing.Point(95, 54);
+            this.HuaSkillP.Location = new System.Drawing.Point(98, 33);
             this.HuaSkillP.Name = "HuaSkillP";
             this.HuaSkillP.Size = new System.Drawing.Size(290, 33);
-            this.HuaSkillP.TabIndex = 41;
+            this.HuaSkillP.TabIndex = 58;
             // 
             // HuaAllMaxB
             // 
@@ -1889,7 +2017,6 @@
             this.HuaSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.HuaSkill3Text.TabIndex = 27;
             this.HuaSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.HuaSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // HuaSkill3
             // 
@@ -1907,7 +2034,6 @@
             this.HuaSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.HuaSkill2Text.TabIndex = 25;
             this.HuaSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.HuaSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // HuaSkill2
             // 
@@ -1925,7 +2051,6 @@
             this.HuaSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.HuaSkill1Text.TabIndex = 23;
             this.HuaSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.HuaSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // HuaSkill1
             // 
@@ -1956,10 +2081,10 @@
             this.HaiExSkillP.Controls.Add(this.HaiExSkill1);
             this.HaiExSkillP.Controls.Add(this.HaiExSkill);
             this.HaiExSkillP.Enabled = false;
-            this.HaiExSkillP.Location = new System.Drawing.Point(95, 21);
+            this.HaiExSkillP.Location = new System.Drawing.Point(98, 0);
             this.HaiExSkillP.Name = "HaiExSkillP";
             this.HaiExSkillP.Size = new System.Drawing.Size(290, 33);
-            this.HaiExSkillP.TabIndex = 40;
+            this.HaiExSkillP.TabIndex = 57;
             // 
             // HaiExAllMaxB
             // 
@@ -1978,7 +2103,6 @@
             this.HaiExSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.HaiExSkill3Text.TabIndex = 27;
             this.HaiExSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.HaiExSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // HaiExSkill3
             // 
@@ -1996,7 +2120,6 @@
             this.HaiExSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.HaiExSkill2Text.TabIndex = 25;
             this.HaiExSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.HaiExSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // HaiExSkill2
             // 
@@ -2014,7 +2137,6 @@
             this.HaiExSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.HaiExSkill1Text.TabIndex = 23;
             this.HaiExSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
-            this.HaiExSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // HaiExSkill1
             // 
@@ -2036,6 +2158,20 @@
             // 
             // BuffP
             // 
+            this.BuffP.Controls.Add(this.ShanL);
+            this.BuffP.Controls.Add(this.FenL);
+            this.BuffP.Controls.Add(this.XinL);
+            this.BuffP.Controls.Add(this.SanL);
+            this.BuffP.Controls.Add(this.YuL);
+            this.BuffP.Controls.Add(this.HuaL);
+            this.BuffP.Controls.Add(this.ShanChB);
+            this.BuffP.Controls.Add(this.FenChB);
+            this.BuffP.Controls.Add(this.XinChB);
+            this.BuffP.Controls.Add(this.SanChB);
+            this.BuffP.Controls.Add(this.YuChB);
+            this.BuffP.Controls.Add(this.HuaChB);
+            this.BuffP.Controls.Add(this.HaiExL);
+            this.BuffP.Controls.Add(this.HaiExChB);
             this.BuffP.Controls.Add(this.ShanRB);
             this.BuffP.Controls.Add(this.FenRB);
             this.BuffP.Controls.Add(this.XinRB);
@@ -2043,91 +2179,981 @@
             this.BuffP.Controls.Add(this.YuRB);
             this.BuffP.Controls.Add(this.HuaRB);
             this.BuffP.Controls.Add(this.HaiExRB);
-            this.BuffP.Location = new System.Drawing.Point(10, 22);
+            this.BuffP.Location = new System.Drawing.Point(3, 1);
             this.BuffP.Name = "BuffP";
-            this.BuffP.Size = new System.Drawing.Size(75, 235);
-            this.BuffP.TabIndex = 0;
+            this.BuffP.Size = new System.Drawing.Size(90, 235);
+            this.BuffP.TabIndex = 56;
+            // 
+            // ShanL
+            // 
+            this.ShanL.AutoSize = true;
+            this.ShanL.Location = new System.Drawing.Point(22, 205);
+            this.ShanL.Name = "ShanL";
+            this.ShanL.Size = new System.Drawing.Size(39, 20);
+            this.ShanL.TabIndex = 20;
+            this.ShanL.Text = "贤王";
+            // 
+            // FenL
+            // 
+            this.FenL.AutoSize = true;
+            this.FenL.Location = new System.Drawing.Point(22, 172);
+            this.FenL.Name = "FenL";
+            this.FenL.Size = new System.Drawing.Size(39, 20);
+            this.FenL.TabIndex = 19;
+            this.FenL.Text = "芬恩";
+            // 
+            // XinL
+            // 
+            this.XinL.AutoSize = true;
+            this.XinL.Location = new System.Drawing.Point(22, 139);
+            this.XinL.Name = "XinL";
+            this.XinL.Size = new System.Drawing.Size(39, 20);
+            this.XinL.TabIndex = 18;
+            this.XinL.Text = "信长";
+            // 
+            // SanL
+            // 
+            this.SanL.AutoSize = true;
+            this.SanL.Location = new System.Drawing.Point(22, 106);
+            this.SanL.Name = "SanL";
+            this.SanL.Size = new System.Drawing.Size(39, 20);
+            this.SanL.TabIndex = 17;
+            this.SanL.Text = "三藏";
+            // 
+            // YuL
+            // 
+            this.YuL.AutoSize = true;
+            this.YuL.Location = new System.Drawing.Point(22, 73);
+            this.YuL.Name = "YuL";
+            this.YuL.Size = new System.Drawing.Size(39, 20);
+            this.YuL.TabIndex = 16;
+            this.YuL.Text = "小玉";
+            // 
+            // HuaL
+            // 
+            this.HuaL.AutoSize = true;
+            this.HuaL.Location = new System.Drawing.Point(22, 40);
+            this.HuaL.Name = "HuaL";
+            this.HuaL.Size = new System.Drawing.Size(39, 20);
+            this.HuaL.TabIndex = 15;
+            this.HuaL.Text = "花嫁";
+            // 
+            // ShanChB
+            // 
+            this.ShanChB.AutoSize = true;
+            this.ShanChB.Enabled = false;
+            this.ShanChB.Location = new System.Drawing.Point(67, 207);
+            this.ShanChB.Name = "ShanChB";
+            this.ShanChB.Size = new System.Drawing.Size(18, 17);
+            this.ShanChB.TabIndex = 14;
+            this.ShanChB.UseVisualStyleBackColor = true;
+            this.ShanChB.CheckedChanged += new System.EventHandler(this.Bu20s_CheckedChanged);
+            this.ShanChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
+            // 
+            // FenChB
+            // 
+            this.FenChB.AutoSize = true;
+            this.FenChB.Enabled = false;
+            this.FenChB.Location = new System.Drawing.Point(67, 174);
+            this.FenChB.Name = "FenChB";
+            this.FenChB.Size = new System.Drawing.Size(18, 17);
+            this.FenChB.TabIndex = 13;
+            this.FenChB.UseVisualStyleBackColor = true;
+            this.FenChB.CheckedChanged += new System.EventHandler(this.Bu20s_CheckedChanged);
+            this.FenChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
+            // 
+            // XinChB
+            // 
+            this.XinChB.AutoSize = true;
+            this.XinChB.Enabled = false;
+            this.XinChB.Location = new System.Drawing.Point(67, 141);
+            this.XinChB.Name = "XinChB";
+            this.XinChB.Size = new System.Drawing.Size(18, 17);
+            this.XinChB.TabIndex = 12;
+            this.XinChB.UseVisualStyleBackColor = true;
+            this.XinChB.CheckedChanged += new System.EventHandler(this.Bu20s_CheckedChanged);
+            this.XinChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
+            // 
+            // SanChB
+            // 
+            this.SanChB.AutoSize = true;
+            this.SanChB.Enabled = false;
+            this.SanChB.Location = new System.Drawing.Point(67, 108);
+            this.SanChB.Name = "SanChB";
+            this.SanChB.Size = new System.Drawing.Size(18, 17);
+            this.SanChB.TabIndex = 11;
+            this.SanChB.UseVisualStyleBackColor = true;
+            this.SanChB.CheckedChanged += new System.EventHandler(this.Bu20s_CheckedChanged);
+            this.SanChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
+            // 
+            // YuChB
+            // 
+            this.YuChB.AutoSize = true;
+            this.YuChB.Enabled = false;
+            this.YuChB.Location = new System.Drawing.Point(67, 75);
+            this.YuChB.Name = "YuChB";
+            this.YuChB.Size = new System.Drawing.Size(18, 17);
+            this.YuChB.TabIndex = 10;
+            this.YuChB.UseVisualStyleBackColor = true;
+            this.YuChB.CheckedChanged += new System.EventHandler(this.Bu20s_CheckedChanged);
+            this.YuChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
+            // 
+            // HuaChB
+            // 
+            this.HuaChB.AutoSize = true;
+            this.HuaChB.Enabled = false;
+            this.HuaChB.Location = new System.Drawing.Point(67, 42);
+            this.HuaChB.Name = "HuaChB";
+            this.HuaChB.Size = new System.Drawing.Size(18, 17);
+            this.HuaChB.TabIndex = 9;
+            this.HuaChB.UseVisualStyleBackColor = true;
+            this.HuaChB.CheckedChanged += new System.EventHandler(this.Bu20s_CheckedChanged);
+            this.HuaChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
+            // 
+            // HaiExL
+            // 
+            this.HaiExL.AutoSize = true;
+            this.HaiExL.Location = new System.Drawing.Point(22, 7);
+            this.HaiExL.Name = "HaiExL";
+            this.HaiExL.Size = new System.Drawing.Size(39, 20);
+            this.HaiExL.TabIndex = 8;
+            this.HaiExL.Text = "海妈";
+            // 
+            // HaiExChB
+            // 
+            this.HaiExChB.AutoSize = true;
+            this.HaiExChB.Enabled = false;
+            this.HaiExChB.Location = new System.Drawing.Point(67, 9);
+            this.HaiExChB.Name = "HaiExChB";
+            this.HaiExChB.Size = new System.Drawing.Size(18, 17);
+            this.HaiExChB.TabIndex = 7;
+            this.HaiExChB.UseVisualStyleBackColor = true;
+            this.HaiExChB.CheckedChanged += new System.EventHandler(this.Bu20s_CheckedChanged);
+            this.HaiExChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // ShanRB
             // 
-            this.ShanRB.Location = new System.Drawing.Point(3, 201);
+            this.ShanRB.AutoSize = true;
+            this.ShanRB.Location = new System.Drawing.Point(3, 207);
             this.ShanRB.Name = "ShanRB";
-            this.ShanRB.Size = new System.Drawing.Size(70, 25);
+            this.ShanRB.Size = new System.Drawing.Size(17, 16);
             this.ShanRB.TabIndex = 6;
             this.ShanRB.TabStop = true;
-            this.ShanRB.Text = "贤王";
             this.ShanRB.UseVisualStyleBackColor = true;
-            this.ShanRB.CheckedChanged += new System.EventHandler(this.Buff_CheckedChanged);
+            this.ShanRB.CheckedChanged += new System.EventHandler(this.Buffs_CheckedChanged);
+            this.ShanRB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // FenRB
             // 
-            this.FenRB.Location = new System.Drawing.Point(3, 168);
+            this.FenRB.AutoSize = true;
+            this.FenRB.Location = new System.Drawing.Point(3, 174);
             this.FenRB.Name = "FenRB";
-            this.FenRB.Size = new System.Drawing.Size(70, 25);
+            this.FenRB.Size = new System.Drawing.Size(17, 16);
             this.FenRB.TabIndex = 5;
             this.FenRB.TabStop = true;
-            this.FenRB.Text = "芬恩";
             this.FenRB.UseVisualStyleBackColor = true;
-            this.FenRB.CheckedChanged += new System.EventHandler(this.Buff_CheckedChanged);
+            this.FenRB.CheckedChanged += new System.EventHandler(this.Buffs_CheckedChanged);
+            this.FenRB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // XinRB
             // 
-            this.XinRB.Location = new System.Drawing.Point(3, 135);
+            this.XinRB.AutoSize = true;
+            this.XinRB.Location = new System.Drawing.Point(3, 141);
             this.XinRB.Name = "XinRB";
-            this.XinRB.Size = new System.Drawing.Size(70, 25);
+            this.XinRB.Size = new System.Drawing.Size(17, 16);
             this.XinRB.TabIndex = 4;
             this.XinRB.TabStop = true;
-            this.XinRB.Text = "信长";
             this.XinRB.UseVisualStyleBackColor = true;
-            this.XinRB.CheckedChanged += new System.EventHandler(this.Buff_CheckedChanged);
+            this.XinRB.CheckedChanged += new System.EventHandler(this.Buffs_CheckedChanged);
+            this.XinRB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // SanRB
             // 
-            this.SanRB.Location = new System.Drawing.Point(3, 102);
+            this.SanRB.AutoSize = true;
+            this.SanRB.Location = new System.Drawing.Point(3, 108);
             this.SanRB.Name = "SanRB";
-            this.SanRB.Size = new System.Drawing.Size(70, 25);
+            this.SanRB.Size = new System.Drawing.Size(17, 16);
             this.SanRB.TabIndex = 3;
             this.SanRB.TabStop = true;
-            this.SanRB.Text = "三藏";
             this.SanRB.UseVisualStyleBackColor = true;
-            this.SanRB.CheckedChanged += new System.EventHandler(this.Buff_CheckedChanged);
+            this.SanRB.CheckedChanged += new System.EventHandler(this.Buffs_CheckedChanged);
+            this.SanRB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // YuRB
             // 
-            this.YuRB.Location = new System.Drawing.Point(3, 69);
+            this.YuRB.AutoSize = true;
+            this.YuRB.Location = new System.Drawing.Point(3, 75);
             this.YuRB.Name = "YuRB";
-            this.YuRB.Size = new System.Drawing.Size(70, 25);
+            this.YuRB.Size = new System.Drawing.Size(17, 16);
             this.YuRB.TabIndex = 2;
             this.YuRB.TabStop = true;
-            this.YuRB.Text = "小玉";
             this.YuRB.UseVisualStyleBackColor = true;
-            this.YuRB.CheckedChanged += new System.EventHandler(this.Buff_CheckedChanged);
+            this.YuRB.CheckedChanged += new System.EventHandler(this.Buffs_CheckedChanged);
+            this.YuRB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // HuaRB
             // 
-            this.HuaRB.Location = new System.Drawing.Point(3, 36);
+            this.HuaRB.AutoSize = true;
+            this.HuaRB.Location = new System.Drawing.Point(3, 42);
             this.HuaRB.Name = "HuaRB";
-            this.HuaRB.Size = new System.Drawing.Size(70, 25);
+            this.HuaRB.Size = new System.Drawing.Size(17, 16);
             this.HuaRB.TabIndex = 1;
             this.HuaRB.TabStop = true;
-            this.HuaRB.Text = "花嫁";
             this.HuaRB.UseVisualStyleBackColor = true;
-            this.HuaRB.CheckedChanged += new System.EventHandler(this.Buff_CheckedChanged);
+            this.HuaRB.CheckedChanged += new System.EventHandler(this.Buffs_CheckedChanged);
+            this.HuaRB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // HaiExRB
             // 
+            this.HaiExRB.AutoSize = true;
             this.HaiExRB.Enabled = false;
-            this.HaiExRB.Location = new System.Drawing.Point(3, 3);
+            this.HaiExRB.Location = new System.Drawing.Point(3, 9);
             this.HaiExRB.Name = "HaiExRB";
-            this.HaiExRB.Size = new System.Drawing.Size(70, 25);
+            this.HaiExRB.Size = new System.Drawing.Size(17, 16);
             this.HaiExRB.TabIndex = 0;
             this.HaiExRB.TabStop = true;
-            this.HaiExRB.Text = "海妈";
             this.HaiExRB.UseVisualStyleBackColor = true;
-            this.HaiExRB.CheckedChanged += new System.EventHandler(this.Buff_CheckedChanged);
+            this.HaiExRB.CheckedChanged += new System.EventHandler(this.Buffs_CheckedChanged);
+            this.HaiExRB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
+            // 
+            // Bu20TP
+            // 
+            this.Bu20TP.Controls.Add(this.NiSkillP);
+            this.Bu20TP.Controls.Add(this.Bu20AllMaxB);
+            this.Bu20TP.Controls.Add(this.Bu20ResetSlctnB);
+            this.Bu20TP.Controls.Add(this.Bu20ResetAllB);
+            this.Bu20TP.Controls.Add(this.LongSkillP);
+            this.Bu20TP.Controls.Add(this.BuSkillP);
+            this.Bu20TP.Controls.Add(this.NiuSkillP);
+            this.Bu20TP.Controls.Add(this.LilySkillP);
+            this.Bu20TP.Controls.Add(this.LinSkillP);
+            this.Bu20TP.Controls.Add(this.DouSkillP);
+            this.Bu20TP.Controls.Add(this.Bu20P);
+            this.Bu20TP.Location = new System.Drawing.Point(4, 29);
+            this.Bu20TP.Name = "Bu20TP";
+            this.Bu20TP.Padding = new System.Windows.Forms.Padding(3);
+            this.Bu20TP.Size = new System.Drawing.Size(480, 235);
+            this.Bu20TP.TabIndex = 1;
+            this.Bu20TP.Text = "20%提升从者";
+            this.Bu20TP.UseVisualStyleBackColor = true;
+            // 
+            // NiSkillP
+            // 
+            this.NiSkillP.Controls.Add(this.NiAllMaxB);
+            this.NiSkillP.Controls.Add(this.NiSkill3Text);
+            this.NiSkillP.Controls.Add(this.NiSkill3);
+            this.NiSkillP.Controls.Add(this.NiSkill2Text);
+            this.NiSkillP.Controls.Add(this.NiSkill2);
+            this.NiSkillP.Controls.Add(this.NiSkill1Text);
+            this.NiSkillP.Controls.Add(this.NiSkill1);
+            this.NiSkillP.Controls.Add(this.NiSkill);
+            this.NiSkillP.Enabled = false;
+            this.NiSkillP.Location = new System.Drawing.Point(88, 198);
+            this.NiSkillP.Name = "NiSkillP";
+            this.NiSkillP.Size = new System.Drawing.Size(290, 33);
+            this.NiSkillP.TabIndex = 67;
+            // 
+            // NiAllMaxB
+            // 
+            this.NiAllMaxB.Location = new System.Drawing.Point(230, 1);
+            this.NiAllMaxB.Name = "NiAllMaxB";
+            this.NiAllMaxB.Size = new System.Drawing.Size(50, 30);
+            this.NiAllMaxB.TabIndex = 28;
+            this.NiAllMaxB.Text = "310";
+            this.NiAllMaxB.UseVisualStyleBackColor = true;
+            this.NiAllMaxB.Click += new System.EventHandler(this.SkillMax_Click);
+            // 
+            // NiSkill3Text
+            // 
+            this.NiSkill3Text.Location = new System.Drawing.Point(190, 3);
+            this.NiSkill3Text.Name = "NiSkill3Text";
+            this.NiSkill3Text.Size = new System.Drawing.Size(30, 27);
+            this.NiSkill3Text.TabIndex = 27;
+            // 
+            // NiSkill3
+            // 
+            this.NiSkill3.AutoSize = true;
+            this.NiSkill3.Location = new System.Drawing.Point(170, 6);
+            this.NiSkill3.Name = "NiSkill3";
+            this.NiSkill3.Size = new System.Drawing.Size(18, 20);
+            this.NiSkill3.TabIndex = 26;
+            this.NiSkill3.Text = "3";
+            // 
+            // NiSkill2Text
+            // 
+            this.NiSkill2Text.Location = new System.Drawing.Point(125, 3);
+            this.NiSkill2Text.Name = "NiSkill2Text";
+            this.NiSkill2Text.Size = new System.Drawing.Size(30, 27);
+            this.NiSkill2Text.TabIndex = 25;
+            // 
+            // NiSkill2
+            // 
+            this.NiSkill2.AutoSize = true;
+            this.NiSkill2.Location = new System.Drawing.Point(105, 6);
+            this.NiSkill2.Name = "NiSkill2";
+            this.NiSkill2.Size = new System.Drawing.Size(18, 20);
+            this.NiSkill2.TabIndex = 24;
+            this.NiSkill2.Text = "2";
+            // 
+            // NiSkill1Text
+            // 
+            this.NiSkill1Text.Location = new System.Drawing.Point(60, 3);
+            this.NiSkill1Text.Name = "NiSkill1Text";
+            this.NiSkill1Text.Size = new System.Drawing.Size(30, 27);
+            this.NiSkill1Text.TabIndex = 23;
+            // 
+            // NiSkill1
+            // 
+            this.NiSkill1.AutoSize = true;
+            this.NiSkill1.Location = new System.Drawing.Point(40, 6);
+            this.NiSkill1.Name = "NiSkill1";
+            this.NiSkill1.Size = new System.Drawing.Size(18, 20);
+            this.NiSkill1.TabIndex = 22;
+            this.NiSkill1.Text = "1";
+            // 
+            // NiSkill
+            // 
+            this.NiSkill.AutoSize = true;
+            this.NiSkill.Location = new System.Drawing.Point(0, 6);
+            this.NiSkill.Name = "NiSkill";
+            this.NiSkill.Size = new System.Drawing.Size(39, 20);
+            this.NiSkill.TabIndex = 21;
+            this.NiSkill.Text = "技能";
+            // 
+            // Bu20AllMaxB
+            // 
+            this.Bu20AllMaxB.Enabled = false;
+            this.Bu20AllMaxB.Location = new System.Drawing.Point(393, 133);
+            this.Bu20AllMaxB.Name = "Bu20AllMaxB";
+            this.Bu20AllMaxB.Size = new System.Drawing.Size(85, 30);
+            this.Bu20AllMaxB.TabIndex = 65;
+            this.Bu20AllMaxB.Text = "全部310";
+            this.Bu20AllMaxB.UseVisualStyleBackColor = true;
+            this.Bu20AllMaxB.Click += new System.EventHandler(this.SkillMax_Click);
+            // 
+            // Bu20ResetSlctnB
+            // 
+            this.Bu20ResetSlctnB.Enabled = false;
+            this.Bu20ResetSlctnB.Location = new System.Drawing.Point(393, 166);
+            this.Bu20ResetSlctnB.Name = "Bu20ResetSlctnB";
+            this.Bu20ResetSlctnB.Size = new System.Drawing.Size(85, 30);
+            this.Bu20ResetSlctnB.TabIndex = 64;
+            this.Bu20ResetSlctnB.Text = "重置选择";
+            this.Bu20ResetSlctnB.UseVisualStyleBackColor = true;
+            this.Bu20ResetSlctnB.Click += new System.EventHandler(this.Bu20ResetSlctnB_Click);
+            // 
+            // Bu20ResetAllB
+            // 
+            this.Bu20ResetAllB.Enabled = false;
+            this.Bu20ResetAllB.Location = new System.Drawing.Point(393, 199);
+            this.Bu20ResetAllB.Name = "Bu20ResetAllB";
+            this.Bu20ResetAllB.Size = new System.Drawing.Size(85, 30);
+            this.Bu20ResetAllB.TabIndex = 63;
+            this.Bu20ResetAllB.Text = "重置所有";
+            this.Bu20ResetAllB.UseVisualStyleBackColor = true;
+            this.Bu20ResetAllB.Click += new System.EventHandler(this.Bu20ResetAllB_Click);
+            // 
+            // LongSkillP
+            // 
+            this.LongSkillP.Controls.Add(this.LongAllMaxB);
+            this.LongSkillP.Controls.Add(this.LongSkill3Text);
+            this.LongSkillP.Controls.Add(this.LongSkill3);
+            this.LongSkillP.Controls.Add(this.LongSkill2Text);
+            this.LongSkillP.Controls.Add(this.LongSkill2);
+            this.LongSkillP.Controls.Add(this.LongSkill1Text);
+            this.LongSkillP.Controls.Add(this.LongSkill1);
+            this.LongSkillP.Controls.Add(this.LongSkill);
+            this.LongSkillP.Enabled = false;
+            this.LongSkillP.Location = new System.Drawing.Point(88, 165);
+            this.LongSkillP.Name = "LongSkillP";
+            this.LongSkillP.Size = new System.Drawing.Size(290, 33);
+            this.LongSkillP.TabIndex = 62;
+            // 
+            // LongAllMaxB
+            // 
+            this.LongAllMaxB.Location = new System.Drawing.Point(230, 1);
+            this.LongAllMaxB.Name = "LongAllMaxB";
+            this.LongAllMaxB.Size = new System.Drawing.Size(50, 30);
+            this.LongAllMaxB.TabIndex = 28;
+            this.LongAllMaxB.Text = "310";
+            this.LongAllMaxB.UseVisualStyleBackColor = true;
+            this.LongAllMaxB.Click += new System.EventHandler(this.SkillMax_Click);
+            // 
+            // LongSkill3Text
+            // 
+            this.LongSkill3Text.Location = new System.Drawing.Point(190, 3);
+            this.LongSkill3Text.Name = "LongSkill3Text";
+            this.LongSkill3Text.Size = new System.Drawing.Size(30, 27);
+            this.LongSkill3Text.TabIndex = 27;
+            // 
+            // LongSkill3
+            // 
+            this.LongSkill3.AutoSize = true;
+            this.LongSkill3.Location = new System.Drawing.Point(170, 6);
+            this.LongSkill3.Name = "LongSkill3";
+            this.LongSkill3.Size = new System.Drawing.Size(18, 20);
+            this.LongSkill3.TabIndex = 26;
+            this.LongSkill3.Text = "3";
+            // 
+            // LongSkill2Text
+            // 
+            this.LongSkill2Text.Location = new System.Drawing.Point(125, 3);
+            this.LongSkill2Text.Name = "LongSkill2Text";
+            this.LongSkill2Text.Size = new System.Drawing.Size(30, 27);
+            this.LongSkill2Text.TabIndex = 25;
+            // 
+            // LongSkill2
+            // 
+            this.LongSkill2.AutoSize = true;
+            this.LongSkill2.Location = new System.Drawing.Point(105, 6);
+            this.LongSkill2.Name = "LongSkill2";
+            this.LongSkill2.Size = new System.Drawing.Size(18, 20);
+            this.LongSkill2.TabIndex = 24;
+            this.LongSkill2.Text = "2";
+            // 
+            // LongSkill1Text
+            // 
+            this.LongSkill1Text.Location = new System.Drawing.Point(60, 3);
+            this.LongSkill1Text.Name = "LongSkill1Text";
+            this.LongSkill1Text.Size = new System.Drawing.Size(30, 27);
+            this.LongSkill1Text.TabIndex = 23;
+            // 
+            // LongSkill1
+            // 
+            this.LongSkill1.AutoSize = true;
+            this.LongSkill1.Location = new System.Drawing.Point(40, 6);
+            this.LongSkill1.Name = "LongSkill1";
+            this.LongSkill1.Size = new System.Drawing.Size(18, 20);
+            this.LongSkill1.TabIndex = 22;
+            this.LongSkill1.Text = "1";
+            // 
+            // LongSkill
+            // 
+            this.LongSkill.AutoSize = true;
+            this.LongSkill.Location = new System.Drawing.Point(0, 6);
+            this.LongSkill.Name = "LongSkill";
+            this.LongSkill.Size = new System.Drawing.Size(39, 20);
+            this.LongSkill.TabIndex = 21;
+            this.LongSkill.Text = "技能";
+            // 
+            // BuSkillP
+            // 
+            this.BuSkillP.Controls.Add(this.BuAllMaxB);
+            this.BuSkillP.Controls.Add(this.BuSkill3Text);
+            this.BuSkillP.Controls.Add(this.BuSkill3);
+            this.BuSkillP.Controls.Add(this.BuSkill2Text);
+            this.BuSkillP.Controls.Add(this.BuSkill2);
+            this.BuSkillP.Controls.Add(this.BuSkill1Text);
+            this.BuSkillP.Controls.Add(this.BuSkill1);
+            this.BuSkillP.Controls.Add(this.BuSkill);
+            this.BuSkillP.Enabled = false;
+            this.BuSkillP.Location = new System.Drawing.Point(88, 132);
+            this.BuSkillP.Name = "BuSkillP";
+            this.BuSkillP.Size = new System.Drawing.Size(290, 33);
+            this.BuSkillP.TabIndex = 61;
+            // 
+            // BuAllMaxB
+            // 
+            this.BuAllMaxB.Location = new System.Drawing.Point(230, 1);
+            this.BuAllMaxB.Name = "BuAllMaxB";
+            this.BuAllMaxB.Size = new System.Drawing.Size(50, 30);
+            this.BuAllMaxB.TabIndex = 28;
+            this.BuAllMaxB.Text = "310";
+            this.BuAllMaxB.UseVisualStyleBackColor = true;
+            this.BuAllMaxB.Click += new System.EventHandler(this.SkillMax_Click);
+            // 
+            // BuSkill3Text
+            // 
+            this.BuSkill3Text.Location = new System.Drawing.Point(190, 3);
+            this.BuSkill3Text.Name = "BuSkill3Text";
+            this.BuSkill3Text.Size = new System.Drawing.Size(30, 27);
+            this.BuSkill3Text.TabIndex = 27;
+            // 
+            // BuSkill3
+            // 
+            this.BuSkill3.AutoSize = true;
+            this.BuSkill3.Location = new System.Drawing.Point(170, 6);
+            this.BuSkill3.Name = "BuSkill3";
+            this.BuSkill3.Size = new System.Drawing.Size(18, 20);
+            this.BuSkill3.TabIndex = 26;
+            this.BuSkill3.Text = "3";
+            // 
+            // BuSkill2Text
+            // 
+            this.BuSkill2Text.Location = new System.Drawing.Point(125, 3);
+            this.BuSkill2Text.Name = "BuSkill2Text";
+            this.BuSkill2Text.Size = new System.Drawing.Size(30, 27);
+            this.BuSkill2Text.TabIndex = 25;
+            // 
+            // BuSkill2
+            // 
+            this.BuSkill2.AutoSize = true;
+            this.BuSkill2.Location = new System.Drawing.Point(105, 6);
+            this.BuSkill2.Name = "BuSkill2";
+            this.BuSkill2.Size = new System.Drawing.Size(18, 20);
+            this.BuSkill2.TabIndex = 24;
+            this.BuSkill2.Text = "2";
+            // 
+            // BuSkill1Text
+            // 
+            this.BuSkill1Text.Location = new System.Drawing.Point(60, 3);
+            this.BuSkill1Text.Name = "BuSkill1Text";
+            this.BuSkill1Text.Size = new System.Drawing.Size(30, 27);
+            this.BuSkill1Text.TabIndex = 23;
+            // 
+            // BuSkill1
+            // 
+            this.BuSkill1.AutoSize = true;
+            this.BuSkill1.Location = new System.Drawing.Point(40, 6);
+            this.BuSkill1.Name = "BuSkill1";
+            this.BuSkill1.Size = new System.Drawing.Size(18, 20);
+            this.BuSkill1.TabIndex = 22;
+            this.BuSkill1.Text = "1";
+            // 
+            // BuSkill
+            // 
+            this.BuSkill.AutoSize = true;
+            this.BuSkill.Location = new System.Drawing.Point(0, 6);
+            this.BuSkill.Name = "BuSkill";
+            this.BuSkill.Size = new System.Drawing.Size(39, 20);
+            this.BuSkill.TabIndex = 21;
+            this.BuSkill.Text = "技能";
+            // 
+            // NiuSkillP
+            // 
+            this.NiuSkillP.Controls.Add(this.NiuAllMaxB);
+            this.NiuSkillP.Controls.Add(this.NiuSkill3Text);
+            this.NiuSkillP.Controls.Add(this.NiuSkill3);
+            this.NiuSkillP.Controls.Add(this.NiuSkill2Text);
+            this.NiuSkillP.Controls.Add(this.NiuSkill2);
+            this.NiuSkillP.Controls.Add(this.NiuSkill1Text);
+            this.NiuSkillP.Controls.Add(this.NiuSkill1);
+            this.NiuSkillP.Controls.Add(this.NiuSkill);
+            this.NiuSkillP.Enabled = false;
+            this.NiuSkillP.Location = new System.Drawing.Point(88, 99);
+            this.NiuSkillP.Name = "NiuSkillP";
+            this.NiuSkillP.Size = new System.Drawing.Size(290, 33);
+            this.NiuSkillP.TabIndex = 60;
+            // 
+            // NiuAllMaxB
+            // 
+            this.NiuAllMaxB.Location = new System.Drawing.Point(230, 1);
+            this.NiuAllMaxB.Name = "NiuAllMaxB";
+            this.NiuAllMaxB.Size = new System.Drawing.Size(50, 30);
+            this.NiuAllMaxB.TabIndex = 28;
+            this.NiuAllMaxB.Text = "310";
+            this.NiuAllMaxB.UseVisualStyleBackColor = true;
+            this.NiuAllMaxB.Click += new System.EventHandler(this.SkillMax_Click);
+            // 
+            // NiuSkill3Text
+            // 
+            this.NiuSkill3Text.Location = new System.Drawing.Point(190, 3);
+            this.NiuSkill3Text.Name = "NiuSkill3Text";
+            this.NiuSkill3Text.Size = new System.Drawing.Size(30, 27);
+            this.NiuSkill3Text.TabIndex = 27;
+            // 
+            // NiuSkill3
+            // 
+            this.NiuSkill3.AutoSize = true;
+            this.NiuSkill3.Location = new System.Drawing.Point(170, 6);
+            this.NiuSkill3.Name = "NiuSkill3";
+            this.NiuSkill3.Size = new System.Drawing.Size(18, 20);
+            this.NiuSkill3.TabIndex = 26;
+            this.NiuSkill3.Text = "3";
+            // 
+            // NiuSkill2Text
+            // 
+            this.NiuSkill2Text.Location = new System.Drawing.Point(125, 3);
+            this.NiuSkill2Text.Name = "NiuSkill2Text";
+            this.NiuSkill2Text.Size = new System.Drawing.Size(30, 27);
+            this.NiuSkill2Text.TabIndex = 25;
+            // 
+            // NiuSkill2
+            // 
+            this.NiuSkill2.AutoSize = true;
+            this.NiuSkill2.Location = new System.Drawing.Point(105, 6);
+            this.NiuSkill2.Name = "NiuSkill2";
+            this.NiuSkill2.Size = new System.Drawing.Size(18, 20);
+            this.NiuSkill2.TabIndex = 24;
+            this.NiuSkill2.Text = "2";
+            // 
+            // NiuSkill1Text
+            // 
+            this.NiuSkill1Text.Location = new System.Drawing.Point(60, 3);
+            this.NiuSkill1Text.Name = "NiuSkill1Text";
+            this.NiuSkill1Text.Size = new System.Drawing.Size(30, 27);
+            this.NiuSkill1Text.TabIndex = 23;
+            // 
+            // NiuSkill1
+            // 
+            this.NiuSkill1.AutoSize = true;
+            this.NiuSkill1.Location = new System.Drawing.Point(40, 6);
+            this.NiuSkill1.Name = "NiuSkill1";
+            this.NiuSkill1.Size = new System.Drawing.Size(18, 20);
+            this.NiuSkill1.TabIndex = 22;
+            this.NiuSkill1.Text = "1";
+            // 
+            // NiuSkill
+            // 
+            this.NiuSkill.AutoSize = true;
+            this.NiuSkill.Location = new System.Drawing.Point(0, 6);
+            this.NiuSkill.Name = "NiuSkill";
+            this.NiuSkill.Size = new System.Drawing.Size(39, 20);
+            this.NiuSkill.TabIndex = 21;
+            this.NiuSkill.Text = "技能";
+            // 
+            // LilySkillP
+            // 
+            this.LilySkillP.Controls.Add(this.LilyAllMaxB);
+            this.LilySkillP.Controls.Add(this.LilySkill3Text);
+            this.LilySkillP.Controls.Add(this.LilySkill3);
+            this.LilySkillP.Controls.Add(this.LilySkill2Text);
+            this.LilySkillP.Controls.Add(this.LilySkill2);
+            this.LilySkillP.Controls.Add(this.LilySkill1Text);
+            this.LilySkillP.Controls.Add(this.LilySkill1);
+            this.LilySkillP.Controls.Add(this.LilySkill);
+            this.LilySkillP.Enabled = false;
+            this.LilySkillP.Location = new System.Drawing.Point(88, 66);
+            this.LilySkillP.Name = "LilySkillP";
+            this.LilySkillP.Size = new System.Drawing.Size(290, 33);
+            this.LilySkillP.TabIndex = 59;
+            // 
+            // LilyAllMaxB
+            // 
+            this.LilyAllMaxB.Location = new System.Drawing.Point(230, 1);
+            this.LilyAllMaxB.Name = "LilyAllMaxB";
+            this.LilyAllMaxB.Size = new System.Drawing.Size(50, 30);
+            this.LilyAllMaxB.TabIndex = 28;
+            this.LilyAllMaxB.Text = "310";
+            this.LilyAllMaxB.UseVisualStyleBackColor = true;
+            this.LilyAllMaxB.Click += new System.EventHandler(this.SkillMax_Click);
+            // 
+            // LilySkill3Text
+            // 
+            this.LilySkill3Text.Location = new System.Drawing.Point(190, 3);
+            this.LilySkill3Text.Name = "LilySkill3Text";
+            this.LilySkill3Text.Size = new System.Drawing.Size(30, 27);
+            this.LilySkill3Text.TabIndex = 27;
+            // 
+            // LilySkill3
+            // 
+            this.LilySkill3.AutoSize = true;
+            this.LilySkill3.Location = new System.Drawing.Point(170, 6);
+            this.LilySkill3.Name = "LilySkill3";
+            this.LilySkill3.Size = new System.Drawing.Size(18, 20);
+            this.LilySkill3.TabIndex = 26;
+            this.LilySkill3.Text = "3";
+            // 
+            // LilySkill2Text
+            // 
+            this.LilySkill2Text.Location = new System.Drawing.Point(125, 3);
+            this.LilySkill2Text.Name = "LilySkill2Text";
+            this.LilySkill2Text.Size = new System.Drawing.Size(30, 27);
+            this.LilySkill2Text.TabIndex = 25;
+            // 
+            // LilySkill2
+            // 
+            this.LilySkill2.AutoSize = true;
+            this.LilySkill2.Location = new System.Drawing.Point(105, 6);
+            this.LilySkill2.Name = "LilySkill2";
+            this.LilySkill2.Size = new System.Drawing.Size(18, 20);
+            this.LilySkill2.TabIndex = 24;
+            this.LilySkill2.Text = "2";
+            // 
+            // LilySkill1Text
+            // 
+            this.LilySkill1Text.Location = new System.Drawing.Point(60, 3);
+            this.LilySkill1Text.Name = "LilySkill1Text";
+            this.LilySkill1Text.Size = new System.Drawing.Size(30, 27);
+            this.LilySkill1Text.TabIndex = 23;
+            // 
+            // LilySkill1
+            // 
+            this.LilySkill1.AutoSize = true;
+            this.LilySkill1.Location = new System.Drawing.Point(40, 6);
+            this.LilySkill1.Name = "LilySkill1";
+            this.LilySkill1.Size = new System.Drawing.Size(18, 20);
+            this.LilySkill1.TabIndex = 22;
+            this.LilySkill1.Text = "1";
+            // 
+            // LilySkill
+            // 
+            this.LilySkill.AutoSize = true;
+            this.LilySkill.Location = new System.Drawing.Point(0, 6);
+            this.LilySkill.Name = "LilySkill";
+            this.LilySkill.Size = new System.Drawing.Size(39, 20);
+            this.LilySkill.TabIndex = 21;
+            this.LilySkill.Text = "技能";
+            // 
+            // LinSkillP
+            // 
+            this.LinSkillP.Controls.Add(this.LinAllMaxB);
+            this.LinSkillP.Controls.Add(this.LinSkill3Text);
+            this.LinSkillP.Controls.Add(this.LinSkill3);
+            this.LinSkillP.Controls.Add(this.LinSkill2Text);
+            this.LinSkillP.Controls.Add(this.LinSkill2);
+            this.LinSkillP.Controls.Add(this.LinSkill1Text);
+            this.LinSkillP.Controls.Add(this.LinSkill1);
+            this.LinSkillP.Controls.Add(this.LinSkill);
+            this.LinSkillP.Enabled = false;
+            this.LinSkillP.Location = new System.Drawing.Point(88, 33);
+            this.LinSkillP.Name = "LinSkillP";
+            this.LinSkillP.Size = new System.Drawing.Size(290, 33);
+            this.LinSkillP.TabIndex = 58;
+            // 
+            // LinAllMaxB
+            // 
+            this.LinAllMaxB.Location = new System.Drawing.Point(230, 1);
+            this.LinAllMaxB.Name = "LinAllMaxB";
+            this.LinAllMaxB.Size = new System.Drawing.Size(50, 30);
+            this.LinAllMaxB.TabIndex = 28;
+            this.LinAllMaxB.Text = "310";
+            this.LinAllMaxB.UseVisualStyleBackColor = true;
+            this.LinAllMaxB.Click += new System.EventHandler(this.SkillMax_Click);
+            // 
+            // LinSkill3Text
+            // 
+            this.LinSkill3Text.Location = new System.Drawing.Point(190, 3);
+            this.LinSkill3Text.Name = "LinSkill3Text";
+            this.LinSkill3Text.Size = new System.Drawing.Size(30, 27);
+            this.LinSkill3Text.TabIndex = 27;
+            // 
+            // LinSkill3
+            // 
+            this.LinSkill3.AutoSize = true;
+            this.LinSkill3.Location = new System.Drawing.Point(170, 6);
+            this.LinSkill3.Name = "LinSkill3";
+            this.LinSkill3.Size = new System.Drawing.Size(18, 20);
+            this.LinSkill3.TabIndex = 26;
+            this.LinSkill3.Text = "3";
+            // 
+            // LinSkill2Text
+            // 
+            this.LinSkill2Text.Location = new System.Drawing.Point(125, 3);
+            this.LinSkill2Text.Name = "LinSkill2Text";
+            this.LinSkill2Text.Size = new System.Drawing.Size(30, 27);
+            this.LinSkill2Text.TabIndex = 25;
+            // 
+            // LinSkill2
+            // 
+            this.LinSkill2.AutoSize = true;
+            this.LinSkill2.Location = new System.Drawing.Point(105, 6);
+            this.LinSkill2.Name = "LinSkill2";
+            this.LinSkill2.Size = new System.Drawing.Size(18, 20);
+            this.LinSkill2.TabIndex = 24;
+            this.LinSkill2.Text = "2";
+            // 
+            // LinSkill1Text
+            // 
+            this.LinSkill1Text.Location = new System.Drawing.Point(60, 3);
+            this.LinSkill1Text.Name = "LinSkill1Text";
+            this.LinSkill1Text.Size = new System.Drawing.Size(30, 27);
+            this.LinSkill1Text.TabIndex = 23;
+            // 
+            // LinSkill1
+            // 
+            this.LinSkill1.AutoSize = true;
+            this.LinSkill1.Location = new System.Drawing.Point(40, 6);
+            this.LinSkill1.Name = "LinSkill1";
+            this.LinSkill1.Size = new System.Drawing.Size(18, 20);
+            this.LinSkill1.TabIndex = 22;
+            this.LinSkill1.Text = "1";
+            // 
+            // LinSkill
+            // 
+            this.LinSkill.AutoSize = true;
+            this.LinSkill.Location = new System.Drawing.Point(0, 6);
+            this.LinSkill.Name = "LinSkill";
+            this.LinSkill.Size = new System.Drawing.Size(39, 20);
+            this.LinSkill.TabIndex = 21;
+            this.LinSkill.Text = "技能";
+            // 
+            // DouSkillP
+            // 
+            this.DouSkillP.Controls.Add(this.DouAllMaxB);
+            this.DouSkillP.Controls.Add(this.DouSkill3Text);
+            this.DouSkillP.Controls.Add(this.DouSkill3);
+            this.DouSkillP.Controls.Add(this.DouSkill2Text);
+            this.DouSkillP.Controls.Add(this.DouSkill2);
+            this.DouSkillP.Controls.Add(this.DouSkill1Text);
+            this.DouSkillP.Controls.Add(this.DouSkill1);
+            this.DouSkillP.Controls.Add(this.DouSkill);
+            this.DouSkillP.Enabled = false;
+            this.DouSkillP.Location = new System.Drawing.Point(88, 0);
+            this.DouSkillP.Name = "DouSkillP";
+            this.DouSkillP.Size = new System.Drawing.Size(290, 33);
+            this.DouSkillP.TabIndex = 57;
+            // 
+            // DouAllMaxB
+            // 
+            this.DouAllMaxB.Location = new System.Drawing.Point(230, 1);
+            this.DouAllMaxB.Name = "DouAllMaxB";
+            this.DouAllMaxB.Size = new System.Drawing.Size(50, 30);
+            this.DouAllMaxB.TabIndex = 28;
+            this.DouAllMaxB.Text = "310";
+            this.DouAllMaxB.UseVisualStyleBackColor = true;
+            this.DouAllMaxB.Click += new System.EventHandler(this.SkillMax_Click);
+            // 
+            // DouSkill3Text
+            // 
+            this.DouSkill3Text.Location = new System.Drawing.Point(190, 3);
+            this.DouSkill3Text.Name = "DouSkill3Text";
+            this.DouSkill3Text.Size = new System.Drawing.Size(30, 27);
+            this.DouSkill3Text.TabIndex = 27;
+            // 
+            // DouSkill3
+            // 
+            this.DouSkill3.AutoSize = true;
+            this.DouSkill3.Location = new System.Drawing.Point(170, 6);
+            this.DouSkill3.Name = "DouSkill3";
+            this.DouSkill3.Size = new System.Drawing.Size(18, 20);
+            this.DouSkill3.TabIndex = 26;
+            this.DouSkill3.Text = "3";
+            // 
+            // DouSkill2Text
+            // 
+            this.DouSkill2Text.Location = new System.Drawing.Point(125, 3);
+            this.DouSkill2Text.Name = "DouSkill2Text";
+            this.DouSkill2Text.Size = new System.Drawing.Size(30, 27);
+            this.DouSkill2Text.TabIndex = 25;
+            // 
+            // DouSkill2
+            // 
+            this.DouSkill2.AutoSize = true;
+            this.DouSkill2.Location = new System.Drawing.Point(105, 6);
+            this.DouSkill2.Name = "DouSkill2";
+            this.DouSkill2.Size = new System.Drawing.Size(18, 20);
+            this.DouSkill2.TabIndex = 24;
+            this.DouSkill2.Text = "2";
+            // 
+            // DouSkill1Text
+            // 
+            this.DouSkill1Text.Location = new System.Drawing.Point(60, 3);
+            this.DouSkill1Text.Name = "DouSkill1Text";
+            this.DouSkill1Text.Size = new System.Drawing.Size(30, 27);
+            this.DouSkill1Text.TabIndex = 23;
+            // 
+            // DouSkill1
+            // 
+            this.DouSkill1.AutoSize = true;
+            this.DouSkill1.Location = new System.Drawing.Point(40, 6);
+            this.DouSkill1.Name = "DouSkill1";
+            this.DouSkill1.Size = new System.Drawing.Size(18, 20);
+            this.DouSkill1.TabIndex = 22;
+            this.DouSkill1.Text = "1";
+            // 
+            // DouSkill
+            // 
+            this.DouSkill.AutoSize = true;
+            this.DouSkill.Location = new System.Drawing.Point(0, 6);
+            this.DouSkill.Name = "DouSkill";
+            this.DouSkill.Size = new System.Drawing.Size(39, 20);
+            this.DouSkill.TabIndex = 21;
+            this.DouSkill.Text = "技能";
+            // 
+            // Bu20P
+            // 
+            this.Bu20P.Controls.Add(this.NiChB);
+            this.Bu20P.Controls.Add(this.LongChB);
+            this.Bu20P.Controls.Add(this.BuChB);
+            this.Bu20P.Controls.Add(this.NiuChB);
+            this.Bu20P.Controls.Add(this.LilyChB);
+            this.Bu20P.Controls.Add(this.LinChB);
+            this.Bu20P.Controls.Add(this.DouChB);
+            this.Bu20P.Enabled = false;
+            this.Bu20P.Location = new System.Drawing.Point(3, 1);
+            this.Bu20P.Name = "Bu20P";
+            this.Bu20P.Size = new System.Drawing.Size(75, 235);
+            this.Bu20P.TabIndex = 56;
+            // 
+            // NiChB
+            // 
+            this.NiChB.AutoSize = true;
+            this.NiChB.Location = new System.Drawing.Point(3, 202);
+            this.NiChB.Name = "NiChB";
+            this.NiChB.Size = new System.Drawing.Size(61, 24);
+            this.NiChB.TabIndex = 6;
+            this.NiChB.Text = "水泥";
+            this.NiChB.UseVisualStyleBackColor = true;
+            this.NiChB.CheckedChanged += new System.EventHandler(this.Bu20s_CheckedChanged);
+            this.NiChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
+            // 
+            // LongChB
+            // 
+            this.LongChB.AutoSize = true;
+            this.LongChB.Location = new System.Drawing.Point(3, 169);
+            this.LongChB.Name = "LongChB";
+            this.LongChB.Size = new System.Drawing.Size(61, 24);
+            this.LongChB.TabIndex = 5;
+            this.LongChB.Text = "龙娘";
+            this.LongChB.UseVisualStyleBackColor = true;
+            this.LongChB.CheckedChanged += new System.EventHandler(this.Bu20s_CheckedChanged);
+            this.LongChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
+            // 
+            // BuChB
+            // 
+            this.BuChB.AutoSize = true;
+            this.BuChB.Location = new System.Drawing.Point(3, 136);
+            this.BuChB.Name = "BuChB";
+            this.BuChB.Size = new System.Drawing.Size(61, 24);
+            this.BuChB.TabIndex = 4;
+            this.BuChB.Text = "布妈";
+            this.BuChB.UseVisualStyleBackColor = true;
+            this.BuChB.CheckedChanged += new System.EventHandler(this.Bu20s_CheckedChanged);
+            this.BuChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
+            // 
+            // NiuChB
+            // 
+            this.NiuChB.AutoSize = true;
+            this.NiuChB.Location = new System.Drawing.Point(3, 103);
+            this.NiuChB.Name = "NiuChB";
+            this.NiuChB.Size = new System.Drawing.Size(61, 24);
+            this.NiuChB.TabIndex = 3;
+            this.NiuChB.Text = "牛若";
+            this.NiuChB.UseVisualStyleBackColor = true;
+            this.NiuChB.CheckedChanged += new System.EventHandler(this.Bu20s_CheckedChanged);
+            this.NiuChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
+            // 
+            // LilyChB
+            // 
+            this.LilyChB.AutoSize = true;
+            this.LilyChB.Location = new System.Drawing.Point(3, 70);
+            this.LilyChB.Name = "LilyChB";
+            this.LilyChB.Size = new System.Drawing.Size(55, 24);
+            this.LilyChB.TabIndex = 2;
+            this.LilyChB.Text = "Lily";
+            this.LilyChB.UseVisualStyleBackColor = true;
+            this.LilyChB.CheckedChanged += new System.EventHandler(this.Bu20s_CheckedChanged);
+            this.LilyChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
+            // 
+            // LinChB
+            // 
+            this.LinChB.AutoSize = true;
+            this.LinChB.Location = new System.Drawing.Point(3, 37);
+            this.LinChB.Name = "LinChB";
+            this.LinChB.Size = new System.Drawing.Size(61, 24);
+            this.LinChB.TabIndex = 1;
+            this.LinChB.Text = "骑凛";
+            this.LinChB.UseVisualStyleBackColor = true;
+            this.LinChB.CheckedChanged += new System.EventHandler(this.Bu20s_CheckedChanged);
+            this.LinChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
+            // 
+            // DouChB
+            // 
+            this.DouChB.AutoSize = true;
+            this.DouChB.Location = new System.Drawing.Point(3, 4);
+            this.DouChB.Name = "DouChB";
+            this.DouChB.Size = new System.Drawing.Size(61, 24);
+            this.DouChB.TabIndex = 0;
+            this.DouChB.Text = "豆爸";
+            this.DouChB.UseVisualStyleBackColor = true;
+            this.DouChB.CheckedChanged += new System.EventHandler(this.Bu20s_CheckedChanged);
+            this.DouChB.EnabledChanged += new System.EventHandler(this.RB_ChB_EnabledChanged);
             // 
             // ResultGB
             // 
+            this.ResultGB.Controls.Add(this.ExtraAtkOutput);
+            this.ResultGB.Controls.Add(this.NpDmgUpOutput);
             this.ResultGB.Controls.Add(this.ArtsOut);
             this.ResultGB.Controls.Add(this.NPUpOutput);
             this.ResultGB.Controls.Add(this.ArtsUpOutput);
@@ -2137,19 +3163,41 @@
             this.ResultGB.Controls.Add(this.ResultTC);
             this.ResultGB.Enabled = false;
             this.ResultGB.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ResultGB.Location = new System.Drawing.Point(15, 735);
+            this.ResultGB.Location = new System.Drawing.Point(15, 765);
             this.ResultGB.Name = "ResultGB";
-            this.ResultGB.Size = new System.Drawing.Size(500, 360);
+            this.ResultGB.Size = new System.Drawing.Size(500, 400);
             this.ResultGB.TabIndex = 46;
             this.ResultGB.TabStop = false;
             this.ResultGB.Text = "结果";
+            // 
+            // ExtraAtkOutput
+            // 
+            this.ExtraAtkOutput.AutoSize = true;
+            this.ExtraAtkOutput.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ExtraAtkOutput.ForeColor = System.Drawing.Color.Blue;
+            this.ExtraAtkOutput.Location = new System.Drawing.Point(10, 308);
+            this.ExtraAtkOutput.Name = "ExtraAtkOutput";
+            this.ExtraAtkOutput.Size = new System.Drawing.Size(114, 20);
+            this.ExtraAtkOutput.TabIndex = 59;
+            this.ExtraAtkOutput.Text = "额外伤害增加：";
+            // 
+            // NpDmgUpOutput
+            // 
+            this.NpDmgUpOutput.AutoSize = true;
+            this.NpDmgUpOutput.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.NpDmgUpOutput.ForeColor = System.Drawing.Color.Blue;
+            this.NpDmgUpOutput.Location = new System.Drawing.Point(10, 286);
+            this.NpDmgUpOutput.Name = "NpDmgUpOutput";
+            this.NpDmgUpOutput.Size = new System.Drawing.Size(114, 20);
+            this.NpDmgUpOutput.TabIndex = 58;
+            this.NpDmgUpOutput.Text = "宝具威力提升：";
             // 
             // ArtsOut
             // 
             this.ArtsOut.AutoSize = true;
             this.ArtsOut.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ArtsOut.ForeColor = System.Drawing.Color.Blue;
-            this.ArtsOut.Location = new System.Drawing.Point(9, 274);
+            this.ArtsOut.Location = new System.Drawing.Point(10, 330);
             this.ArtsOut.Name = "ArtsOut";
             this.ArtsOut.Size = new System.Drawing.Size(84, 20);
             this.ArtsOut.TabIndex = 57;
@@ -2160,7 +3208,7 @@
             this.NPUpOutput.AutoSize = true;
             this.NPUpOutput.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.NPUpOutput.ForeColor = System.Drawing.Color.Blue;
-            this.NPUpOutput.Location = new System.Drawing.Point(9, 325);
+            this.NPUpOutput.Location = new System.Drawing.Point(10, 374);
             this.NPUpOutput.Name = "NPUpOutput";
             this.NPUpOutput.Size = new System.Drawing.Size(120, 20);
             this.NPUpOutput.TabIndex = 56;
@@ -2171,7 +3219,7 @@
             this.ArtsUpOutput.AutoSize = true;
             this.ArtsUpOutput.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ArtsUpOutput.ForeColor = System.Drawing.Color.Blue;
-            this.ArtsUpOutput.Location = new System.Drawing.Point(10, 294);
+            this.ArtsUpOutput.Location = new System.Drawing.Point(10, 352);
             this.ArtsUpOutput.Name = "ArtsUpOutput";
             this.ArtsUpOutput.Size = new System.Drawing.Size(13, 20);
             this.ArtsUpOutput.TabIndex = 55;
@@ -2182,7 +3230,7 @@
             this.AtkUPOutput.AutoSize = true;
             this.AtkUPOutput.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.AtkUPOutput.ForeColor = System.Drawing.Color.Blue;
-            this.AtkUPOutput.Location = new System.Drawing.Point(9, 245);
+            this.AtkUPOutput.Location = new System.Drawing.Point(10, 264);
             this.AtkUPOutput.Name = "AtkUPOutput";
             this.AtkUPOutput.Size = new System.Drawing.Size(99, 20);
             this.AtkUPOutput.TabIndex = 54;
@@ -2193,7 +3241,7 @@
             this.AtkOutput.AutoSize = true;
             this.AtkOutput.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.AtkOutput.ForeColor = System.Drawing.Color.Blue;
-            this.AtkOutput.Location = new System.Drawing.Point(350, 220);
+            this.AtkOutput.Location = new System.Drawing.Point(10, 220);
             this.AtkOutput.Name = "AtkOutput";
             this.AtkOutput.Size = new System.Drawing.Size(79, 20);
             this.AtkOutput.TabIndex = 53;
@@ -2204,7 +3252,7 @@
             this.NPOutput.AutoSize = true;
             this.NPOutput.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.NPOutput.ForeColor = System.Drawing.Color.Blue;
-            this.NPOutput.Location = new System.Drawing.Point(10, 220);
+            this.NPOutput.Location = new System.Drawing.Point(10, 242);
             this.NPOutput.Name = "NPOutput";
             this.NPOutput.Size = new System.Drawing.Size(45, 20);
             this.NPOutput.TabIndex = 52;
@@ -2383,7 +3431,7 @@
             // SaveFndmtlB
             // 
             this.SaveFndmtlB.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.SaveFndmtlB.Location = new System.Drawing.Point(15, 1100);
+            this.SaveFndmtlB.Location = new System.Drawing.Point(15, 1170);
             this.SaveFndmtlB.Name = "SaveFndmtlB";
             this.SaveFndmtlB.Size = new System.Drawing.Size(200, 30);
             this.SaveFndmtlB.TabIndex = 47;
@@ -2394,7 +3442,7 @@
             // SaveSkillB
             // 
             this.SaveSkillB.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.SaveSkillB.Location = new System.Drawing.Point(215, 1100);
+            this.SaveSkillB.Location = new System.Drawing.Point(215, 1170);
             this.SaveSkillB.Name = "SaveSkillB";
             this.SaveSkillB.Size = new System.Drawing.Size(200, 30);
             this.SaveSkillB.TabIndex = 48;
@@ -2405,7 +3453,7 @@
             // ReLoadB
             // 
             this.ReLoadB.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ReLoadB.Location = new System.Drawing.Point(415, 1100);
+            this.ReLoadB.Location = new System.Drawing.Point(415, 1170);
             this.ReLoadB.Name = "ReLoadB";
             this.ReLoadB.Size = new System.Drawing.Size(100, 30);
             this.ReLoadB.TabIndex = 49;
@@ -2456,7 +3504,9 @@
             this.HaiSkillP.PerformLayout();
             this.NP20P.ResumeLayout(false);
             this.BuffGB.ResumeLayout(false);
-            this.BuffGB.PerformLayout();
+            this.BuffTC.ResumeLayout(false);
+            this.Bu30TP.ResumeLayout(false);
+            this.Bu30TP.PerformLayout();
             this.ShanSkillP.ResumeLayout(false);
             this.ShanSkillP.PerformLayout();
             this.FenSkillP.ResumeLayout(false);
@@ -2472,6 +3522,24 @@
             this.HaiExSkillP.ResumeLayout(false);
             this.HaiExSkillP.PerformLayout();
             this.BuffP.ResumeLayout(false);
+            this.BuffP.PerformLayout();
+            this.Bu20TP.ResumeLayout(false);
+            this.NiSkillP.ResumeLayout(false);
+            this.NiSkillP.PerformLayout();
+            this.LongSkillP.ResumeLayout(false);
+            this.LongSkillP.PerformLayout();
+            this.BuSkillP.ResumeLayout(false);
+            this.BuSkillP.PerformLayout();
+            this.NiuSkillP.ResumeLayout(false);
+            this.NiuSkillP.PerformLayout();
+            this.LilySkillP.ResumeLayout(false);
+            this.LilySkillP.PerformLayout();
+            this.LinSkillP.ResumeLayout(false);
+            this.LinSkillP.PerformLayout();
+            this.DouSkillP.ResumeLayout(false);
+            this.DouSkillP.PerformLayout();
+            this.Bu20P.ResumeLayout(false);
+            this.Bu20P.PerformLayout();
             this.ResultGB.ResumeLayout(false);
             this.ResultGB.PerformLayout();
             this.ResultTC.ResumeLayout(false);
@@ -2582,6 +3650,64 @@
         private System.Windows.Forms.Label HaiSkill1;
         private System.Windows.Forms.Label HaiSkill;
         private System.Windows.Forms.GroupBox BuffGB;
+        private System.Windows.Forms.Button NPResetAllB;
+        private System.Windows.Forms.Button NPResetSlctnB;
+        private System.Windows.Forms.Button NP20AllMaxB;
+        private System.Windows.Forms.CheckBox HideNrskChB;
+        private System.Windows.Forms.GroupBox ResultGB;
+        private System.Windows.Forms.ListView Enermy1LV;
+        private System.Windows.Forms.ColumnHeader e1ch1;
+        private System.Windows.Forms.ColumnHeader e1ch2;
+        private System.Windows.Forms.ColumnHeader e1ch3;
+        private System.Windows.Forms.ColumnHeader e1ch4;
+        private System.Windows.Forms.ColumnHeader e1ch5;
+        private System.Windows.Forms.TabControl ResultTC;
+        private System.Windows.Forms.TabPage ResultTP1;
+        private System.Windows.Forms.TabPage ResultTP2;
+        private System.Windows.Forms.ListView Enermy2LV;
+        private System.Windows.Forms.ColumnHeader e2ch1;
+        private System.Windows.Forms.ColumnHeader e2ch2;
+        private System.Windows.Forms.ColumnHeader e2ch3;
+        private System.Windows.Forms.ColumnHeader e2ch4;
+        private System.Windows.Forms.ColumnHeader e2ch5;
+        private System.Windows.Forms.TabPage ResultTP3;
+        private System.Windows.Forms.ListView Enermy3LV;
+        private System.Windows.Forms.ColumnHeader e3ch1;
+        private System.Windows.Forms.ColumnHeader e3ch2;
+        private System.Windows.Forms.ColumnHeader e3ch3;
+        private System.Windows.Forms.Label NPUpOutput;
+        private System.Windows.Forms.Label ArtsUpOutput;
+        private System.Windows.Forms.Label AtkUPOutput;
+        private System.Windows.Forms.Label AtkOutput;
+        private System.Windows.Forms.Label NPOutput;
+        private System.Windows.Forms.Label ArtsOut;
+        private System.Windows.Forms.Button SaveFndmtlB;
+        private System.Windows.Forms.Button SaveSkillB;
+        private System.Windows.Forms.Button ReLoadB;
+        private System.Windows.Forms.TabControl BuffTC;
+        private System.Windows.Forms.TabPage Bu30TP;
+        private System.Windows.Forms.Panel ShanSkillP;
+        private System.Windows.Forms.Button ShanAllMaxB;
+        private System.Windows.Forms.TextBox ShanSkill3Text;
+        private System.Windows.Forms.Label ShanSkill3;
+        private System.Windows.Forms.TextBox ShanSkill2Text;
+        private System.Windows.Forms.Label ShanSkill2;
+        private System.Windows.Forms.TextBox ShanSkill1Text;
+        private System.Windows.Forms.Label ShanSkill1;
+        private System.Windows.Forms.Label ShanSkill;
+        private System.Windows.Forms.CheckBox DoubleHaiChB;
+        private System.Windows.Forms.Button Bu30AllMaxB;
+        private System.Windows.Forms.Button BuResetSlctnB;
+        private System.Windows.Forms.Button BuResetAllB;
+        private System.Windows.Forms.Panel FenSkillP;
+        private System.Windows.Forms.Button FenAllMaxB;
+        private System.Windows.Forms.TextBox FenSkill3Text;
+        private System.Windows.Forms.Label FenSkill3;
+        private System.Windows.Forms.TextBox FenSkill2Text;
+        private System.Windows.Forms.Label FenSkill2;
+        private System.Windows.Forms.TextBox FenSkill1Text;
+        private System.Windows.Forms.Label FenSkill1;
+        private System.Windows.Forms.Label FenSkill;
         private System.Windows.Forms.Panel XinSkillP;
         private System.Windows.Forms.Button XinAllMaxB;
         private System.Windows.Forms.TextBox XinSkill3Text;
@@ -2628,69 +3754,105 @@
         private System.Windows.Forms.Label HaiExSkill1;
         private System.Windows.Forms.Label HaiExSkill;
         private System.Windows.Forms.Panel BuffP;
+        private System.Windows.Forms.RadioButton ShanRB;
+        private System.Windows.Forms.RadioButton FenRB;
         private System.Windows.Forms.RadioButton XinRB;
         private System.Windows.Forms.RadioButton SanRB;
         private System.Windows.Forms.RadioButton YuRB;
         private System.Windows.Forms.RadioButton HuaRB;
         private System.Windows.Forms.RadioButton HaiExRB;
-        private System.Windows.Forms.Button NPResetAllB;
-        private System.Windows.Forms.Panel FenSkillP;
-        private System.Windows.Forms.Button FenAllMaxB;
-        private System.Windows.Forms.TextBox FenSkill3Text;
-        private System.Windows.Forms.Label FenSkill3;
-        private System.Windows.Forms.TextBox FenSkill2Text;
-        private System.Windows.Forms.Label FenSkill2;
-        private System.Windows.Forms.TextBox FenSkill1Text;
-        private System.Windows.Forms.Label FenSkill1;
-        private System.Windows.Forms.Label FenSkill;
-        private System.Windows.Forms.RadioButton FenRB;
-        private System.Windows.Forms.Button NPResetSlctnB;
-        private System.Windows.Forms.Button NP20AllMaxB;
-        private System.Windows.Forms.CheckBox DoubleHaiChB;
-        private System.Windows.Forms.Button BuffAllMaxB;
-        private System.Windows.Forms.Button BuResetSlctnB;
-        private System.Windows.Forms.Button BuResetAllB;
-        private System.Windows.Forms.CheckBox HideNrskChB;
-        private System.Windows.Forms.GroupBox ResultGB;
-        private System.Windows.Forms.ListView Enermy1LV;
-        private System.Windows.Forms.ColumnHeader e1ch1;
-        private System.Windows.Forms.ColumnHeader e1ch2;
-        private System.Windows.Forms.ColumnHeader e1ch3;
-        private System.Windows.Forms.ColumnHeader e1ch4;
-        private System.Windows.Forms.ColumnHeader e1ch5;
-        private System.Windows.Forms.TabControl ResultTC;
-        private System.Windows.Forms.TabPage ResultTP1;
-        private System.Windows.Forms.TabPage ResultTP2;
-        private System.Windows.Forms.ListView Enermy2LV;
-        private System.Windows.Forms.ColumnHeader e2ch1;
-        private System.Windows.Forms.ColumnHeader e2ch2;
-        private System.Windows.Forms.ColumnHeader e2ch3;
-        private System.Windows.Forms.ColumnHeader e2ch4;
-        private System.Windows.Forms.ColumnHeader e2ch5;
-        private System.Windows.Forms.TabPage ResultTP3;
-        private System.Windows.Forms.ListView Enermy3LV;
-        private System.Windows.Forms.ColumnHeader e3ch1;
-        private System.Windows.Forms.ColumnHeader e3ch2;
-        private System.Windows.Forms.ColumnHeader e3ch3;
-        private System.Windows.Forms.Label NPUpOutput;
-        private System.Windows.Forms.Label ArtsUpOutput;
-        private System.Windows.Forms.Label AtkUPOutput;
-        private System.Windows.Forms.Label AtkOutput;
-        private System.Windows.Forms.Label NPOutput;
-        private System.Windows.Forms.Label ArtsOut;
-        private System.Windows.Forms.Button SaveFndmtlB;
-        private System.Windows.Forms.Button SaveSkillB;
-        private System.Windows.Forms.Button ReLoadB;
-        private System.Windows.Forms.Panel ShanSkillP;
-        private System.Windows.Forms.Button ShanAllMaxB;
-        private System.Windows.Forms.TextBox ShanSkill3Text;
-        private System.Windows.Forms.Label ShanSkill3;
-        private System.Windows.Forms.TextBox ShanSkill2Text;
-        private System.Windows.Forms.Label ShanSkill2;
-        private System.Windows.Forms.TextBox ShanSkill1Text;
-        private System.Windows.Forms.Label ShanSkill1;
-        private System.Windows.Forms.Label ShanSkill;
-        private System.Windows.Forms.RadioButton ShanRB;
+        private System.Windows.Forms.TabPage Bu20TP;
+        private System.Windows.Forms.Panel NiSkillP;
+        private System.Windows.Forms.Button NiAllMaxB;
+        private System.Windows.Forms.TextBox NiSkill3Text;
+        private System.Windows.Forms.Label NiSkill3;
+        private System.Windows.Forms.TextBox NiSkill2Text;
+        private System.Windows.Forms.Label NiSkill2;
+        private System.Windows.Forms.TextBox NiSkill1Text;
+        private System.Windows.Forms.Label NiSkill1;
+        private System.Windows.Forms.Label NiSkill;
+        private System.Windows.Forms.Button Bu20AllMaxB;
+        private System.Windows.Forms.Button Bu20ResetSlctnB;
+        private System.Windows.Forms.Button Bu20ResetAllB;
+        private System.Windows.Forms.Panel LongSkillP;
+        private System.Windows.Forms.Button LongAllMaxB;
+        private System.Windows.Forms.TextBox LongSkill3Text;
+        private System.Windows.Forms.Label LongSkill3;
+        private System.Windows.Forms.TextBox LongSkill2Text;
+        private System.Windows.Forms.Label LongSkill2;
+        private System.Windows.Forms.TextBox LongSkill1Text;
+        private System.Windows.Forms.Label LongSkill1;
+        private System.Windows.Forms.Label LongSkill;
+        private System.Windows.Forms.Panel BuSkillP;
+        private System.Windows.Forms.Button BuAllMaxB;
+        private System.Windows.Forms.TextBox BuSkill3Text;
+        private System.Windows.Forms.Label BuSkill3;
+        private System.Windows.Forms.TextBox BuSkill2Text;
+        private System.Windows.Forms.Label BuSkill2;
+        private System.Windows.Forms.TextBox BuSkill1Text;
+        private System.Windows.Forms.Label BuSkill1;
+        private System.Windows.Forms.Label BuSkill;
+        private System.Windows.Forms.Panel NiuSkillP;
+        private System.Windows.Forms.Button NiuAllMaxB;
+        private System.Windows.Forms.TextBox NiuSkill3Text;
+        private System.Windows.Forms.Label NiuSkill3;
+        private System.Windows.Forms.TextBox NiuSkill2Text;
+        private System.Windows.Forms.Label NiuSkill2;
+        private System.Windows.Forms.TextBox NiuSkill1Text;
+        private System.Windows.Forms.Label NiuSkill1;
+        private System.Windows.Forms.Label NiuSkill;
+        private System.Windows.Forms.Panel LilySkillP;
+        private System.Windows.Forms.Button LilyAllMaxB;
+        private System.Windows.Forms.TextBox LilySkill3Text;
+        private System.Windows.Forms.Label LilySkill3;
+        private System.Windows.Forms.TextBox LilySkill2Text;
+        private System.Windows.Forms.Label LilySkill2;
+        private System.Windows.Forms.TextBox LilySkill1Text;
+        private System.Windows.Forms.Label LilySkill1;
+        private System.Windows.Forms.Label LilySkill;
+        private System.Windows.Forms.Panel LinSkillP;
+        private System.Windows.Forms.Button LinAllMaxB;
+        private System.Windows.Forms.TextBox LinSkill3Text;
+        private System.Windows.Forms.Label LinSkill3;
+        private System.Windows.Forms.TextBox LinSkill2Text;
+        private System.Windows.Forms.Label LinSkill2;
+        private System.Windows.Forms.TextBox LinSkill1Text;
+        private System.Windows.Forms.Label LinSkill1;
+        private System.Windows.Forms.Label LinSkill;
+        private System.Windows.Forms.Panel DouSkillP;
+        private System.Windows.Forms.Button DouAllMaxB;
+        private System.Windows.Forms.TextBox DouSkill3Text;
+        private System.Windows.Forms.Label DouSkill3;
+        private System.Windows.Forms.TextBox DouSkill2Text;
+        private System.Windows.Forms.Label DouSkill2;
+        private System.Windows.Forms.TextBox DouSkill1Text;
+        private System.Windows.Forms.Label DouSkill1;
+        private System.Windows.Forms.Label DouSkill;
+        private System.Windows.Forms.Panel Bu20P;
+        private System.Windows.Forms.CheckBox BuChB;
+        private System.Windows.Forms.CheckBox NiuChB;
+        private System.Windows.Forms.CheckBox LilyChB;
+        private System.Windows.Forms.CheckBox LinChB;
+        private System.Windows.Forms.CheckBox DouChB;
+        private System.Windows.Forms.CheckBox NiChB;
+        private System.Windows.Forms.CheckBox LongChB;
+        private System.Windows.Forms.CheckBox NoZGlChB;
+        private System.Windows.Forms.Label ShanL;
+        private System.Windows.Forms.Label FenL;
+        private System.Windows.Forms.Label XinL;
+        private System.Windows.Forms.Label SanL;
+        private System.Windows.Forms.Label YuL;
+        private System.Windows.Forms.Label HuaL;
+        private System.Windows.Forms.CheckBox ShanChB;
+        private System.Windows.Forms.CheckBox FenChB;
+        private System.Windows.Forms.CheckBox XinChB;
+        private System.Windows.Forms.CheckBox SanChB;
+        private System.Windows.Forms.CheckBox YuChB;
+        private System.Windows.Forms.CheckBox HuaChB;
+        private System.Windows.Forms.Label HaiExL;
+        private System.Windows.Forms.CheckBox HaiExChB;
+        private System.Windows.Forms.Label ExtraAtkOutput;
+        private System.Windows.Forms.Label NpDmgUpOutput;
     }
 }
 
