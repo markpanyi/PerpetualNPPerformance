@@ -238,8 +238,8 @@
         <Skill2>
             <valid>1</valid>
             <eff type="artsUp">
-                <eff_num1>10</eff_num1>
-                <eff_numX>20</eff_numX>
+                <eff_num1>0.10</eff_num1>
+                <eff_numX>0.20</eff_numX>
             </eff>
         </Skill2>
         <Skill3>
