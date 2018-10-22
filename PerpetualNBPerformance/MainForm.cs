@@ -49,21 +49,21 @@ namespace PerpetualNBPerformance
             {
                 CreateXML.CreateMdFndmntlXML();
                 CreateXML.CreateServSkillXML();
-                MessageBox.Show("未发现\\Data\\MdMdFndmntlXML.xml与\\Data\\SkillXML.xml文件，已创建新文件", "缺少必要的XML文件", MessageBoxButtons.OK);
+                MessageBox.Show("未发现\\Data\\MdMdFndmntlXML.xml与\\Data\\SkillXML.xml文件，已创建新文件", "缺少必要的XML文件", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 WriteFndmtlData(true);
                 WriteSkillData(true);
             }
             else if (!File.Exists(@".\Data\MdFndmntlXML.xml"))
             {
                 CreateXML.CreateMdFndmntlXML();
-                MessageBox.Show("未发现\\Data\\MdMdFndmntlXML.xml文件，已创建新文件", "缺少必要的XML文件", MessageBoxButtons.OK);
+                MessageBox.Show("未发现\\Data\\MdMdFndmntlXML.xml文件，已创建新文件", "缺少必要的XML文件", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 WriteFndmtlData(true);
                 if (!WriteSkillData()) WriteSkillData(true);
             }
             else if (!File.Exists(@".\Data\SkillXML.xml"))
             {
                 CreateXML.CreateServSkillXML();
-                MessageBox.Show("未发现\\Data\\SkillXML.xml文件，已创建新文件", "缺少必要的XML文件", MessageBoxButtons.OK);
+                MessageBox.Show("未发现\\Data\\SkillXML.xml文件，已创建新文件", "缺少必要的XML文件", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 if (!WriteFndmtlData()) WriteFndmtlData(true);
                 WriteSkillData(true);
 
@@ -77,7 +77,7 @@ namespace PerpetualNBPerformance
             // 检查XML文件，不存在时退出
             if (!File.Exists(@".\Data\SkillInfo.xml") || !File.Exists(@".\Data\CraftEInfo.xml"))
             {
-                MessageBox.Show("缺少\\Data\\SkillInfo.xml或\\Data\\CraftEInfo.xml文件，程序无法运行", "缺少必要的XML文件", MessageBoxButtons.OK);
+                MessageBox.Show("缺少\\Data\\SkillInfo.xml或\\Data\\CraftEInfo.xml文件，程序无法运行", "缺少必要的XML文件", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
             else
@@ -146,7 +146,7 @@ namespace PerpetualNBPerformance
             }
             catch (Exception)
             {
-                string txt = MessageBox.Show("基础数据尝试写入失败，是否重新生成XML文件以重新写入？\n“是”：重新生成XML文件并尝试重写；\n“否”：不重新生成XML文件，使用默认参数写入", "", MessageBoxButtons.YesNo).ToString();
+                string txt = MessageBox.Show("基础数据尝试写入失败，是否重新生成XML文件以重新写入？\n“是”：重新生成XML文件并尝试重写；\n“否”：不重新生成XML文件，使用默认参数写入", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning).ToString();
                 switch (txt)
                 {
                     case "Yes": //Yes
@@ -200,7 +200,7 @@ namespace PerpetualNBPerformance
             }
             catch (Exception)
             {
-                string txt = MessageBox.Show("从者技能数据尝试写入失败，是否重新生成XML文件以重新写入？\n“是”：重新生成XML文件并尝试重写；\n“否”：不重新生成XML文件，使用默认参数写入", "", MessageBoxButtons.YesNo).ToString();
+                string txt = MessageBox.Show("从者技能数据尝试写入失败，是否重新生成XML文件以重新写入？\n“是”：重新生成XML文件并尝试重写；\n“否”：不重新生成XML文件，使用默认参数写入", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning).ToString();
                 switch (txt)
                 {
                     case "Yes": //Yes
@@ -627,7 +627,7 @@ namespace PerpetualNBPerformance
             {
                 if (error || !((Convert.ToInt32(tbx.Text) > 0 && Convert.ToInt32(tbx.Text) < 11)))
                 {
-                    MessageBox.Show("技能数值无效，已重置为1", "", MessageBoxButtons.OK);
+                    MessageBox.Show("技能数值无效，已重置为1", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     tbx.Text = "1";
                     return;
                 }
@@ -636,7 +636,7 @@ namespace PerpetualNBPerformance
             {
                 if (error || !((Convert.ToInt32(tbx.Text) > -1 && Convert.ToInt32(tbx.Text) < 2000)))
                 {
-                    MessageBox.Show("芙芙数值无效，已重置为1000", "", MessageBoxButtons.OK);
+                    MessageBox.Show("芙芙数值无效，已重置为1000", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     tbx.Text = "1000";
                     return;
                 }
@@ -645,7 +645,7 @@ namespace PerpetualNBPerformance
             {
                 if (error || !((Convert.ToInt32(tbx.Text) > 0 && Convert.ToInt32(tbx.Text) < 6)))
                 {
-                    MessageBox.Show("宝具等级数值无效，已重置为1", "", MessageBoxButtons.OK);
+                    MessageBox.Show("宝具等级数值无效，已重置为1", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     tbx.Text = "1";
                     return;
                 }
@@ -654,7 +654,7 @@ namespace PerpetualNBPerformance
             {
                 if (error || !((Convert.ToInt32(tbx.Text) > 0 && Convert.ToInt32(tbx.Text) < 101)))
                 {
-                    MessageBox.Show("礼装等级数值无效，已重置为20", "", MessageBoxButtons.OK);
+                    MessageBox.Show("礼装等级数值无效，已重置为20", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     tbx.Text = "20";
                     return;
                 }
@@ -663,7 +663,7 @@ namespace PerpetualNBPerformance
             {
                 if (error || !((Convert.ToInt32(tbx.Text) > 79 && Convert.ToInt32(tbx.Text) < 101)))
                 {
-                    MessageBox.Show("小莫等级数值无效（需至少80级），已重置为80", "", MessageBoxButtons.OK);
+                    MessageBox.Show("小莫等级数值无效（需至少80级），已重置为80", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     tbx.Text = "80";
                     return;
                 }
@@ -758,6 +758,16 @@ namespace PerpetualNBPerformance
             // 先判断是不是可以开始计算了
             if (allowCalcu)
             {
+                try
+                {
+                    XmlNode craft = craftinfo.SelectSingleNode(string.Format("craftes[name='{0}']", CECoB.SelectedItem.ToString()));
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("礼装无效，请重新选择礼装！", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 ResultGB.Enabled = true;
 
                 List<int> npAllL = new List<int>();
@@ -1261,7 +1271,7 @@ namespace PerpetualNBPerformance
             }
             FndmtXML.GetElementsByTagName("celv").Item(0).InnerText = CELvText.Text;
             XML.Save(@".\Data\MdFndmntlXML.xml");
-            MessageBox.Show("保存成功！", "", MessageBoxButtons.OK);
+            MessageBox.Show("保存成功！", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void SaveSkillB_Click(object sender, EventArgs e)
@@ -1281,7 +1291,7 @@ namespace PerpetualNBPerformance
                 }
             }
             XML.Save(@".\Data\SkillXML.xml");
-            MessageBox.Show("保存成功！", "", MessageBoxButtons.OK);
+            MessageBox.Show("保存成功！", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ReLoadB_Click(object sender, EventArgs e)

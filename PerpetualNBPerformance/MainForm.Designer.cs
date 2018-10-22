@@ -1549,6 +1549,7 @@
             this.ShanSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.ShanSkill3Text.TabIndex = 27;
             this.ShanSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.ShanSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // ShanSkill3
             // 
@@ -1566,6 +1567,7 @@
             this.ShanSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.ShanSkill2Text.TabIndex = 25;
             this.ShanSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.ShanSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // ShanSkill2
             // 
@@ -1583,6 +1585,7 @@
             this.ShanSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.ShanSkill1Text.TabIndex = 23;
             this.ShanSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.ShanSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // ShanSkill1
             // 
@@ -1677,6 +1680,7 @@
             this.FenSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.FenSkill3Text.TabIndex = 27;
             this.FenSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.FenSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // FenSkill3
             // 
@@ -1694,6 +1698,7 @@
             this.FenSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.FenSkill2Text.TabIndex = 25;
             this.FenSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.FenSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // FenSkill2
             // 
@@ -1711,6 +1716,7 @@
             this.FenSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.FenSkill1Text.TabIndex = 23;
             this.FenSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.FenSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // FenSkill1
             // 
@@ -1762,6 +1768,7 @@
             this.XinSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.XinSkill3Text.TabIndex = 27;
             this.XinSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.XinSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // XinSkill3
             // 
@@ -1779,6 +1786,7 @@
             this.XinSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.XinSkill2Text.TabIndex = 25;
             this.XinSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.XinSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // XinSkill2
             // 
@@ -1796,6 +1804,7 @@
             this.XinSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.XinSkill1Text.TabIndex = 23;
             this.XinSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.XinSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // XinSkill1
             // 
@@ -1847,6 +1856,7 @@
             this.SanSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.SanSkill3Text.TabIndex = 27;
             this.SanSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.SanSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // SanSkill3
             // 
@@ -1864,6 +1874,7 @@
             this.SanSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.SanSkill2Text.TabIndex = 25;
             this.SanSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.SanSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // SanSkill2
             // 
@@ -1881,6 +1892,7 @@
             this.SanSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.SanSkill1Text.TabIndex = 23;
             this.SanSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.SanSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // SanSkill1
             // 
@@ -1932,6 +1944,7 @@
             this.YuSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.YuSkill3Text.TabIndex = 27;
             this.YuSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.YuSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // YuSkill3
             // 
@@ -1949,6 +1962,7 @@
             this.YuSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.YuSkill2Text.TabIndex = 25;
             this.YuSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.YuSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // YuSkill2
             // 
@@ -1966,6 +1980,7 @@
             this.YuSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.YuSkill1Text.TabIndex = 23;
             this.YuSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.YuSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // YuSkill1
             // 
@@ -2017,6 +2032,7 @@
             this.HuaSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.HuaSkill3Text.TabIndex = 27;
             this.HuaSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.HuaSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // HuaSkill3
             // 
@@ -2034,6 +2050,7 @@
             this.HuaSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.HuaSkill2Text.TabIndex = 25;
             this.HuaSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.HuaSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // HuaSkill2
             // 
@@ -2051,6 +2068,7 @@
             this.HuaSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.HuaSkill1Text.TabIndex = 23;
             this.HuaSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.HuaSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // HuaSkill1
             // 
@@ -2103,6 +2121,7 @@
             this.HaiExSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.HaiExSkill3Text.TabIndex = 27;
             this.HaiExSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.HaiExSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // HaiExSkill3
             // 
@@ -2120,6 +2139,7 @@
             this.HaiExSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.HaiExSkill2Text.TabIndex = 25;
             this.HaiExSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.HaiExSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // HaiExSkill2
             // 
@@ -2137,6 +2157,7 @@
             this.HaiExSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.HaiExSkill1Text.TabIndex = 23;
             this.HaiExSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.HaiExSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // HaiExSkill1
             // 
@@ -2469,6 +2490,8 @@
             this.NiSkill3Text.Name = "NiSkill3Text";
             this.NiSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.NiSkill3Text.TabIndex = 27;
+            this.NiSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.NiSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // NiSkill3
             // 
@@ -2485,6 +2508,8 @@
             this.NiSkill2Text.Name = "NiSkill2Text";
             this.NiSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.NiSkill2Text.TabIndex = 25;
+            this.NiSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.NiSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // NiSkill2
             // 
@@ -2501,6 +2526,8 @@
             this.NiSkill1Text.Name = "NiSkill1Text";
             this.NiSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.NiSkill1Text.TabIndex = 23;
+            this.NiSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.NiSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // NiSkill1
             // 
@@ -2585,6 +2612,8 @@
             this.LongSkill3Text.Name = "LongSkill3Text";
             this.LongSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.LongSkill3Text.TabIndex = 27;
+            this.LongSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.LongSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // LongSkill3
             // 
@@ -2601,6 +2630,8 @@
             this.LongSkill2Text.Name = "LongSkill2Text";
             this.LongSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.LongSkill2Text.TabIndex = 25;
+            this.LongSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.LongSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // LongSkill2
             // 
@@ -2617,6 +2648,8 @@
             this.LongSkill1Text.Name = "LongSkill1Text";
             this.LongSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.LongSkill1Text.TabIndex = 23;
+            this.LongSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.LongSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // LongSkill1
             // 
@@ -2668,6 +2701,8 @@
             this.BuSkill3Text.Name = "BuSkill3Text";
             this.BuSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.BuSkill3Text.TabIndex = 27;
+            this.BuSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.BuSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // BuSkill3
             // 
@@ -2684,6 +2719,8 @@
             this.BuSkill2Text.Name = "BuSkill2Text";
             this.BuSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.BuSkill2Text.TabIndex = 25;
+            this.BuSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.BuSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // BuSkill2
             // 
@@ -2700,6 +2737,8 @@
             this.BuSkill1Text.Name = "BuSkill1Text";
             this.BuSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.BuSkill1Text.TabIndex = 23;
+            this.BuSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.BuSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // BuSkill1
             // 
@@ -2751,6 +2790,8 @@
             this.NiuSkill3Text.Name = "NiuSkill3Text";
             this.NiuSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.NiuSkill3Text.TabIndex = 27;
+            this.NiuSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.NiuSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // NiuSkill3
             // 
@@ -2767,6 +2808,8 @@
             this.NiuSkill2Text.Name = "NiuSkill2Text";
             this.NiuSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.NiuSkill2Text.TabIndex = 25;
+            this.NiuSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.NiuSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // NiuSkill2
             // 
@@ -2783,6 +2826,8 @@
             this.NiuSkill1Text.Name = "NiuSkill1Text";
             this.NiuSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.NiuSkill1Text.TabIndex = 23;
+            this.NiuSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.NiuSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // NiuSkill1
             // 
@@ -2834,6 +2879,8 @@
             this.LilySkill3Text.Name = "LilySkill3Text";
             this.LilySkill3Text.Size = new System.Drawing.Size(30, 27);
             this.LilySkill3Text.TabIndex = 27;
+            this.LilySkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.LilySkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // LilySkill3
             // 
@@ -2850,6 +2897,8 @@
             this.LilySkill2Text.Name = "LilySkill2Text";
             this.LilySkill2Text.Size = new System.Drawing.Size(30, 27);
             this.LilySkill2Text.TabIndex = 25;
+            this.LilySkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.LilySkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // LilySkill2
             // 
@@ -2866,6 +2915,8 @@
             this.LilySkill1Text.Name = "LilySkill1Text";
             this.LilySkill1Text.Size = new System.Drawing.Size(30, 27);
             this.LilySkill1Text.TabIndex = 23;
+            this.LilySkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.LilySkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // LilySkill1
             // 
@@ -2917,6 +2968,8 @@
             this.LinSkill3Text.Name = "LinSkill3Text";
             this.LinSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.LinSkill3Text.TabIndex = 27;
+            this.LinSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.LinSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // LinSkill3
             // 
@@ -2933,6 +2986,8 @@
             this.LinSkill2Text.Name = "LinSkill2Text";
             this.LinSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.LinSkill2Text.TabIndex = 25;
+            this.LinSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.LinSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // LinSkill2
             // 
@@ -2949,6 +3004,8 @@
             this.LinSkill1Text.Name = "LinSkill1Text";
             this.LinSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.LinSkill1Text.TabIndex = 23;
+            this.LinSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.LinSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // LinSkill1
             // 
@@ -3000,6 +3057,8 @@
             this.DouSkill3Text.Name = "DouSkill3Text";
             this.DouSkill3Text.Size = new System.Drawing.Size(30, 27);
             this.DouSkill3Text.TabIndex = 27;
+            this.DouSkill3Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.DouSkill3Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // DouSkill3
             // 
@@ -3016,6 +3075,8 @@
             this.DouSkill2Text.Name = "DouSkill2Text";
             this.DouSkill2Text.Size = new System.Drawing.Size(30, 27);
             this.DouSkill2Text.TabIndex = 25;
+            this.DouSkill2Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.DouSkill2Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // DouSkill2
             // 
@@ -3032,6 +3093,8 @@
             this.DouSkill1Text.Name = "DouSkill1Text";
             this.DouSkill1Text.Size = new System.Drawing.Size(30, 27);
             this.DouSkill1Text.TabIndex = 23;
+            this.DouSkill1Text.TextChanged += new System.EventHandler(this.TextBox_Text_Changed);
+            this.DouSkill1Text.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // DouSkill1
             // 

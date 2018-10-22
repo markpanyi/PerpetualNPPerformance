@@ -64,7 +64,7 @@
             <eff_N>50</eff_N>
             <eff_M>60</eff_M>
         </eff>
-        <eff type="npUp">
+        <eff type="artsUp">
             <eff_N>0.15</eff_N>
             <eff_M>0.20</eff_M>
         </eff>
@@ -79,7 +79,7 @@
             <eff_N>50</eff_N>
             <eff_M>60</eff_M>
         </eff>
-        <eff type="npUp">
+        <eff type="artsUp">
             <eff_N>0.08</eff_N>
             <eff_M>0.10</eff_M>
         </eff>
@@ -94,7 +94,7 @@
             <eff_N>50</eff_N>
             <eff_M>60</eff_M>
         </eff>
-        <eff type="npUp">
+        <eff type="artsUp">
             <eff_N>0.08</eff_N>
             <eff_M>0.10</eff_M>
         </eff>
@@ -109,7 +109,7 @@
             <eff_N>30</eff_N>
             <eff_M>50</eff_M>
         </eff>
-        <eff type="npUp">
+        <eff type="artsUp">
             <eff_N>0.08</eff_N>
             <eff_M>0.10</eff_M>
         </eff>
